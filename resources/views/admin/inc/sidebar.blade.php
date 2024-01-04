@@ -5,7 +5,7 @@
       
            
       <li class="nav-item">
-        <a href="{{route('admin.dashboard')}}" class="nav-link active">
+        <a href="{{route('admin.dashboard')}}" class="nav-link  {{ (request()->is('admin/dashboard*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>
             Dashboard
@@ -13,6 +13,18 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{{route('alladmin')}}" class="nav-link {{ (request()->is('admin/new-admin*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Admin
+          </p>
+        </a>
+      </li>
+
+
+
+
+      {{-- <li class="nav-item">
         <a href="pages/widgets.html" class="nav-link">
           <i class="nav-icon fas fa-th"></i>
           <p>
@@ -613,6 +625,6 @@
           <i class="nav-icon far fa-circle text-info"></i>
           <p>Informational</p>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </nav>

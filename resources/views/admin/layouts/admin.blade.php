@@ -61,7 +61,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          {{-- <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->name}}</a>
@@ -149,7 +149,15 @@
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-
+<script>
+  // page schroll top
+  function pagetop() {
+          window.scrollTo({
+              top: 130,
+              behavior: 'smooth',
+          });
+      }
+</script>
 @yield('script')
 </body>
 </html>
