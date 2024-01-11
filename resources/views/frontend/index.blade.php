@@ -219,62 +219,69 @@
             </div>
         </section>
 
-        <section class="volunteer-section section-padding" id="section_2">
+        <section class="volunteer-section pt-3" id="section_2">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-md-center">
 
                     <div class="col-lg-6 col-12">
-                        <h2 class="text-white mb-4">Volunteer</h2>
+                        <h2 class="text-white mb-4">Find a worker</h2>
 
                         <form class="custom-form volunteer-form mb-5 mb-lg-0" action="#" method="post" role="form">
-                            <h3 class="mb-4">Become a volunteer today</h3>
+                            <h3 class="mb-4">Submit your details</h3>
 
                             <div class="row">
                                 <div class="col-lg-6 col-12">
-                                    <input type="text" name="volunteer-name" id="volunteer-name" class="form-control"
-                                        placeholder="Jack Doe" required>
+                                    <label for="name"> Name</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Jack Doe" required>
                                 </div>
 
                                 <div class="col-lg-6 col-12">
-                                    <input type="email" name="volunteer-email" id="volunteer-email"
-                                        pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com"
-                                        required>
+                                    <label for="email"> Email</label>
+                                    <input type="email" name="email" id="email"
+                                        pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" required>
                                 </div>
 
+                                
                                 <div class="col-lg-6 col-12">
-                                    <input type="text" name="volunteer-subject" id="volunteer-subject"
-                                        class="form-control" placeholder="Subject" required>
+                                    <label for="house_number"> House Number</label>
+                                    <input type="text" name="house_number" id="house_number" class="form-control" required>
                                 </div>
 
+                                
                                 <div class="col-lg-6 col-12">
+                                    <label for="town"> Town</label>
+                                    <input type="text" name="town" id="town" class="form-control" required>
+                                </div>
+
+                                
+                                <div class="col-lg-6 col-12">
+                                    <label for="street">Street Name</label>
+                                    <input type="text" name="street" id="street" class="form-control" required>
+                                </div>
+
+                                
+                                <div class="col-lg-6 col-12">
+                                    <label for="post_code"> Post Code</label>
+                                    <input type="text" name="post_code" id="post_code" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-12 col-12">
                                     <div class="input-group input-group-file">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
-
-                                        <label class="input-group-text" for="inputGroupFile02">Upload your CV</label>
-
+                                        <input type="file" class="form-control" id="inputGroupFile02" name="images[]" multiple>
+                                        <label class="input-group-text" for="inputGroupFile02">Upload Images</label>
                                         <i class="bi-cloud-arrow-up ms-auto"></i>
                                     </div>
                                 </div>
                             </div>
 
-                            <textarea name="volunteer-message" rows="3" class="form-control" id="volunteer-message"
+                            <textarea name="message" rows="3" class="form-control" id="message"
                                 placeholder="Comment (Optional)"></textarea>
 
                             <button type="submit" class="form-control">Submit</button>
                         </form>
                     </div>
 
-                    <div class="col-lg-6 col-12">
-                        <img src="{{ asset('frontend/images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg')}}"
-                            class="volunteer-image img-fluid" alt="">
-
-                        <div class="custom-block-body text-center">
-                            <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
-
-                            <p class="text-white">Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
-                                tokito Professional charity theme based</p>
-                        </div>
-                    </div>
+                    
 
                 </div>
             </div>
