@@ -219,48 +219,54 @@
             </div>
         </section>
 
-        <section class="volunteer-section pt-3" id="section_2">
+        <section class="volunteer-section p-3" id="section_2">
             <div class="container">
                 <div class="row justify-content-md-center">
 
-                    <div class="col-lg-6 col-12">
+                    <div class="col-lg-8 col-12">
                         <h2 class="text-white mb-4">Find a worker</h2>
 
-                        <form class="custom-form volunteer-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                        <form class="custom-form volunteer-form mb-5 mb-lg-0" action="{{route('work.store')}}" method="post" role="form">
+                            @csrf
                             <h3 class="mb-4">Submit your details</h3>
 
                             <div class="row">
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-4 col-12">
                                     <label for="name"> Name</label>
                                     <input type="text" name="name" id="name" class="form-control" placeholder="Jack Doe" required>
                                 </div>
 
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-4 col-12">
                                     <label for="email"> Email</label>
                                     <input type="email" name="email" id="email"
                                         pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" required>
                                 </div>
 
+                                <div class="col-lg-4 col-12">
+                                    <label for="phone"> Phone</label>
+                                    <input type="number" name="phone" id="phone" class="form-control" required>
+                                </div>
+
                                 
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-3 col-12">
                                     <label for="house_number"> House Number</label>
                                     <input type="text" name="house_number" id="house_number" class="form-control" required>
                                 </div>
 
                                 
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-3 col-12">
                                     <label for="town"> Town</label>
                                     <input type="text" name="town" id="town" class="form-control" required>
                                 </div>
 
                                 
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-3 col-12">
                                     <label for="street">Street Name</label>
                                     <input type="text" name="street" id="street" class="form-control" required>
                                 </div>
 
                                 
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-3 col-12">
                                     <label for="post_code"> Post Code</label>
                                     <input type="text" name="post_code" id="post_code" class="form-control" required>
                                 </div>
@@ -330,7 +336,7 @@
                                     </a>
                                 </p>
 
-                                <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+                                {{-- <a href="#" class="custom-btn btn mt-3">Get Direction</a> --}}
                             </div>
                         </div>
                     </div>
