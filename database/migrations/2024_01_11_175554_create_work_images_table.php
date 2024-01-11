@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('works', function (Blueprint $table) {
+        Schema::create('work_images', function (Blueprint $table) {
             $table->id();
-            $table->string('date')->nullable();
+            $table->bigInteger('work_id')->unsigned()->nullable();
+            $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('house_number')->nullable();
-            $table->string('town')->nullable();
-            $table->string('street')->nullable();
-            $table->string('post_code')->nullable();
-            $table->longText('message')->nullable();
             $table->boolean('status')->default(1);
             $table->string('updated_by')->nullable();
             $table->string('created_by')->nullable();
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('works');
+        Schema::dropIfExists('work_images');
     }
 };
