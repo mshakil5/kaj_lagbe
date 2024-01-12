@@ -21,6 +21,16 @@
         </a>
       </li>
 
+      
+      <li class="nav-item">
+        <a href="{{route('admin.work')}}" class="nav-link {{ (request()->is('admin/get-all-work')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Work
+          </p>
+        </a>
+      </li>
+
 
 
 

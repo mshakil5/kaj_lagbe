@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WorkController;
 use App\Http\Controllers\Admin\AdminController;
 
 
@@ -26,5 +27,10 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/new-admin/{id}/edit', [AdminController::class, 'adminEdit']);
     Route::post('/new-admin-update', [AdminController::class, 'adminUpdate']);
     Route::get('/new-admin/{id}', [AdminController::class, 'adminDelete']);
+
+
+    
+    Route::get('/get-all-work', [WorkController::class, 'index'])->name('admin.work');
+    Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
 });
   

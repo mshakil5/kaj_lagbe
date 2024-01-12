@@ -15,7 +15,7 @@ class FrontendController extends Controller
 
     public function workStore(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $request->validate([
             'email' => ['required', 'email'],
@@ -30,6 +30,7 @@ class FrontendController extends Controller
         ]);
 
         $data = new Work();
+        $data->date = date('Y-m-d');
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
@@ -40,19 +41,19 @@ class FrontendController extends Controller
         $data->message = $request->message;
         if ($data->save()) {
 
-            if ($request->hasfile('images')) {
-                $files = $request->file('images');
+            if ($request->images) {
+                $files = $request->images;
                 
                 foreach ($files as $image) {
+                    // dd($image);
                     $rand = mt_rand(100000, 999999);
-                    $name = time(). $rand .'.'.$image->getClientOriginalExtension();
-                    //move image to postimages folder
-                    $image->move(public_path() . '/images/', $name);
-                    //insert into picture table
-                    $workimg = new WorkImage();
-                    $workimg->work_id = $data->id;
-                    $workimg->name = $name;
-                    $workimg->save();
+                    $imageName = time(). $rand .'.'.$image->extension();
+                    $image->move(public_path('images'), $imageName);
+                    $workImg = new WorkImage();
+                    $workImg->work_id = $data->id;
+                    $workImg->name = $imageName;
+                    $workImg->save();
+
                 }
                 
                 return redirect()->route("homepage")->with("message", "Data save successfully!");

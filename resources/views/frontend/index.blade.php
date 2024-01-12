@@ -226,7 +226,16 @@
                     <div class="col-lg-8 col-12">
                         <h2 class="text-white mb-4">Find a worker</h2>
 
-                        <form class="custom-form volunteer-form mb-5 mb-lg-0" action="{{route('work.store')}}" method="post" role="form">
+                        @if ($message = Session::get('message'))
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
+                        <form class="custom-form volunteer-form mb-5 mb-lg-0" action="{{route('work.store')}}" method="post" role="form" enctype="multipart/form-data">
                             @csrf
                             <h3 class="mb-4">Submit your details</h3>
 
