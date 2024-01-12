@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WorkController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AdminController;
 
 
@@ -32,6 +33,16 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     
     Route::get('/get-all-work', [WorkController::class, 'index'])->name('admin.work');
     Route::get('/get-all-work/{id}', [WorkController::class, 'workGallery'])->name('admin.workGallery');
-    Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
+    // Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
+
+
+    // location
+    Route::get('/location', [LocationController::class, 'index'])->name('admin.location');
+    Route::post('/location', [LocationController::class, 'store']);
+    Route::get('/location/{id}/edit', [LocationController::class, 'edit']);
+    Route::post('/location-update', [LocationController::class, 'update']);
+    Route::get('/location/{id}', [LocationController::class, 'delete']);
+
+
 });
   

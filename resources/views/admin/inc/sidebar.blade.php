@@ -31,6 +31,15 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a href="{{route('admin.location')}}" class="nav-link {{ (request()->is('admin/location*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Post Code
+          </p>
+        </a>
+      </li>
+
 
 
 
