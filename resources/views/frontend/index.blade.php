@@ -278,7 +278,7 @@
                                 <div class="col-lg-3 col-12">
                                     <label for="post_code"> Post Code</label>
                                     <input type="text" name="post_code" id="post_code" class="form-control" required>
-                                    <p style="color: red" id="perrmsg"></p>
+                                    <div class="perrmsg"></div>
                                 </div>
 
                                 <div class="col-lg-12 col-12">
