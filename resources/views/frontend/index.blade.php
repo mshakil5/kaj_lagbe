@@ -292,7 +292,7 @@
                             <textarea name="message" rows="3" class="form-control" id="message"
                                 placeholder="Comment (Optional)"></textarea>
 
-                            <button type="submit" class="form-control">Submit</button>
+                            <button type="submit" class="form-control" disabled id="submitBtn">Submit</button>
                         </form>
                     </div>
 
