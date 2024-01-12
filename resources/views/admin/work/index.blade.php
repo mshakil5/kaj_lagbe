@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-2">
-            <button type="button" class="btn btn-secondary my-3" id="newBtn">Add new</button>
+          
         </div>
       </div>
     </div>
@@ -16,15 +16,15 @@
 
 
 <!-- Main content -->
-<section class="content" id="contentContainer">
+<section class="content mt-3" id="contentContainer">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <!-- /.card -->
 
-          <div class="card">
+          <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">All Data</h3>
+              <h3 class="card-title"><b>Work List</b></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -58,7 +58,7 @@
                     <td style="text-align: center">{{$data->message}}</td>
                     
                     <td style="text-align: center">
-                      <a href=""><i class="fa fa-eye" style="color: #21f352;font-size:16px;"></i></a>
+                      <a href="{{route('admin.workGallery', $data->id)}}"><i class="fa fa-eye" style="color: #21f352;font-size:16px;"></i></a>
                     </td>
 
                   </tr>

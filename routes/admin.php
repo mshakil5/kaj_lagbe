@@ -31,6 +31,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     
     Route::get('/get-all-work', [WorkController::class, 'index'])->name('admin.work');
+    Route::get('/get-all-work/{id}', [WorkController::class, 'workGallery'])->name('admin.workGallery');
     Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
 });
   
