@@ -2,7 +2,17 @@
 
 @section('content')
 
-
+<!-- Main content -->
+<section class="content p-3" id="newBtnSection">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <a href="{{route('admin.work')}}" class="btn btn-secondary">Back</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
 
 <!-- Main content -->
 <section class="content">
@@ -20,11 +30,11 @@
               @foreach ($data as $item)
                   
               <div class="col-sm-4">
-                <a href="https://via.placeholder.com/1200/FFFFFF.png?text=1" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-                  <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/>
+                <a href="{{asset('images/'.$item->name)}}" data-toggle="lightbox" data-title="Image" data-gallery="gallery">
+                  <img src="{{asset('images/'.$item->name)}}" class="img-fluid mb-2" alt="Image"/>
                 </a>
               </div>
-              
+
               @endforeach
 
 
@@ -44,6 +54,23 @@
 @endsection
 @section('script')
 
+
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
 
 
 <script>

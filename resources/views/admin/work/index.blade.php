@@ -58,7 +58,9 @@
                     <td style="text-align: center">{{$data->message}}</td>
                     
                     <td style="text-align: center">
-                      <a href="{{route('admin.workGallery', $data->id)}}"><i class="fa fa-eye" style="color: #21f352;font-size:16px;"></i></a>
+                      
+                      <a href="{{route('admin.workGallery', $data->id)}}" class="btn btn-secondary">Gallery</a>
+
                     </td>
 
                   </tr>

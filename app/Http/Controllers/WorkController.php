@@ -17,6 +17,7 @@ class WorkController extends Controller
     public function workGallery($id)
     {
         $data = WorkImage::where('work_id', $id)->orderby('id','DESC')->get();
+        // dd($data);
         return view('admin.work.gallery', compact('data'));
     }
 }

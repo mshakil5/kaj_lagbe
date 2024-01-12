@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.min.css')}}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('assets/admin/css/OverlayScrollbars.min.css')}}">
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.css')}}">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('assets/admin/datatables/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/admin/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -28,7 +30,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{{ asset('logo.png')}}" alt="logo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -128,6 +130,8 @@
 <script src="{{ asset('assets/admin/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/admin/js/dashboard.js')}}"></script>
+<!-- Ekko Lightbox -->
+<script src="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('assets/admin/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatablesdataTables.bootstrap4.min.js')}}"></script>
