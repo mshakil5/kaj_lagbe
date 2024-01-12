@@ -33,6 +33,9 @@ Route::get('/clear', function() {
 Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
+
+
+Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
   
 /*------------------------------------------
 --------------------------------------------

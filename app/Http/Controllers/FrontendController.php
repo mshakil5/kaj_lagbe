@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Work;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
@@ -65,6 +66,23 @@ class FrontendController extends Controller
         
 
     }
+
+
+    public function checkPostCode(Request $request)
+    {
+
+        $data = Location::where('postcode', 'like', '%'.$request->postcode.'%')->first();
+
+        if (isset($data) ) {
+            return response()->json(['status'=> 300,'data'=>$data]);
+        } else {
+            $message ="<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>This location is out of our service.</b></div>";
+            return response()->json(['status'=> 303,'message'=>$message]);
+        }
+        
+
+    }
+
 
 
 

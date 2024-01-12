@@ -278,6 +278,7 @@
                                 <div class="col-lg-3 col-12">
                                     <label for="post_code"> Post Code</label>
                                     <input type="text" name="post_code" id="post_code" class="form-control" required>
+                                    <p style="color: red" id="perrmsg"></p>
                                 </div>
 
                                 <div class="col-lg-12 col-12">
@@ -444,6 +445,45 @@
     <script src="{{ asset('frontend/js/click-scroll.js')}}"></script>
     <script src="{{ asset('frontend/js/counter.js')}}"></script>
     <script src="{{ asset('frontend/js/custom.js')}}"></script>
+
+    <script>
+        
+    $(document).ready(function () {
+
+        //header for csrf-token is must in laravel
+      $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+      //
+
+        //check post code start 
+      var url = "{{URL::to('/check-post-code')}}";
+        $("#post_code").keyup(function(){
+            var postcode = $("#post_code").val();
+            console.log(postcode);
+
+            $.ajax({
+                    url: url,
+                    method: "POST",
+                    data: {postcode},
+
+                    success: function (d) {
+                        if (d.status == 303) {
+                            console.log(d);
+                            $(".perrmsg").html(d.message);
+                        }else if(d.status == 300){
+                            console.log(d);
+                            $(".perrmsg").html(d.message);
+                        }
+                    },
+                    error: function (d) {
+                        console.log(d);
+                    }
+                });
+        });
+        //check post code end 
+
+    });
+
+    </script>
 
 </body>
 
