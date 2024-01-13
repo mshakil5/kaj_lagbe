@@ -293,7 +293,7 @@
                             <textarea name="message" rows="3" class="form-control" id="message"
                                 placeholder="Comment (Optional)"></textarea>
 
-                            <button type="submit" class="form-control" disabled id="submitBtn">Submit</button>
+                            <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
                         </form>
                     </div>
 
@@ -457,27 +457,35 @@
         //check post code start 
       var url = "{{URL::to('/check-post-code')}}";
         $("#post_code").keyup(function(){
-            var postcode = $("#post_code").val();
-            console.log(postcode);
+            var length =  $(this).val().length;
 
-            $.ajax({
+            var postcode = $("#post_code").val();
+            
+            if (length > 2) {
+                $.ajax({
                     url: url,
                     method: "POST",
                     data: {postcode},
 
                     success: function (d) {
                         if (d.status == 303) {
-                            console.log(d);
                             $(".perrmsg").html(d.message);
+                            $('#submitBtn').attr('disabled', false);
                         }else if(d.status == 300){
-                            console.log(d);
+                            // console.log(d);
                             $(".perrmsg").html(d.message);
+                            $('#submitBtn').attr('disabled', true);
                         }
                     },
                     error: function (d) {
                         console.log(d);
                     }
-                });
+                }); 
+            }else{
+                $(".perrmsg").html("");
+            }
+
+            
         });
         //check post code end 
 
