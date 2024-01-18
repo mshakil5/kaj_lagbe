@@ -472,7 +472,6 @@
                             $(".perrmsg").html(d.message);
                             $('#submitBtn').attr('disabled', true);
                         }else if(d.status == 300){
-                            // console.log(d);
                             $(".perrmsg").html(d.message);
                             $('#submitBtn').attr('disabled', false);
                         }
