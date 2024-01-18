@@ -470,11 +470,11 @@
                     success: function (d) {
                         if (d.status == 303) {
                             $(".perrmsg").html(d.message);
-                            $('#submitBtn').attr('disabled', false);
+                            $('#submitBtn').attr('disabled', true);
                         }else if(d.status == 300){
                             // console.log(d);
                             $(".perrmsg").html(d.message);
-                            $('#submitBtn').attr('disabled', true);
+                            $('#submitBtn').attr('disabled', false);
                         }
                     },
                     error: function (d) {
