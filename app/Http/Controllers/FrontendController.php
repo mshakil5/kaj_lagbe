@@ -71,7 +71,9 @@ class FrontendController extends Controller
     public function checkPostCode(Request $request)
     {
 
-        $data = Location::where('postcode', 'like', '%'.$request->postcode.'%')->first();
+        $searchdata = substr($request->postcode, 0, 3);
+
+        $data = Location::where('postcode', 'like', '%'.$request->postcode.'%')->orWhere('postcode', 'like', '%'.$searchdata.'%')->first();
 
         if (isset($data) ) {
             $message ="<b style='color: green'>Available</b>";
