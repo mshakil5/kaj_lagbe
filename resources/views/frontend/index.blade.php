@@ -153,7 +153,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="{{ asset('frontend/images/group-people-volunteering-foodbank-poor-people.jpg')}}"
+                        <img src="{{ asset('6242692.jpg')}}"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 
