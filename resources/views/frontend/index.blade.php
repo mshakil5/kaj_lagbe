@@ -28,14 +28,14 @@
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
                         <i class="bi-geo-alt me-2"></i>
-                        Akershusstranda 20, 0150 Oslo, Norway
+                        Address here
                     </p>
 
                     <p class="d-flex mb-0">
                         <i class="bi-envelope me-2"></i>
 
                         <a href="mailto:info@company.com">
-                            info@company.com
+                            Email here
                         </a>
                     </p>
                 </div>
@@ -87,7 +87,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_2">Volunteer</a>
+                        <a class="nav-link click-scroll" href="#section_2">Menu Name</a>
                     </li>
 
                     <li class="nav-item">
@@ -159,13 +159,11 @@
 
                     <div class="col-lg-6 col-12">
                         <div class="custom-text-box">
-                            <h2 class="mb-2">Our Story</h2>
+                            <h2 class="mb-2">About Us</h2>
 
-                            <h5 class="mb-3">Kind Heart Charity, Non-Profit Organization</h5>
+                            <h5 class="mb-3">About our details will be there...</h5>
 
-                            <p class="mb-0">This is a Bootstrap 5.2.2 CSS template for charity organization websites.
-                                You can feel free to use it. Please tell your friends about TemplateMo website. Thank
-                                you.</p>
+                            <p class="mb-0">About our details will be there...</p>
                         </div>
 
                         {{-- <div class="row">
@@ -224,7 +222,7 @@
                 <div class="row justify-content-md-center">
 
                     <div class="col-lg-8 col-12">
-                        <h2 class="text-white mb-4">Find a worker</h2>
+                        <h2 class="text-white mb-4">Title will be there...</h2>
 
                         @if ($message = Session::get('message'))
                             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -327,14 +325,14 @@
 
                                 <p class="d-flex mb-2">
                                     <i class="bi-geo-alt me-2"></i>
-                                    Akershusstranda 20, 0150 Oslo, Norway
+                                    Address here
                                 </p>
 
                                 <p class="d-flex mb-2">
                                     <i class="bi-telephone me-2"></i>
 
                                     <a href="tel: 305-240-9671">
-                                        305-240-9671
+                                        Phone number here
                                     </a>
                                 </p>
 
@@ -342,7 +340,7 @@
                                     <i class="bi-envelope me-2"></i>
 
                                     <a href="mailto:info@yourgmail.com">
-                                        donate@charity.org
+                                        Email here
                                     </a>
                                 </p>
 
@@ -355,9 +353,7 @@
                         <form class="custom-form contact-form" action="#" method="post" role="form">
                             <h2>Contact form</h2>
 
-                            <p class="mb-4">Or, you can just send an email:
-                                <a href="#">info@charity.org</a>
-                            </p>
+                            
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <input type="text" name="first-name" id="first-name" class="form-control"
@@ -402,7 +398,7 @@
 
                         <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
 
-                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Find an assistant</a></li>
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Menu Name</a></li>
 
                     </ul>
                 </div>
@@ -414,7 +410,7 @@
                         <i class="bi-telephone me-2"></i>
 
                         <a href="tel: 305-240-9671" class="site-footer-link">
-                            305-240-9671
+                            Phone number here
                         </a>
                     </p>
 
@@ -422,13 +418,13 @@
                         <i class="bi-envelope me-2"></i>
 
                         <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                            donate@charity.org
+                            Email here
                         </a>
                     </p>
 
                     <p class="text-white d-flex mt-3">
                         <i class="bi-geo-alt me-2"></i>
-                        Akershusstranda 20, 0150 Oslo, Norway
+                        Address here
                     </p>
 
                 </div>
