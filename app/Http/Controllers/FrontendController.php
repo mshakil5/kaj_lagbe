@@ -14,6 +14,16 @@ class FrontendController extends Controller
         return view('frontend.index');
     }
 
+    public function privacy()
+    {
+        return view('frontend.privacy');
+    }
+
+    public function terms()
+    {
+        return view('frontend.terms');
+    }
+
     public function workStore(Request $request)
     {
         // dd($request->all());

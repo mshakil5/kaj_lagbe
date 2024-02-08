@@ -35,6 +35,11 @@ Route::get('/', [FrontendController::class, 'index'])->name('homepage');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
 
 
+
+Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
+Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
+
+
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
   
 /*------------------------------------------
