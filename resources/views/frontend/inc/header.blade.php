@@ -48,7 +48,7 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="{{route('homepage')}}">
-            <img src="{{ asset('frontend/images/logo.png')}}" class="logo img-fluid" alt="">
+            <img src="{{ asset('frontend/images/logo.jpg')}}" class="logo img-fluid" alt="">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

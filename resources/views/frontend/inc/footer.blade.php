@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12 mb-4">
-                <img src="{{ asset('frontend/images/logo.png')}}" class="logo img-fluid" alt="">
+                <img src="{{ asset('frontend/images/logo.jpg')}}" class="logo img-fluid" alt="">
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mb-4">
@@ -14,6 +14,8 @@
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
 
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Menu Name</a></li>
+                    <li class="footer-menu-item"><a href="{{route('terms')}}" class="footer-menu-link">Terms & Conditions</a></li>
+                    <li class="footer-menu-item"><a href="{{route('privacy')}}" class="footer-menu-link">Privacy & Policy</a></li>
 
                 </ul>
             </div>

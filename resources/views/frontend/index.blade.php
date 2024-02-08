@@ -9,7 +9,7 @@
             <div class="row">
 
                 <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <img src="{{ asset('6242692.jpg')}}"
+                    <img src="{{ asset('logo-4.png')}}"
                         class="custom-text-box-image img-fluid" alt="">
                 </div>
 
@@ -121,7 +121,7 @@
                     <div class="contact-info-wrap">
                         <h2>Get in touch</h2>
 
-                        <div class="contact-image-wrap d-flex flex-wrap">
+                        {{-- <div class="contact-image-wrap d-flex flex-wrap">
                             <img src="{{ asset('frontend/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg')}}"
                                 class="img-fluid avatar-image" alt="">
 
@@ -129,7 +129,7 @@
                                 <p class="mb-0">Clara Barton</p>
                                 <p class="mb-0"><strong>HR & Office Manager</strong></p>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="contact-info">
                             <h5 class="mb-3">Contact Infomation</h5>
