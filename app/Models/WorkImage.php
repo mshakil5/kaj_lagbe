@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class WorkImage extends Model
 {
     use HasFactory;
+
+    public function work()
+    {
+        return $this->belongsTo(Work::class);
+    }
 }
