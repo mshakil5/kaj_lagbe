@@ -73,14 +73,14 @@ class FrontendController extends Controller
             }
             
             $works = Work::with('workimage')->where('id', $data->id)->first();
-            $message ="<b style='color: green'>Data Store Successfully..</b>";
+            $message ="Data Store Successfully.";
             return response()->json(['status'=> 300,'data'=>$works,'message'=>$message]);
 
 
 
 
         } else {
-            $message ="<b style='color: red'>Server Error!!</b>";
+            $message ="Server Error!!";
             return response()->json(['status'=> 303,'data'=>$data,'message'=>$message]);
         }
         
