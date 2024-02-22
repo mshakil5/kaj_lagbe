@@ -130,7 +130,7 @@ h4 {
 }
 
 h5 {
-  color: var(--primary-color);
+  color: #e40003;
   font-size: var(--h5-font-size);
 }
 
@@ -341,7 +341,7 @@ strong {
 
 .navbar-expand-lg .navbar-nav .nav-link.custom-btn:hover,
 .custom-border-btn:hover {
-  background: var(--custom-btn-bg-hover-color);
+  background: #ffffff;
   border-color: transparent;
   color: var(--white-color);
 }
@@ -351,7 +351,7 @@ strong {
   NAVIGATION              
 -----------------------------------------*/
 .navbar {
-  background: var(--white-color);
+  background: #ffffff;
   z-index: 9;
   padding-top: 0;
   padding-bottom: 0;
@@ -377,7 +377,7 @@ strong {
 }
 
 .logo {
-  width: 80px;
+  width: 180px;
   height: auto;
 }
 
@@ -723,7 +723,7 @@ strong {
 
 .volunteer-section::after {
   content: "";
-  background: var(--primary-color);
+  background: #e40003;
   border-radius: 50%;
   position: absolute;
   bottom: -110px;

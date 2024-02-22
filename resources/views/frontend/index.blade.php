@@ -9,7 +9,7 @@
             <div class="row">
 
                 <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <img src="{{ asset('logo-4.png')}}"
+                    <img src="{{ asset('image.jpg')}}"
                         class="custom-text-box-image img-fluid" alt="">
                 </div>
 
@@ -142,16 +142,16 @@
                             <p class="d-flex mb-2">
                                 <i class="bi-telephone me-2"></i>
 
-                                <a href="tel: 305-240-9671">
-                                    Phone number here
+                                <a href="tel: 0203-994-7611">
+                                    0203.994.7611
                                 </a>
                             </p>
 
                             <p class="d-flex">
                                 <i class="bi-envelope me-2"></i>
 
-                                <a href="mailto:info@yourgmail.com">
-                                    Email here
+                                <a href="mailto:sam@edgeemg.co.uk">
+                                    sam@edgeemg.co.uk
                                 </a>
                             </p>
 

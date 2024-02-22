@@ -26,16 +26,16 @@
                 <p class="text-white d-flex mb-2">
                     <i class="bi-telephone me-2"></i>
 
-                    <a href="tel: 305-240-9671" class="site-footer-link">
-                        Phone number here
+                    <a href="tel: 0203-994-7611" class="site-footer-link">
+                        0203.994.7611
                     </a>
                 </p>
 
                 <p class="text-white d-flex">
                     <i class="bi-envelope me-2"></i>
 
-                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                        Email here
+                    <a href="mailto:sam@edgeemg.co.uk" class="site-footer-link">
+                        sam@edgeemg.co.uk
                     </a>
                 </p>
 
