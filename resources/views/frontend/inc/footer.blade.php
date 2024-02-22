@@ -14,7 +14,7 @@
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
 
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Menu Name</a></li>
-                    <li class="footer-menu-item"><a href="{{route('terms')}}" class="footer-menu-link">Terms & Conditions</a></li>
+                    {{-- <li class="footer-menu-item"><a href="{{route('terms')}}" class="footer-menu-link">Terms & Conditions</a></li> --}}
                     <li class="footer-menu-item"><a href="{{route('privacy')}}" class="footer-menu-link">Privacy & Policy</a></li>
 
                 </ul>
@@ -41,8 +41,25 @@
 
                 <p class="text-white d-flex mt-3">
                     <i class="bi-geo-alt me-2"></i>
-                    Address here
+                    100 fairholt rd
+                    London 
+                    N165HN
                 </p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-footer-bottom">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-7 col-12">
+                    <p class="copyright-text mb-0">Copyright © 2024 <a href="#">EDGE</a>  Design &amp; Developed: <a href="https://mentosoftware.co.uk" target="_blank"></a>
+                        <a href="https://mentosoftware.co.uk" target="_blank">Mento Software</a>
+                    </p>
+                </div>
 
             </div>
         </div>

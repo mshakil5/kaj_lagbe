@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageMail;
 use App\Models\Location;
 use App\Models\Work;
+use App\Models\Contact;
+use Mail;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
 
@@ -96,6 +99,73 @@ class FrontendController extends Controller
 
     }
 
+
+    public function contactMessage(Request $request)
+    {
+        
+
+        $request->validate([
+            'contactemail' => ['required', 'email'],
+            'firstname' => ['required', 'string'],
+            'lastname' => ['required', 'string'],
+            'contactmessage' => ['required'],
+        ], [
+            'firstname.required' => 'First Name field is required.',
+            'lastname.required' => 'Last Name field is required.',
+            'contactmessage.required' => 'Message field is required.',
+            'contactemail.required' => 'Email field is required.'
+        ]);
+
+        $adminmail = Contact::where('id', 1)->first()->email;
+        $contactmail = $request->contactmail; 
+        $ccEmails = $adminmail;
+        $msg = $request->contactmessage; 
+                  
+        if (isset($msg)) {
+            $array['firstname'] = $request->firstname; 
+            $array['lastname'] = $request->lastname; 
+            $array['email'] = $request->contactmail; 
+            $array['subject'] = "Order Booking Confirmation";
+            $array['message'] = $msg;
+            $array['contactmail'] = $contactmail;
+
+            Mail::to($contactmail)
+                ->cc($ccEmails)
+                ->send(new ContactMessageMail($array));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // $data = new Work();
+        // $data->date = date('Y-m-d');
+        // $data->name = $request->name;
+        // $data->email = $request->email;
+        // $data->phone = $request->phone;
+        // $data->post_code = $request->post_code;
+        // $data->town = $request->town;
+        // $data->house_number = $request->house_number;
+        // $data->street = $request->street;
+        // $data->message = $request->message;
+        // if ($data->save()) {
+
+        //     return redirect()->route("homepage")->with("message", "Data save successfully!");
+
+        // } else {
+        //     return redirect()->route("homepage")->with("error", "Server Error!");
+        // }
+        
+
+    }
 
 
 

@@ -15,12 +15,14 @@
 
                 <div class="col-lg-6 col-12">
                     <div class="custom-text-box">
-                        <h2 class="mb-2">About Us</h2>
+                        <h5 class="mb-3">Handyman, Assembly, repairs.</h5>
 
-                        <h5 class="mb-3">About our details will be there...</h5>
-
-                        <p class="mb-0">About our details will be there...</p>
+                        <p class="mb-0">When you don’t have the time, tools, or know-how to do those niggling handyman jobs such as replacing light bulbs or property maintenance, book our handyman . They’ll cross tasks off your to-do list for you, no matter how big or small.</p>
                     </div>
+
+                    
+                    <img src="{{ asset('image2.jpg')}}"
+                        class="custom-text-box-image img-fluid" alt="">
 
                 </div>
 
@@ -136,7 +138,9 @@
 
                             <p class="d-flex mb-2">
                                 <i class="bi-geo-alt me-2"></i>
-                                Address here
+                                100 fairholt rd
+                                London 
+                                N165HN
                             </p>
 
                             <p class="d-flex mb-2">
@@ -161,27 +165,42 @@
                 </div>
 
                 <div class="col-lg-5 col-12 mx-auto">
-                    <form class="custom-form contact-form" action="#" method="post" role="form">
+                    <form class="custom-form contact-form" action="{{route('contactMessage')}}" method="post" role="form">
+                        @csrf
                         <h2>Contact form</h2>
 
                         
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
-                                <input type="text" name="first-name" id="first-name" class="form-control"
-                                    placeholder="Jack" required>
+                                <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Jack" value="{{ old('firstname') }}" required>
+                                @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-12">
-                                <input type="text" name="last-name" id="last-name" class="form-control"
-                                    placeholder="Doe" required>
+                                <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Doe" value="{{ old('lastname') }}" required>
+
+                                @error('lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+
                             </div>
                         </div>
 
-                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                            placeholder="Jackdoe@gmail.com" required>
+                        <input type="email" name="contactemail" id="contactemail" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" value="{{ old('contactemail') }}" required>
+                        @error('contactemail')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 
-                        <textarea name="message" rows="5" class="form-control" id="message"
-                            placeholder="What can we help you?"></textarea>
+                        <textarea name="contactmessage" rows="5" class="form-control" id="contactmessage" placeholder="What can we help you?"></textarea>
 
                         <button type="submit" class="form-control">Send Message</button>
                     </form>
