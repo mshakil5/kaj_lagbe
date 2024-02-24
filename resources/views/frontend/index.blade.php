@@ -169,6 +169,15 @@
                         @csrf
                         <h2>Contact form</h2>
 
+                        @if ($message = Session::get('message'))
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
                         
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">

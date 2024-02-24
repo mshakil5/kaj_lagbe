@@ -117,6 +117,7 @@ class FrontendController extends Controller
         ]);
 
         $adminmail = Contact::where('id', 1)->first()->email;
+        // dd($adminmail);
         $contactmail = $request->contactmail; 
         $ccEmails = $adminmail;
         $msg = $request->contactmessage; 
@@ -132,38 +133,12 @@ class FrontendController extends Controller
             Mail::to($contactmail)
                 ->cc($ccEmails)
                 ->send(new ContactMessageMail($array));
+
+        return redirect()->route("homepage")->with("message", "Message send successfully!");
+
+        }else{
+            return redirect()->route("homepage")->with("error", "Server Error!");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // $data = new Work();
-        // $data->date = date('Y-m-d');
-        // $data->name = $request->name;
-        // $data->email = $request->email;
-        // $data->phone = $request->phone;
-        // $data->post_code = $request->post_code;
-        // $data->town = $request->town;
-        // $data->house_number = $request->house_number;
-        // $data->street = $request->street;
-        // $data->message = $request->message;
-        // if ($data->save()) {
-
-        //     return redirect()->route("homepage")->with("message", "Data save successfully!");
-
-        // } else {
-        //     return redirect()->route("homepage")->with("error", "Server Error!");
-        // }
-        
 
     }
 

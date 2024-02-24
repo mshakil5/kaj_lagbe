@@ -4,7 +4,7 @@
 <p>{{$array['message']}}</p>
 
 From <br>
-{{$array['name']}} {{$array['name']}} <br>
+{{$array['firstname']}} {{$array['lastname']}} <br>
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent
