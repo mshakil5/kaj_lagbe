@@ -1221,7 +1221,7 @@ blockquote::before {
 
 .custom-form button[type="submit"]:hover,
 .custom-form button[type="submit"]:focus {
-  background: var(--custom-btn-bg-hover-color);
+  background: #e40003;
   border-color: transparent;
 }
 

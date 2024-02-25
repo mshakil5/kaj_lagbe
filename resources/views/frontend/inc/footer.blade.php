@@ -13,7 +13,7 @@
 
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
 
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Menu Name</a></li>
+                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Find Help</a></li>
                     {{-- <li class="footer-menu-item"><a href="{{route('terms')}}" class="footer-menu-link">Terms & Conditions</a></li> --}}
                     <li class="footer-menu-item"><a href="{{route('privacy')}}" class="footer-menu-link">Privacy & Policy</a></li>
 

@@ -20,7 +20,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_2">Menu Name</a>
+                    <a class="nav-link click-scroll" href="#section_2">Find Help</a>
                 </li>
 
                 <li class="nav-item">

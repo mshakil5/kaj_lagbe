@@ -35,7 +35,7 @@
             <div class="row justify-content-md-center">
 
                 <div class="col-lg-8 col-12">
-                    <h2 class="text-white mb-4">Title will be there...</h2>
+                    <h2 class="text-white mb-4">Tell us about your task. We will get in touch with you soon.</h2>
 
                     @if ($message = Session::get('message'))
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -48,7 +48,7 @@
 
                     <form class="custom-form volunteer-form mb-5 mb-lg-0" action="{{route('work.store')}}" method="post" role="form" enctype="multipart/form-data">
                         @csrf
-                        <h3 class="mb-4">Submit your details</h3>
+                        {{-- <h3 class="mb-4">Submit your details</h3> --}}
 
                         <div class="row">
                             <div class="col-lg-4 col-12">

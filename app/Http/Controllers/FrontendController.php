@@ -102,8 +102,6 @@ class FrontendController extends Controller
 
     public function contactMessage(Request $request)
     {
-        
-
         $request->validate([
             'contactemail' => ['required', 'email'],
             'firstname' => ['required', 'string'],
