@@ -70,7 +70,7 @@ class FrontendController extends Controller
 
                 }
                 
-                return redirect()->route("homepage")->with("message", "Data save successfully!");
+                return redirect()->route("homepage")->with("message", "Thank you for telling us about your work");
             }
 
 
