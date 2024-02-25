@@ -399,7 +399,7 @@ strong {
 .navbar-nav .nav-link.active, 
 .navbar-nav .nav-link:hover {
   background: transparent;
-  color: var(--primary-color);
+  color: #e20001;
 }
 
 .dropdown-menu {

@@ -34,7 +34,7 @@ class ContactMessageMail extends Mailable
 
     public function build()
     {
-        return $this->from('do-not-reply@shambleskorner.co.uk', 'Shambleskorner')
+        return $this->from('info@edgeemg.co.uk', 'EDGE')
                     ->subject($this->array['subject'])
                     ->markdown('emails.contact_message');
     }

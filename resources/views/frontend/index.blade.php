@@ -102,7 +102,7 @@
                         </div>
 
                         <textarea name="message" rows="3" class="form-control" id="message"
-                            placeholder="Comment (Optional)"></textarea>
+                            placeholder="Comment" required></textarea>
 
                         <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
                     </form>
@@ -147,7 +147,7 @@
                                 <i class="bi-telephone me-2"></i>
 
                                 <a href="tel: 0203-994-7611">
-                                    0203.994.7611
+                                    0203-994-7611
                                 </a>
                             </p>
 

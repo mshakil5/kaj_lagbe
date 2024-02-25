@@ -1,7 +1,7 @@
 
 
 
-<nav class="navbar navbar-expand-lg bg-light shadow-lg">
+<nav class="navbar navbar-expand-lg shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="{{route('homepage')}}">
             <img src="{{ asset('frontend/images/logo.jpg')}}" class="logo img-fluid" alt="">

@@ -40,6 +40,7 @@ class FrontendController extends Controller
             'street' => ['required'],
             'phone' => ['required'],
             'images' => ['required'],
+            'message' => ['required'],
         ]);
 
         $data = new Work();

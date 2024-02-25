@@ -27,7 +27,7 @@
                     <i class="bi-telephone me-2"></i>
 
                     <a href="tel: 0203-994-7611" class="site-footer-link">
-                        0203.994.7611
+                        0203-994-7611
                     </a>
                 </p>
 
