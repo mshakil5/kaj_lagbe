@@ -18,10 +18,10 @@ class FrontendController extends Controller
         $data = Location::where('postcode', 'like', '%'.$request->postcode.'%')->orWhere('postcode', 'like', '%'.$searchdata.'%')->first();
 
         if (isset($data) ) {
-            $message ="<b style='color: green'>Available</b>";
+            $message ="Available";
             return response()->json(['status'=> 300,'data'=>$data,'message'=>$message]);
         } else {
-            $message ="<b style='color: red'>This location is out of our service.</b>";
+            $message ="This location is out of our service.";
             return response()->json(['status'=> 303,'message'=>$message]);
         }
         
@@ -30,7 +30,6 @@ class FrontendController extends Controller
 
     public function workStore(Request $request)
     {
-        // dd($request->all());
 
         $request->validate([
             'email' => ['required', 'email'],
@@ -41,6 +40,7 @@ class FrontendController extends Controller
             'street' => ['required'],
             'phone' => ['required'],
             'images' => ['required'],
+            'message' => ['required'],
         ]);
 
         $data = new Work();
