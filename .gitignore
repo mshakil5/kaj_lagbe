@@ -6,6 +6,11 @@
 /public/images
 /storage/*.key
 /vendor
+
+
+#stripe key ignore
+resources/views/frontend/index2.blade.php
+
 .env
 .env.backup
 .env.production
