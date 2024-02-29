@@ -34,10 +34,9 @@ class FrontendController extends Controller
         $request->validate([
             'email' => ['required', 'email'],
             'name' => ['required', 'string'],
+            'address_first_line' => ['required'],
             'post_code' => ['required'],
-            'house_number' => ['required'],
             'town' => ['required'],
-            'street' => ['required'],
             'phone' => ['required'],
             'images' => ['required'],
             'message' => ['required'],
@@ -50,8 +49,9 @@ class FrontendController extends Controller
         $data->phone = $request->phone;
         $data->post_code = $request->post_code;
         $data->town = $request->town;
-        $data->house_number = $request->house_number;
-        $data->street = $request->street;
+        $data->address_first_line = $request->address_first_line;
+        $data->address_second_line = $request->address_second_line;
+        $data->address_third_line = $request->address_third_line;
         $data->message = $request->message;
         if ($data->save()) {
 

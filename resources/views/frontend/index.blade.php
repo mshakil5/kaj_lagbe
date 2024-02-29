@@ -73,12 +73,12 @@
 
                             <div class="col-lg-4 col-12">
                                 <label for="address_second_line"> Address Second Line</label>
-                                <input type="text" name="address_second_line" id="address_second_line" class="form-control" required readonly>
+                                <input type="text" name="address_second_line" id="address_second_line" class="form-control" readonly>
                             </div>
 
                             <div class="col-lg-4 col-12">
                                 <label for="address_third_line"> Address Third Line</label>
-                                <input type="text" name="address_third_line" id="address_third_line" class="form-control" required readonly>
+                                <input type="text" name="address_third_line" id="address_third_line" class="form-control" readonly>
                             </div>
 
                             
@@ -237,7 +237,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
         IdealPostcodes.AddressFinder.watch({
-            apiKey: "test",
+            apiKey: "",
             outputFields: {
             line_1: "#address_first_line",
             line_2: "#address_second_line",
