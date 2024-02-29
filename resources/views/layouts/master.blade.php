@@ -17,6 +17,7 @@
     <link href="{{ asset('frontend/css/bootstrap-icons.css')}}" rel="stylesheet">
     <link href="{{ asset('frontend/css/templatemo-kind-heart-charity.css')}}" rel="stylesheet">
 
+
 </head>
 
 <body id="section_1">
@@ -30,11 +31,12 @@
 
     <!-- JAVASCRIPT FILES -->
     <script src="{{ asset('frontend/js/jquery.min.js')}}"></script>
-    <script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('frontend/js/jquery.sticky.js')}}"></script>
-    <script src="{{ asset('frontend/js/click-scroll.js')}}"></script>
+    {{-- <script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('frontend/js/counter.js')}}"></script>
-    <script src="{{ asset('frontend/js/custom.js')}}"></script>
+    <script src="{{ asset('frontend/js/custom.js')}}"></script> --}}
+
+    
+    @yield('script')
 
     <script>
         
@@ -46,7 +48,7 @@
 
         //check post code start 
       var url = "{{URL::to('/check-post-code')}}";
-        $("#post_code").keyup(function(){
+        $("#post_code").change(function(){
             var length =  $(this).val().length;
 
             var postcode = $("#post_code").val();
@@ -76,6 +78,7 @@
 
             
         });
+        
         //check post code end 
 
     });

@@ -58,8 +58,7 @@
 
                             <div class="col-lg-4 col-12">
                                 <label for="email"> Email</label>
-                                <input type="email" name="email" id="email"
-                                    pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" required>
+                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" required>
                             </div>
 
                             <div class="col-lg-4 col-12">
@@ -67,28 +66,31 @@
                                 <input type="number" name="phone" id="phone" class="form-control" required>
                             </div>
 
-                            
-                            <div class="col-lg-3 col-12">
-                                <label for="house_number"> House Number</label>
-                                <input type="text" name="house_number" id="house_number" class="form-control" required>
+                            <div class="col-lg-4 col-12">
+                                <label for="address_first_line"> Address First Line</label>
+                                <input type="text" name="address_first_line" id="address_first_line" class="form-control" required>
+                            </div>
+
+                            <div class="col-lg-4 col-12">
+                                <label for="address_second_line"> Address Second Line</label>
+                                <input type="text" name="address_second_line" id="address_second_line" class="form-control" required readonly>
+                            </div>
+
+                            <div class="col-lg-4 col-12">
+                                <label for="address_third_line"> Address Third Line</label>
+                                <input type="text" name="address_third_line" id="address_third_line" class="form-control" required readonly>
                             </div>
 
                             
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-6 col-12">
                                 <label for="town"> Town</label>
-                                <input type="text" name="town" id="town" class="form-control" required>
+                                <input type="text" name="town" id="town" class="form-control" required readonly>
                             </div>
 
                             
-                            <div class="col-lg-3 col-12">
-                                <label for="street">Street Name</label>
-                                <input type="text" name="street" id="street" class="form-control" required>
-                            </div>
-
-                            
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-6 col-12">
                                 <label for="post_code"> Post Code</label>
-                                <input type="text" name="post_code" id="post_code" class="form-control" required>
+                                <input type="text" name="post_code" id="post_code" class="form-control" required readonly>
                                 <div class="perrmsg"></div>
                             </div>
 
@@ -221,5 +223,30 @@
 
     
 </main>
+
+
     
+@endsection
+
+
+@section('script')
+
+  
+        <script src="https://cdn.jsdelivr.net/npm/@ideal-postcodes/address-finder-bundled@4"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        IdealPostcodes.AddressFinder.watch({
+            apiKey: "test",
+            outputFields: {
+            line_1: "#address_first_line",
+            line_2: "#address_second_line",
+            line_3: "#address_third_line",
+            post_town: "#town",
+            postcode: "#post_code"
+            }
+        });
+        });
+    </script>
+
 @endsection
