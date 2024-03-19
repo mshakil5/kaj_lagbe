@@ -79,6 +79,6 @@ class Kernel extends HttpKernel
         'user-access' => \App\Http\Middleware\UserAccess::class,
         'is_admin' => \App\Http\Middleware\IsAdmin::class,
         'is_user' => \App\Http\Middleware\IsUser::class,
-        'is_manager' => \App\Http\Middleware\IsAgent::class,
+        'is_manager' => \App\Http\Middleware\IsManager::class,
     ];
 }

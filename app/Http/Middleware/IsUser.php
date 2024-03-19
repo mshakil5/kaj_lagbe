@@ -19,6 +19,6 @@ class IsUser
             return $next($request);
         }
 
-        return redirect('home')->with('error',"You don't have user access.");
+        return redirect('login')->with('error',"You don't have user access.");
     }
 }

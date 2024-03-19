@@ -50,8 +50,6 @@ class LocationController extends Controller
 
     public function update(Request $request)
     {
-
-        
         if(empty($request->postcode)){
             $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Post Code \" field..!</b></div>";
             return response()->json(['status'=> 303,'message'=>$message]);
@@ -64,7 +62,6 @@ class LocationController extends Controller
             return response()->json(['status'=> 303,'message'=>$message]);
             exit();
         }
-
 
         $data = Location::find($request->codeid);
         $data->postcode = $request->postcode;
@@ -80,7 +77,6 @@ class LocationController extends Controller
 
     public function delete($id)
     {
-
         if(Location::destroy($id)){
             return response()->json(['success'=>true,'message'=>'Data has been deleted successfully']);
         }else{

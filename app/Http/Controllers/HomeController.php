@@ -22,9 +22,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(): View
+    public function userDashboard(): View
     {
-        return view('home');
+        return view('user.dashboard');
     } 
   
     /**
@@ -46,4 +46,17 @@ class HomeController extends Controller
     {
         return view('managerHome');
     }
+
+    public function index()
+    {
+        if (auth()->user()->is_type == '1') {
+            return redirect()->route('admin.dashboard');
+        }
+        else if (auth()->user()->is_type == '0') {
+            return redirect()->route('user.profile');
+        }
+        else{
+            return view('home');
+        }
+    } 
 }

@@ -7,6 +7,8 @@
 /storage/*.key
 /vendor
 
+app/Http/Controllers/PaypalController.php
+
 
 #stripe key ignore
 resources/views/frontend/index2.blade.php

@@ -26,6 +26,26 @@
                 <li class="nav-item">
                     <a class="nav-link click-scroll" href="#section_3">Contact</a>
                 </li>
+                
+                @if(Auth::check())
+                    @if(auth()->user()->is_type == '1')
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{{ route('admin.dashboard') }}"><strong>{{ Auth::user()->name }}</strong></a>
+                        </li>
+                    @elseif(auth()->user()->is_type == '0')
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{{ route('user.profile') }}"><strong>{{ Auth::user()->name }}</strong></a>
+                        </li>
+                    @endif
+                @else
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{ route('register') }}">Register</a>
+                    </li>
+                @endif
 
             </ul>
         </div>

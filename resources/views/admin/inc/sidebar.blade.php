@@ -23,13 +23,39 @@
 
       
       <li class="nav-item">
-        <a href="{{route('admin.work')}}" class="nav-link {{ (request()->is('admin/get-all-work')) ? 'active' : '' }}">
+        <a href="{{route('alluser')}}" class="nav-link {{ (request()->is('admin/get-all-user*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>
-            Work
+            Users
           </p>
         </a>
       </li>
+
+      
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+            <i class="nav-icon fas fa-th"></i>
+            <p>Work</p>
+        </a>
+        <ul class="dropdown-menu bg-dark">
+           <li>
+            <a href="{{ route('admin.work') }}" class="nav-link {{ (request()->is('admin/get-all-work*')) ? 'active' : '' }} text-white">All</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.processing') }}" class="nav-link {{ (request()->is('admin/processing*')) ? 'active' : '' }} text-white">Processing</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.complete') }}" class="nav-link {{ (request()->is('admin/complete*')) ? 'active' : '' }} text-white">Complete</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.cancel') }}" class="nav-link {{ (request()->is('admin/cancel*')) ? 'active' : '' }} text-white">Cancel</a>
+            </li>
+        </ul>
+    </li>
+
+
+
+
 
       <li class="nav-item">
         <a href="{{route('admin.location')}}" class="nav-link {{ (request()->is('admin/location*')) ? 'active' : '' }}">

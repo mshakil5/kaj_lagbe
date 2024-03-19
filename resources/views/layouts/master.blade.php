@@ -47,37 +47,37 @@
       //
 
         //check post code start 
-      var url = "{{URL::to('/check-post-code')}}";
-        $("#post_code").change(function(){
-            var length =  $(this).val().length;
+      //var url = "{{URL::to('/check-post-code')}}";
+      //  $("#post_code").change(function(){
+        //    var length =  $(this).val().length;
+//
+        //    var postcode = $("#post_code").val();
+        //    
+        //    if (length > 2) {
+        //        $.ajax({
+        //            url: url,
+        //            method: "POST",
+        //            data: {postcode},
+//
+        //            success: function (d) {
+        //                if (d.status == 303) {
+        //                    $(".perrmsg").html(d.message);
+        //                    $('#submitBtn').attr('disabled', true);
+        //                }else if(d.status == 300){
+        //                    $(".perrmsg").html(d.message);
+        //                    $('#submitBtn').attr('disabled', false);
+        //                }
+        //            },
+        //            error: function (d) {
+        //                console.log(d);
+        //            }
+        //        }); 
+        //    }else{
+        //        $(".perrmsg").html("");
+        //    }
 
-            var postcode = $("#post_code").val();
             
-            if (length > 2) {
-                $.ajax({
-                    url: url,
-                    method: "POST",
-                    data: {postcode},
-
-                    success: function (d) {
-                        if (d.status == 303) {
-                            $(".perrmsg").html(d.message);
-                            $('#submitBtn').attr('disabled', true);
-                        }else if(d.status == 300){
-                            $(".perrmsg").html(d.message);
-                            $('#submitBtn').attr('disabled', false);
-                        }
-                    },
-                    error: function (d) {
-                        console.log(d);
-                    }
-                }); 
-            }else{
-                $(".perrmsg").html("");
-            }
-
-            
-        });
+      //  });
         
         //check post code end 
 

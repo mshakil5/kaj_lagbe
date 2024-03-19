@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('work_id')->unsigned()->nullable();
             $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
             $table->string('name')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('status')->default(1);
             $table->string('updated_by')->nullable();
             $table->string('created_by')->nullable();

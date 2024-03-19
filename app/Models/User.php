@@ -3,12 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Work;
+use App\Models\AdditionalAddress;
+// use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
+
 
 class User extends Authenticatable
 {
@@ -70,4 +76,16 @@ class User extends Authenticatable
             get: fn ($value) =>  ["0", "1", "2"][$value],
         );
     }
+
+    public function works()
+    {
+        return $this->hasMany(Work::class);
+    }
+
+    public function additionalAddresses()
+    {
+        return $this->hasMany(AdditionalAddress::class);
+    }
+
+
 }

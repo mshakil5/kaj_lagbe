@@ -58,18 +58,15 @@ class LoginController extends Controller
         {
             
             if (auth()->user()->is_type == '1') {
-                
-                // dd('admin');
                 return redirect()->route('admin.dashboard');
             }else if (auth()->user()->is_type == '2') {
                 return redirect()->route('manager.home');
             }else if (auth()->user()->is_type == '0') {
-                return redirect()->route('user.home');
+                return redirect()->route('user.profile');
             }else{
                 return redirect()->route('home');
             }
         }else{
-            dd('login');
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }
