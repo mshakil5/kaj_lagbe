@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class PaypalController extends Controller
 {
-    public function workStore(Request $request)
+    public function payment(Request $request)
     {
         $request->validate([
             'work_id' => ['required'],
@@ -40,7 +40,7 @@ class PaypalController extends Controller
         $payment->user_id = Auth::user()->id;
         $payment->payment_id = $request->payment_id;
         $payment->payer_id = $request->payer_id;
-        $payment->payer_email = $request->email;
+        $payment->payer_email = $request->payer_email;
         $payment->amount = $request->amount;
         $payment->currency = env('PAYPAL_CURRENCY');
         $payment->payment_status = $request->state;
