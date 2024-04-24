@@ -31,9 +31,9 @@
 
     <!-- JAVASCRIPT FILES -->
     <script src="{{ asset('frontend/js/jquery.min.js')}}"></script>
-    {{-- <script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('frontend/js/counter.js')}}"></script>
-    <script src="{{ asset('frontend/js/custom.js')}}"></script> --}}
+    <script src="{{ asset('frontend/js/custom.js')}}"></script>
 
     
     @yield('script')

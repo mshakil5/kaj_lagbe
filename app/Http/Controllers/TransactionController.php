@@ -24,11 +24,11 @@ class TransactionController extends Controller
             exit();
         }
 
-        if(empty($request->net_amount)){
-            $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Net amount \" field..!</b></div>";
-            return response()->json(['status'=> 303,'message'=>$message]);
-            exit();
-        }
+        // if(empty($request->net_amount)){
+        //     $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Net amount \" field..!</b></div>";
+        //     return response()->json(['status'=> 303,'message'=>$message]);
+        //     exit();
+        // }
 
         if(empty($request->amount)){
             $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Amount \" field..!</b></div>";
@@ -39,7 +39,7 @@ class TransactionController extends Controller
         $validatedData = $request->validate([
             'date' => 'required|date',
             'amount' => 'required|numeric',
-            'net_amount' => 'required|numeric',
+            // 'net_amount' => 'required|numeric',
             'work_id' => 'required|exists:works,id', 
         ]);
 
@@ -48,13 +48,11 @@ class TransactionController extends Controller
         $transaction = new Transaction();
         $transaction->date = $validatedData['date'];
         $transaction->amount = $validatedData['amount'];
-        $transaction->net_amount = $validatedData['net_amount'];
+        // $transaction->net_amount = $validatedData['net_amount'];
         $transaction->work_id = $validatedData['work_id'];
         $transaction->user_id = $work->user_id; 
 
-        $tranid = Str::random(8);
-        $transaction->tranid = $tranid;
-
+        $tranid = now()->format('Ym') . Str::random(6);
         $transaction->tranid = $tranid;
 
         if ($transaction->save()){
@@ -141,6 +139,12 @@ class TransactionController extends Controller
     public function addTransaction($work_id)
     {
         return view('admin.work.transaction.create', compact('work_id'));
+    }
+
+        public function allTransactions()
+    {
+        $data = Transaction::with('work')->orderBy('id', 'desc')->get();
+        return view('admin.work.transaction.list', compact('data'));
     }
 
 }

@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                <a href="{{ route('admin.work') }}">
+                <a href="{{ route('admin.new') }}">
                     <button type="button" class="btn btn-secondary my-3">Go back</button>
                 </a>
                 <button type="button" class="btn btn-secondary my-3" id="newBtn">Add new</button>
@@ -57,14 +57,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <!-- <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label>Net Amount</label>
                         <input type="number" class="form-control" id="net_amount" name="net_amount" placeholder="Enter Net Amount">
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </form>
               </div>
               <!-- /.card-body -->
@@ -190,7 +190,7 @@
           var form_data = new FormData();
           form_data.append("amount", $("#amount").val());
           form_data.append("date", $("#date").val());
-          form_data.append("net_amount", $("#net_amount").val());
+          // form_data.append("net_amount", $("#net_amount").val());
           form_data.append("work_id", $("#work_id").val());
           $.ajax({
             url: url,
@@ -218,7 +218,7 @@
           var form_data = new FormData();
           form_data.append("amount", $("#amount").val());
           form_data.append("date", $("#date").val());
-          form_data.append("net_amount", $("#net_amount").val());
+          // form_data.append("net_amount", $("#net_amount").val());
           form_data.append("codeid", $("#codeid").val()); 
 
           $.ajax({
@@ -286,7 +286,7 @@
       function populateForm(data){
           $("#amount").val(data.amount);
           $("#date").val(data.date);
-          $("#net_amount").val(data.net_amount);
+          // $("#net_amount").val(data.net_amount);
           $("#codeid").val(data.id);
           $("#addBtn").val('Update');
           $("#addBtn").html('Update');

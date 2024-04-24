@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use App\Models\Work;
 use App\Models\Location;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
 {
@@ -28,69 +30,6 @@ class FrontendController extends Controller
         
     }
 
-
-    // public function workStore(Request $request)
-    // {
-
-    //     $request->validate([
-    //         'email' => ['required', 'email'],
-    //         'name' => ['required', 'string'],
-    //         'post_code' => ['required'],
-    //         'house_number' => ['required'],
-    //         'town' => ['required'],
-    //         'street' => ['required'],
-    //         'phone' => ['required'],
-    //         'images' => ['required'],
-    //         'message' => ['required'],
-    //     ]);
-
-    //     $data = new Work();
-    //     $data->date = date('Y-m-d');
-    //     $data->name = $request->name;
-    //     $data->email = $request->email;
-    //     $data->phone = $request->phone;
-    //     $data->post_code = $request->post_code;
-    //     $data->town = $request->town;
-    //     $data->house_number = $request->house_number;
-    //     $data->street = $request->street;
-    //     $data->message = $request->message;
-    //     if ($data->save()) {
-            
-    //         if ($request->hasFile('images')) {
-    //             $images = [];
-    //             foreach ($request->file('images') as $image) {
-                    
-                    
-    //                 $rand = mt_rand(100000, 999999);
-    //                 $imageName = time(). $rand .'.'.$image->extension();
-    //                 $image->move(public_path('images'), $imageName);
-                    
-    //                 $workImg = new WorkImage();
-    //                 $workImg->work_id = $data->id;
-    //                 $workImg->name = $imageName;
-    //                 $workImg->save();
-    //                 $images[] = $imageName;
-    //             }
-    //         }
-            
-    //         $works = Work::with('workimage')->where('id', $data->id)->first();
-    //         $message ="Data Store Successfully.";
-    //         return response()->json(['status'=> 300,'data'=>$works,'message'=>$message]);
-
-
-
-
-    //     } else {
-    //         $message ="Server Error!!";
-    //         return response()->json(['status'=> 303,'data'=>$data,'message'=>$message]);
-    //     }
-        
-
-    // }
-
-
-
-
     public function workStore(Request $request)
     {
         $request->validate([
@@ -98,50 +37,113 @@ class FrontendController extends Controller
             'name' => ['required', 'string'],
             'address_first_line' => ['required'],
             'post_code' => ['required'],
-            'town' => ['required'],
-            // 'phone' => ['required'],
-            // 'images.*' => ['required', 'image'],
-            // 'descriptions.*' => ['nullable', 'string'],
+            'town' => ['nullable'],
+            'phone' => ['required'],
+            'images.*' => ['required', 'image'],
+            'descriptions.*' => ['required', 'string'],
         ]);
 
         $data = new Work();
-        $data->user_id = Auth::id();
+        $data->user_id = auth()->id();
+        $data->orderid = mt_rand(100000, 999999);
         $data->date = date('Y-m-d');
         $data->name = $request->name;
         $data->email = $request->email;
-        // $data->phone = $request->phone;
-        $data->post_code = $request->post_code;
-        $data->town = $request->town;
-        $data->orderid = mt_rand(100000, 999999);
+        $data->phone = $request->phone;
         $data->address_first_line = $request->address_first_line;
         $data->address_second_line = $request->address_second_line;
         $data->address_third_line = $request->address_third_line;
+        $data->town = $request->town;
+        $data->post_code = $request->post_code;
+        $data->created_by = Auth::id();
         $data->save();
-
-        
-        // $alldata = json_decode($request->alldata, true); 
 
         if ($request->hasFile('images')) {
             $files = $request->file('images');
             $descriptions = $request->input('descriptions');
 
             foreach ($files as $index => $image) {
-                $rand = mt_rand(100000, 999999);
-                $imageName = time(). $rand .'.'.$image->extension();
-                $image->storeAs('public/images', $imageName);
+                $validatedData = $request->validate([
+                    'images.' . $index => ['required', 'image'],
+                    'descriptions.' . $index => ['required', 'string'],
+                ]);
+
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $storagePath = public_path('images/works');
+                $image->move($storagePath, $filename);
 
                 $workImg = new WorkImage();
                 $workImg->work_id = $data->id;
-                $workImg->name = $imageName;
+                $workImg->name = 'images/works/' . $filename;
                 $workImg->description = $descriptions[$index] ?? null; 
                 $workImg->save();
             }
         }
-
-        return response()->json(['message' => 'Thank you for telling us about your work. Your submission has been processed successfully.'], 201);
+        return response()->json(['message' => 'Work stored successfully.', 'work' => $data], 200);
     }
 
+    public function workUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'name' => ['required', 'string'],
+            'address_first_line' => ['required'],
+            'post_code' => ['required'],
+            'town' => ['nullable'],
+            'phone' => ['required'],
+            'images.*' => ['required', 'image'],
+            'descriptions.*' => ['required', 'string'],
+        ]);
 
+        $data = Work::findOrFail($id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address_first_line = $request->address_first_line;
+        $data->address_second_line = $request->address_second_line;
+        $data->address_third_line = $request->address_third_line;
+        $data->town = $request->town;
+        $data->post_code = $request->post_code;
+        $data->save();
 
-    
+        if ($request->hasFile('images')) {
+            $files = $request->file('images');
+            $descriptions = $request->input('descriptions');
+
+            foreach ($files as $index => $image) {
+                $validatedData = $request->validate([
+                    'images.' . $index => ['required', 'image'],
+                    'descriptions.' . $index => ['required', 'string'],
+                ]);
+
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $storagePath = public_path('images/works');
+                $image->move($storagePath, $filename);
+
+                $workImg = new WorkImage();
+                $workImg->work_id = $data->id;
+                $workImg->name = 'images/works/' . $filename;
+                $workImg->description = $descriptions[$index] ?? null; 
+                $workImg->save();
+            }
+        }
+        return response()->json(['message' => 'Work updated successfully.', 'work' => $data], 200);
+    }
+
+    public function deleteWork($id)
+    {
+        $work = Work::find($id);
+        if (!$work) {
+            return response()->json(['message' => 'Work not found.'], 404);
+        }
+        if ($work->invoice()->exists()) {
+            return response()->json(['message' => 'Cannot delete work. There are associated invoices.'], 422);
+        }
+        if ($work->delete()) {
+            return response()->json(['message' => 'Work deleted successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'Error deleting work.'], 500);
+        }
+    }
+
 }

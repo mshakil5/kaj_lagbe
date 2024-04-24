@@ -1,29 +1,25 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-
-<div class="container mt-4">
+<div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <a href="{{ route('admin.work') }}" class="btn btn-secondary">
-                        Back
-                    </a>
+                    <a href="{{ route('admin.new') }}" class="btn btn-secondary">Back</a>
+                    @if (isset($invoice) && $invoice->status == 0)
+                        <p class="btn mt-3 btn-secondary" disabled>Paid</p>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="card-body">
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+                <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
             @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+                <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
             @isset($invoice)
@@ -31,36 +27,34 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="work_id" value="{{ $invoice->work_id }}">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="date">Date:</label>
-                                <input type="date" class="form-control" id="date" name="date" value="{{ $invoice->date }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Amount:</label>
-                                <input type="text" class="form-control" id="amount" name="amount" value="{{ $invoice->amount }}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <h3>Existing Invoice File:</h3>
-                                @if ($invoice->img)
-                                    <p><a href="{{ asset($invoice->img) }}" target="_blank">View Invoice</a></p>
-                                @else
-                                    <p>No file found</p>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <h3>Upload New Invoice File</h3>
-                                <label for="file">Choose File:</label>
-                                <input type="file" class="form-control-file" id="img" name="img">
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Date:</td>
+                                <td><input type="date" class="form-control" id="date" name="date" value="{{ $invoice->date }}"></td>
+                            </tr>
+                            <tr>
+                                <td>Amount:</td>
+                                <td><input type="text" class="form-control" id="amount" name="amount" value="{{ $invoice->amount }}"></td>
+                            </tr>
+                            <tr>
+                                <td>Existing Invoice File:</td>
+                                <td>
+                                    @if ($invoice->img)
+                                        <p><a href="{{ asset($invoice->img) }}" target="_blank">View Invoice</a></p>
+                                    @else
+                                        <p>No file found</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Upload New Invoice File</td>
+                                <td><input type="file" class="form-control-file" id="img" name="img"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <button type="submit" class="btn btn-primary">Update Invoice</button>
                 </form>
-
                 <form action="{{ route('invoices.destroy', $invoice->work_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this invoice?');">
                     @csrf
                     @method('DELETE')
@@ -72,5 +66,4 @@
         </div>
     </div>
 </div>
-
 @endsection

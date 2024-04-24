@@ -23,11 +23,18 @@
             <div class="col-lg-4 col-md-6 col-12 mx-auto">
                 <h5 class="site-footer-title mb-3">Contact Infomation</h5>
 
+                <p class="text-white d-flex mt-3">
+                    <i class="bi-geo-alt me-2"></i>
+                    100 Fairholt Rd. 
+                    London, 
+                    N165HN
+                </p>
+
                 <p class="text-white d-flex mb-2">
                     <i class="bi-telephone me-2"></i>
 
                     <a href="tel: 0203-994-7611" class="site-footer-link">
-                        0203-994-7611
+                        02-039947611
                     </a>
                 </p>
 
@@ -39,12 +46,7 @@
                     </a>
                 </p>
 
-                <p class="text-white d-flex mt-3">
-                    <i class="bi-geo-alt me-2"></i>
-                    100 fairholt rd
-                    London 
-                    N165HN
-                </p>
+                
 
             </div>
         </div>

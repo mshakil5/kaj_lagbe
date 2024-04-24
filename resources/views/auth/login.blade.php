@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('content')
 
 <style>
@@ -13,9 +14,9 @@
         @csrf
         <h2>Login</h2>
 
-        @if (isset($message))
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <strong>{{ $message }}</strong>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ session('error') }}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,7 +25,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" required autocomplete="email" autofocus placeholder="Email">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -44,7 +45,7 @@
             </div>
         </div>
 
-        <button type="submit" class="form-control">Sign In</button>
+        <button type="submit" class="form-control">log In</button>
     </form>
 </div>
 

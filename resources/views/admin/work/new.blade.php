@@ -31,65 +31,55 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th class="text-center">Sl</th>
-                  <th class="text-center">Date</th>
-                  <th class="text-center">Name</th>
-                  <th class="text-center">Email</th>
-                  <th class="text-center">Phone</th>
-                  <th class="text-center">Address</th>
-                  <th class="text-center">Transaction</th>
-                  <th class="text-center">Invoice</th>
-                  <th class="text-center">Status</th>
-                  <th class="text-center">Details</th>
+                  <th>Sl</th>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Status</th>
+                  <th>Details</th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach ($data as $key => $data)
                   <tr>
-                    <td style="text-align: center">{{ $key + 1 }}</td>
-                    <td style="text-align: center">{{$data->date}}</td>
-                    <td style="text-align: center">{{$data->name}}</td>
-                    <td style="text-align: center">{{$data->email}}</td>
-                    <td style="text-align: center">{{$data->phone}}</td>
-                    <td style="text-align: center">
-                        <p>House No. {{$data->house_number}}</p>
-                        <p>Street Name. {{$data->street}}</p>
-                        <p>Town. {{$data->town}}</p>
-                        <p>Post Code. {{$data->post_code}}</p>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->phone}}</td>
+                    <td>
+                        {{$data->address_first_line}} </br>
+                        {{$data->address_second_line}}</br>
+                        {{$data->address_third_line}}</br>
+                        {{$data->town}}</br>
+                        {{$data->post_code}}
                     </td>
-                    <td style="text-align: center">
-                        <a href="{{ route('work.transactions', $data->id) }}" class="btn btn-secondary">
-                            Transaction 
-                        </a>
-                    </td>
-                    <td style="text-align: center">
-                        <a href="{{ route('work.invoice', $data->id) }}" class="btn btn-secondary">
-                            Invoice
-                        </a>
-                    </td>
-
-                    <td style="text-align: center">
+                    <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-secondary">
-                          <span id="stsval{{$data->id}}"> 
-                            @if ($data->status == 0) Processing
-                            @elseif($data->status == 1) Complete 
-                            @else Cancel 
-                            @endif
-                          </span>
-                        </button>
+                          <span id="stsval{{$data->id}}">
+                          @if ($data->status == 1) New
+                          @elseif($data->status == 2) In progress
+                          @elseif($data->status == 3) Completed
+                          @elseif($data->status == 4) Cancelled
+                          @endif
+                        </span>
+                      </button>
                         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="0" >Processing</a>
-                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="1">Complete</a>
-                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="2">Cancel</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="1" >New</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="2">In Progress</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="3">Completed</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="4">Cancelled</a>
                         </div>
                       </div>
                     </td>
                    
-                    <td style="text-align: center">
+                    <td>
                         <a href="{{ route('admin.work.details', $data->id) }}" class="btn btn-secondary">
                             <i class="fas fa-eye"></i>
                         </a>
@@ -148,6 +138,9 @@
           } else if(d.status == 300) {
             $("#stsval"+d.id).html(d.stsval);
             alert('Status Changed Successfully');
+              setTimeout(function() {
+                window.location.reload();
+            }, 100);
           }
         },
         error: function (d) {

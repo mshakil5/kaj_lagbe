@@ -1,7 +1,5 @@
-
 @extends('layouts.master')
 @section('content')
-
 
 <main>
     <section class="section-padding section-bg" id="section_1">
@@ -46,75 +44,113 @@
                         </div>
                     @endif
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <!-- Separate radio button  -->
                     <form class="custom-form volunteer-form mb-5 mb-lg-0" action="{{route('work.store')}}" method="post" role="form" enctype="multipart/form-data">
                         @csrf
-                        {{-- <h3 class="mb-4">Submit your details</h3> --}}
+                        @auth
+                        <div class="row">
+                            <div class="col-lg-6 col-12" >
+                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="useRegisteredAddress">
+                                    <label class="form-check-label" for="useRegisteredAddress">
+                                        Use registered address
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12" >
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="useRegisteredPhone">
+                                    <label class="form-check-label" for="useRegisteredPhone">
+                                        Use registered phone number
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @endauth
 
                         <div class="row">
                             <div class="col-lg-4 col-12">
                                 <label for="name"> Name</label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Jack Doe" value="{{ auth()->check() ? auth()->user()->name : '' }}" required>
                             </div>
-
                             <div class="col-lg-4 col-12">
                                 <label for="email"> Email</label>
                                 <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com" value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
                             </div>
-
                             <div class="col-lg-4 col-12">
                                 <label for="phone"> Phone</label>
-                                <input type="number" name="phone" id="phone" class="form-control" value="{{ auth()->check() ? auth()->user()->phone : '' }}" required>
+                                <input type="number" name="phone" id="phone" class="form-control" required>
                             </div>
+                        </div>
 
+                        <div class="row">
                             <div class="col-lg-4 col-12">
                                 <label for="address_first_line"> Address First Line</label>
-                                <input type="text" name="address_first_line" id="address_first_line" class="form-control" value="" required>
+                                <input type="text" name="address_first_line" id="address_first_line" class="form-control" required>
                             </div>
-
                             <div class="col-lg-4 col-12">
                                 <label for="address_second_line"> Address Second Line</label>
-                                <input type="text" name="address_second_line" id="address_second_line" class="form-control" value="" readonly>
+                                <input type="text" name="address_second_line" id="address_second_line" class="form-control" readonly>
                             </div>
-
                             <div class="col-lg-4 col-12">
                                 <label for="address_third_line"> Address Third Line</label>
-                                <input type="text" name="address_third_line" id="address_third_line" class="form-control" value="" readonly>
+                                <input type="text" name="address_third_line" id="address_third_line" class="form-control" readonly>
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="town"> Town</label>
-                                <input type="text" name="town" id="town" class="form-control" required value="" >
+                                <input type="text" name="town" id="town" class="form-control">
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="post_code"> Post Code</label>
-                                <input type="text" name="post_code" id="post_code" class="form-control" required value="">
+                                <input type="text" name="post_code" id="post_code" class="form-control">
                                 <div class="perrmsg"></div>
                             </div>
-
-                            <div class="col-lg-12 col-12">
-                                <div class="input-group input-group-file">
-                                    <input type="button" class="form-control" id="inputGroupFile02"  style="display: none;">
-                                    <label class="input-group-text text-center" for="inputGroupFile02" id="addImageLabel" style="cursor: pointer;">Add image and description</label>
-                                    <i class="bi-cloud-arrow-up ms-auto"></i>
-                                </div>
-                                <div id="imageContainer">
+                        </div>
+                        
+                        <div class="col-lg-12 col-12">
+                            <div id="imageContainer">
+                                <div class="row image-row" style="margin-top: 10px;">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="input-group mb-3">
+                                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-12">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 col-12 text-end">
+                                        <button class="btn btn-success add-row" type="button">+</button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                        <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
+                        @guest
+                            <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
+                        @else
+                            <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
+                        @endguest
                     </form>
                 </div>
-
             </div>
         </div>
     </section>
 
-    
     <section class="contact-section section-padding" id="section_3">
         <div class="container">
             <div class="row">
-
                 <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
                     <div class="contact-info-wrap">
                         <h2>Get in touch</h2>
@@ -132,10 +168,10 @@
                         <div class="contact-info">
                             <h5 class="mb-3">Contact Infomation</h5>
 
-                            <p class="d-flex mb-2">
+                            <p class="d-flex mt-3">
                                 <i class="bi-geo-alt me-2"></i>
-                                100 fairholt rd
-                                London 
+                                100 Fairholt Rd. 
+                                London, 
                                 N165HN
                             </p>
 
@@ -143,7 +179,7 @@
                                 <i class="bi-telephone me-2"></i>
 
                                 <a href="tel: 0203-994-7611">
-                                    0203-994-7611
+                                    02-039947611
                                 </a>
                             </p>
 
@@ -159,7 +195,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-5 col-12 mx-auto">
                     <form class="custom-form contact-form" action="{{route('contactMessage')}}" method="post" role="form">
                         @csrf
@@ -194,7 +229,6 @@
                                     </span>
                                 @enderror
 
-
                             </div>
                         </div>
 
@@ -205,79 +239,140 @@
                             </span>
                         @enderror
 
-                        <textarea name="contactmessage" rows="5" class="form-control" id="contactmessage" placeholder="What can we help you?"></textarea>
+                        <textarea name="contactmessage" rows="5" class="form-control" id="contactmessage" placeholder="How can we help you?" required></textarea>
 
                         <button type="submit" class="form-control">Send Message</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </section>
-
-    
 </main>
 
 
-    
-@endsection
+<style>
+    .add-row,
+    .remove-row {
+        font-size: 25px;
+    }
+</style>
 
+@endsection
 
 @section('script')
 
-  
-    <script src="https://cdn.jsdelivr.net/npm/@ideal-postcodes/address-finder-bundled@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ideal-postcodes/address-finder-bundled@4"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            IdealPostcodes.AddressFinder.watch({
-                apiKey: "ak_lt4ocv0eHLLo4meBRGHWK4HU0SBxa",
-                outputFields: {
-                line_1: "#address_first_line",
-                line_2: "#address_second_line",
-                line_3: "#address_third_line",
-                post_town: "#town",
-                postcode: "#post_code"
-            }
-        });
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        IdealPostcodes.AddressFinder.watch({
+            apiKey: "ak_lt4ocv0eHLLo4meBRGHWK4HU0SBxa",
+            outputFields: {
+            line_1: "#address_first_line",
+            line_2: "#address_second_line",
+            line_3: "#address_third_line",
+            post_town: "#town",
+            postcode: "#post_code"
+        }
     });
-    </script>
-
+});
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-   $(document).ready(function(){
-        $('#addImageLabel').click(function(){
+    $(document).ready(function(){
+        function addNewRow() {
             var newRow = `
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-lg-11 col-12">
-                        <div class="row">
-                            <div class="col-lg-6 col-12">
-                                <div class="input-group mb-3">
-                                    <input type="file" class="form-control image-upload" name="images[]" accept="image/*">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <div class="input-group mb-3">
-                                    <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]"></textarea>
-                                </div>
-                            </div>
+                <div class="row image-row" style="margin-top: 10px;">
+                    <div class="col-lg-6 col-12">
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <div class="input-group mb-3">
+                            <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]" required></textarea>
                         </div>
                     </div>
                     <div class="col-lg-1 col-12 text-end">
-                        <button class="btn btn-danger remove" type="button">-</button>
+                        <button class="btn btn-danger remove-row" type="button">-</button>
                     </div>
                 </div>
             `;
             $('#imageContainer').append(newRow);
-            $('.remove').off('click').on('click', function(){
-                $(this).closest('.row').remove();
-            });
+            $('#imageContainer').children('.row').last().find('.add-row').removeClass('btn-success add-row').addClass('btn-danger remove-row').html('-');
+        }
+
+        $(document).on('click', '.add-row', function(){
+            addNewRow();
+        });
+
+        $(document).on('click', '.remove-row', function(){
+            $(this).closest('.row').remove();
+        });
+
+        $('#submitBtn').click(function(){
+            @guest
+                toastr.error('Please login first to submit the form.', 'Error');
+                return false;
+            @endguest
         });
     });
-
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const useRegisteredPhoneCheckbox = document.getElementById('useRegisteredPhone');
+        const useRegisteredAddressCheckbox = document.getElementById('useRegisteredAddress');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const addressFirstLineInput = document.getElementById('address_first_line');
+        const addressSecondLineInput = document.getElementById('address_second_line');
+        const addressThirdLineInput = document.getElementById('address_third_line');
+        const townInput = document.getElementById('town');
+        const postCodeInput = document.getElementById('post_code');
+
+        if (useRegisteredPhoneCheckbox.checked) {
+            phoneInput.value = "{{ auth()->check() ? auth()->user()->phone : '' }}";
+        }
+
+        if (useRegisteredAddressCheckbox.checked) {
+            addressFirstLineInput.value = "{{ auth()->check() ? auth()->user()->address_first_line : '' }}";
+            addressSecondLineInput.value = "{{ auth()->check() ? auth()->user()->address_second_line : '' }}";
+            addressThirdLineInput.value = "{{ auth()->check() ? auth()->user()->address_third_line : '' }}";
+            townInput.value = "{{ auth()->check() ? auth()->user()->town : '' }}";
+            postCodeInput.value = "{{ auth()->check() ? auth()->user()->postcode : '' }}";
+        }
+
+        useRegisteredPhoneCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                phoneInput.value = "{{ auth()->check() ? auth()->user()->phone : '' }}";
+            } else {
+                phoneInput.value = '';
+            }
+        });
+
+        useRegisteredAddressCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                addressFirstLineInput.value = "{{ auth()->check() ? auth()->user()->address_first_line : '' }}";
+                addressSecondLineInput.value = "{{ auth()->check() ? auth()->user()->address_second_line : '' }}";
+                addressThirdLineInput.value = "{{ auth()->check() ? auth()->user()->address_third_line : '' }}";
+                townInput.value = "{{ auth()->check() ? auth()->user()->town : '' }}";
+                postCodeInput.value = "{{ auth()->check() ? auth()->user()->postcode : '' }}";
+            } else {
+                addressFirstLineInput.value = '';
+                addressSecondLineInput.value = '';
+                addressThirdLineInput.value = '';
+                townInput.value = '';
+                postCodeInput.value = '';
+            }
+        });
+    });
+</script>
 
 @endsection

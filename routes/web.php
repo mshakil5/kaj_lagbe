@@ -30,9 +30,6 @@ Route::get('/clear', function() {
  });
 //  cache clear
   
-// Route::get('/', function () {
-//     return view('welcome');
-// });
   
 Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
@@ -66,11 +63,15 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
 
     Route::get('/work/{id}', [WorkController::class, 'workDetails'])->name('work.details');
 
+    Route::get('/works/{id}', [WorkController::class, 'showDetails'])->name('show.details');
+
     Route::put('/works', [WorkController::class, 'workUpdate'])->name('work.update');
 
     Route::delete('/work/{id}', [WorkController::class, 'destroy'])->name('work.destroy');
 
     Route::get('/work/{work}/invoice', [InvoiceController::class, 'showInvoice'])->name('show.invoice');
+
+    Route::get('/work/{work}/transactions', [WorkController::class, 'showTransactions'])->name('show.transactions');
 
 
 
@@ -92,11 +93,6 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
 });
   
 
-/*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
 Route::group(['prefix' =>'manager/', 'middleware' => ['auth', 'is_manager']], function(){
   
     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');

@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
 use App\Mail\ContactMessageMail;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -29,55 +30,61 @@ class FrontendController extends Controller
         return view('frontend.terms');
     }
 
-   public function workStore(Request $request)
+    public function workStore(Request $request)
     {
-        try {
-            $request->validate([
-                'email' => ['required', 'email'],
-                'name' => ['required', 'string'],
-                'address_first_line' => ['required'],
-                'post_code' => ['required'],
-                'town' => ['required'],
-                'phone' => ['required'],
-                'images.*' => ['required', 'image'],
-                'descriptions.*' => ['nullable', 'string'],
-            ]);
+        $request->validate([
+            'email' => ['required', 'email'],
+            'name' => ['required', 'string'],
+            'address_first_line' => ['required'],
+            'post_code' => ['required'],
+            'town' => ['nullable'],
+            'phone' => ['required', 'regex:/^\d{11}$/'],
+            'images.*' => ['required', 'image'],
+            'descriptions.*' => ['required', 'string'],
+        ], [
+            'phone.regex' => 'The phone number must be exactly 11 digits.',
+        ]);
+                
+        // If validation fails, it will automatically redirect back with errors
+        $data = new Work();
+        $data->user_id = auth()->id();
+        $data->orderid = mt_rand(100000, 999999);
+        $data->date = date('Y-m-d');
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address_first_line = $request->address_first_line;
+        $data->address_second_line = $request->address_second_line;
+        $data->address_third_line = $request->address_third_line;
+        $data->town = $request->town;
+        $data->post_code = $request->post_code;
+        $data->created_by = Auth::id();
+        $data->save();
 
-            $data = new Work();
-            $data->user_id = auth()->id();
-            $data->date = date('Y-m-d');
-            $data->name = $request->name;
-            $data->email = $request->email;
-            $data->phone = $request->phone;
-            $data->post_code = $request->post_code;
-            $data->town = $request->town;
-            $data->orderid = mt_rand(100000, 999999);
-            $data->address_first_line = $request->address_first_line;
-            $data->address_second_line = $request->address_second_line;
-            $data->address_third_line = $request->address_third_line;
-            $data->save();
+        if ($request->hasFile('images')) {
+            $files = $request->file('images');
+            $descriptions = $request->input('descriptions');
 
-            if ($request->hasFile('images')) {
-                $files = $request->file('images');
-                $descriptions = $request->input('descriptions');
+            foreach ($files as $index => $image) {
+                $validatedData = $request->validate([
+                    'images.' . $index => ['required', 'image'],
+                    'descriptions.' . $index => ['required', 'string'],
+                ]);
 
-                foreach ($files as $index => $image) {
-                    $rand = mt_rand(100000, 999999);
-                    $imageName = time(). $rand .'.'.$image->extension();
-                    $image->storeAs('public/images', $imageName);
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
 
-                    $workImg = new WorkImage();
-                    $workImg->work_id = $data->id;
-                    $workImg->name = $imageName;
-                    $workImg->description = $descriptions[$index] ?? null; 
-                    $workImg->save();
-                }
+                $storagePath = public_path('images/works');
+                $image->move($storagePath, $filename);
+
+                $workImg = new WorkImage();
+                $workImg->work_id = $data->id;
+                $workImg->name = 'images/works/' . $filename;
+                $workImg->description = $descriptions[$index] ?? null; 
+                $workImg->save();
             }
-
-            return redirect()->route("homepage")->with("success", "Thank you for telling us about your work");
-        } catch (Exception $e) {
-            return redirect()->route("homepage")->with("error", "Server Error!");
         }
+
+        return redirect()->route("homepage")->with("success", "Thank you for telling us about your work");
     }
 
     public function checkPostCode(Request $request)
@@ -113,15 +120,14 @@ class FrontendController extends Controller
         ]);
 
         $adminmail = Contact::where('id', 1)->first()->email;
-        // dd($adminmail);
-        $contactmail = $request->contactmail; 
+        $contactmail = $request->contactemail;
         $ccEmails = $adminmail;
         $msg = $request->contactmessage; 
-                  
+
         if (isset($msg)) {
             $array['firstname'] = $request->firstname; 
             $array['lastname'] = $request->lastname; 
-            $array['email'] = $request->contactmail; 
+            $array['email'] = $request->contactemail;
             $array['subject'] = "Order Booking Confirmation";
             $array['message'] = $msg;
             $array['contactmail'] = $contactmail;
@@ -130,12 +136,10 @@ class FrontendController extends Controller
                 ->cc($ccEmails)
                 ->send(new ContactMessageMail($array));
 
-        return redirect()->route("homepage")->with("message", "Message send successfully!");
-
-        }else{
+            return redirect()->route("homepage")->with("message", "Message sent successfully!");
+        } else {
             return redirect()->route("homepage")->with("error", "Server Error!");
         }
-
     }
 
 }

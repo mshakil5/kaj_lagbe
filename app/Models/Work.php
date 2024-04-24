@@ -14,16 +14,18 @@ class Work extends Model
 
     protected $fillable = [
         'user_id',
+        'orderid',
         'date',
         'name',
         'email',
         'phone',
-        'house_number',
+        'address_first_line',
+        'address_second_line',
+        'address_third_line',
         'town',
-        'street',
         'post_code',
-        'message',
         'status',
+        'is_new',
         'updated_by',
         'created_by',
     ];

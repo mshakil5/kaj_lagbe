@@ -20,51 +20,72 @@
           </p>
         </a>
       </li>
-
-      
       <li class="nav-item">
-        <a href="{{route('alluser')}}" class="nav-link {{ (request()->is('admin/get-all-user*')) ? 'active' : '' }}">
+        <a href="{{route('allUser')}}" class="nav-link {{ (request()->is('admin/new-user*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>
-            Users
+            All User
           </p>
         </a>
       </li>
 
-      
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
-            <i class="nav-icon fas fa-th"></i>
-            <p>Work</p>
-        </a>
-        <ul class="dropdown-menu bg-dark">
-           <li>
-            <a href="{{ route('admin.work') }}" class="nav-link {{ (request()->is('admin/get-all-work*')) ? 'active' : '' }} text-white">All</a>
-            </li>
-            <li>
-                <a href="{{ route('admin.processing') }}" class="nav-link {{ (request()->is('admin/processing*')) ? 'active' : '' }} text-white">Processing</a>
-            </li>
-            <li>
-                <a href="{{ route('admin.complete') }}" class="nav-link {{ (request()->is('admin/complete*')) ? 'active' : '' }} text-white">Complete</a>
-            </li>
-            <li>
-                <a href="{{ route('admin.cancel') }}" class="nav-link {{ (request()->is('admin/cancel*')) ? 'active' : '' }} text-white">Cancel</a>
-            </li>
-        </ul>
-    </li>
-
-
-
-
+      <li class="nav-item dropdown {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link dropdown-toggle {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                  Jobs
+                  <i class="fas fa-angle-left right"></i>
+              </p>
+          </a>
+          <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="{{ route('admin.new') }}" class="nav-link {{ (request()->is('admin/get-new*')) ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>New Job</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('admin.processing') }}" class="nav-link {{ (request()->is('admin/get-processing*')) ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>In Progress</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('admin.complete') }}" class="nav-link {{ (request()->is('admin/get-complete*')) ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Completed</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('admin.cancel') }}" class="nav-link {{ (request()->is('admin/get-cancel*')) ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Cancelled</p>
+                  </a>
+              </li>
+          </ul>
+      </li>
 
       <li class="nav-item">
+        <a href="{{route('allTransactions')}}" class="nav-link {{ (request()->is('admin/all-transaction*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            All Transaction
+          </p>
+        </a>
+      </li>
+
+     
+
+
+
+      <!-- <li class="nav-item">
         <a href="{{route('admin.location')}}" class="nav-link {{ (request()->is('admin/location*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>
             Post Code
           </p>
         </a>
-      </li>
+      </li> -->
 
 
 

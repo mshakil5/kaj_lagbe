@@ -31,7 +31,7 @@ class InvoiceController extends Controller
             'img' => 'nullable|file|mimes:jpeg,png,jpg,gif,pdf,docx|max:5120',
         ]);
         
-        $invoiceid = Str::random(8);
+        $invoiceid = time() . $request->work_id;
         $validatedData['invoiceid'] = $invoiceid;
 
         if ($request->hasFile('img')) { 
@@ -103,6 +103,12 @@ class InvoiceController extends Controller
     {
         $invoice = $work->invoice;
         return view('user.invoice.details', compact('invoice'));
+    }
+
+    public function showInvoiceApi(Work $work)
+    {
+        $invoice = $work->invoice;
+        return response()->json(['invoice' => $invoice]);
     }
 
 }

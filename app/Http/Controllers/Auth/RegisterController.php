@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\AdditionalAddress;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -50,9 +52,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'phone' => ['required', 'regex:/^\d{11}$/'],
+        'address_first_line' => ['required', 'string', 'max:255'],
+        'address_second_line' => ['nullable', 'string', 'max:255'],
+        'address_third_line' => ['nullable', 'string', 'max:255'],
+        'town' => ['nullable', 'string', 'max:255'],
+        'postcode' => ['nullable', 'string', 'max:255'],
+        'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ], 
+        [
+            'phone.regex' => 'The phone number must be exactly 11 digits.',
+            'email.unique' => 'The email has already been taken.',
         ]);
     }
 
@@ -64,11 +76,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'address_first_line' => $data['address_first_line'],
+            'address_second_line' => $data['address_second_line'],
+            'address_third_line' => $data['address_third_line'],
+            'town' => $data['town'],
+            'postcode' => $data['postcode'],
         ]);
+
+        return $user;
     }
+
 }

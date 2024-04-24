@@ -42,8 +42,8 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label>Surname</label>
-                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Enter surname">
+                        <label>Company Name</label>
+                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Enter company name">
                       </div>
                     </div>
                   </div>
@@ -126,13 +126,13 @@
                 <tbody>
                   @foreach ($data as $key => $data)
                   <tr>
-                    <td style="text-align: center">{{ $key + 1 }}</td>
-                    <td style="text-align: center">{{$data->name}}</td>
-                    <td style="text-align: center">{{$data->surname}}</td>
-                    <td style="text-align: center">{{$data->email}}</td>
-                    <td style="text-align: center">{{$data->phone}}</td>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->surname}}</td>
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->phone}}</td>
                     
-                    <td style="text-align: center">
+                    <td>
                       <a id="EditBtn" rid="{{$data->id}}"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
                       <a id="deleteBtn" rid="{{$data->id}}"><i class="fa fa-trash-o" style="color: red;font-size:16px;"></i></a>
                     </td>

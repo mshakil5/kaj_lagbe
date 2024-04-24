@@ -13,9 +13,7 @@
     @endif
 
     <p>Payment was successfully processed.</p>
-    
-    <p>Payment ID: {{ $payment->payment_id }}</p>
-    <p>Transaction ID: {{ $transaction->tranid }}</p>
+
     <p>Amount: {{ $payment->amount }} {{ $payment->currency }}</p>
     
     <p>Thank you </p>

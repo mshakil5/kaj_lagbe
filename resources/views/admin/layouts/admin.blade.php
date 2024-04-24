@@ -80,7 +80,7 @@
           {{-- <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{ route('admin.dashboard') }}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -135,7 +135,7 @@
 <script src="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('assets/admin/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('assets/admin/datatablesdataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/admin/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <script src="{{ asset('assets/admin/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>

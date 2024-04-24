@@ -12,13 +12,23 @@ use Illuminate\Support\Facades\Validator;
 
 class PassportAuthController extends Controller
 {
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'phone' => 'required|regex:/^\d{11}$/',
+            'address_first_line' => 'required|string|max:255',
+            'address_second_line' => 'nullable|string|max:255',
+            'address_third_line' => 'nullable|string|max:255',
+            'town' => 'nullable|string|max:255',
+            'postcode' => 'nullable|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
+        ], [
+            'phone.regex' => 'The phone number must be exactly 11 digits.',
+            'email.unique' => 'The email has already been taken.',
         ]);
 
         if ($validator->fails()) {
@@ -29,7 +39,13 @@ class PassportAuthController extends Controller
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'address_first_line' => $request->address_first_line,
+            'address_second_line' => $request->address_second_line,
+            'address_third_line' => $request->address_third_line,
+            'town' => $request->town,
+            'postcode' => $request->postcode,
         ]);
 
         $token = $user->createToken('AppName')->accessToken;
@@ -37,7 +53,7 @@ class PassportAuthController extends Controller
         return response()->json(['message' => 'Registration successful.', 'token' => $token], 200);
     }
 
-     public function login(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -63,8 +79,8 @@ class PassportAuthController extends Controller
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|string|min:6',
-            'new_password' => 'required|string|min:6',
+            'current_password' => 'required|string|min:8',
+            'new_password' => 'required|string|min:8',
             'new_password_confirmation' => 'required|string|same:new_password',
         ]);
 

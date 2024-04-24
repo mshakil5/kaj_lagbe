@@ -10,21 +10,63 @@ class WorkController extends Controller
 {
     public function userWorks(Request $request)
     {
-        $data = Work::orderBy('id', 'DESC')->get();
-
-        return response()->json(['works' => $data], 200);
-    }
-
-    public function workDetails($id)
-    {
-        $work = Work::with('workimage')->where('id', $id)->first();
-
-        if (!$work) {
-            return response()->json(['message' => 'Work not found.'], 404);
+        $userId = $request->user()->id;
+        $data = Work::with('transactions','invoice','workimage')->where('user_id', $userId)->orderBy('id', 'DESC')->get();
+        
+        if ($data) {
+            $success['data'] = $data;
+            return response()->json(['success'=>true,'response'=> $success], 200);
+        } else {
+            $success['data'] = "No data found";
+            return response()->json(['success'=>false,'response'=> $success], 202);
         }
-
-        return response()->json(['work' => $work], 200);
     }
 
+    public function workDetails($id, Request $request)
+    {
+        $work = Work::with('transactions','invoice','workimage')->where('id', $id)->first();
+        if ($work && $work->user_id == $request->user()->id) {
+            $success['data'] = $work;
+            return response()->json(['success' => true, 'response' => $success], 200);
+        }else{
+             $success['Message'] = 'No data found.';
+            return response()->json(['success' => false, 'response' => $success], 202);
+        }
+    
+    }
+
+    public function showInvoiceApi($id, Request $request)
+    {
+        $work = Work::findOrFail($id);
+        if ($work->user_id != $request->user()->id) {
+            return response()->json(['success' => false, 'response' => ['Message' => 'No data found.']], 202);
+        }
+        $invoice = $work->invoice;
+
+        if ($invoice) {
+            $success['data'] = $invoice;
+            return response()->json(['success' => true, 'response' => $success], 200);
+        }else{
+            $success['Message'] = 'No data found.';
+            return response()->json(['success' => false, 'response' => $success], 202);
+        }  
+    }
+
+    public function showTransactionsApi($id, Request $request)
+    {
+        $work = Work::findOrFail($id);
+        if ($work->user_id != $request->user()->id) {
+            return response()->json(['success' => false, 'response' => ['Message' => 'No data found.']], 202);
+        }
+        $transactions = $work->transactions;
+        if ($transactions){
+            $success['data'] = $transactions;
+            return response()->json(['success' => true, 'response' => $success], 200);
+        }else{
+            $success['Message'] = 'No data found.';
+            return response()->json(['success' => false, 'response' => $success], 202);
+        }
+        
+    }
 
 }

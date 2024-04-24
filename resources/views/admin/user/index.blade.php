@@ -25,7 +25,7 @@
             <!-- general form elements disabled -->
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Add new admin</h3>
+                <h3 class="card-title">Add new user</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -42,8 +42,8 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label>Surname</label>
-                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Enter surname">
+                        <label>Company Name</label>
+                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Enter company name">
                       </div>
                     </div>
                   </div>
@@ -58,7 +58,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Phone</label>
-                        <input type="number" id="phone" name="phone" class="form-control" placeholder="Enter phone">
+                        <input type="number" id="phone" name="phone"  class="form-control" placeholder="Enter phone">
                       </div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                 <tr>
                   <th>Sl</th>
                   <th>Name</th>
-                  <th>Surname</th>
+                  <th>Company Name</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Action</th>
@@ -126,13 +126,13 @@
                 <tbody>
                   @foreach ($data as $key => $data)
                   <tr>
-                    <td style="text-align: center">{{ $key + 1 }}</td>
-                    <td style="text-align: center">{{$data->name}}</td>
-                    <td style="text-align: center">{{$data->surname}}</td>
-                    <td style="text-align: center">{{$data->email}}</td>
-                    <td style="text-align: center">{{$data->phone}}</td>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->surname}}</td>
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->phone}}</td>
                     
-                    <td style="text-align: center">
+                    <td>
                       <a id="EditBtn" rid="{{$data->id}}"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
                       <a id="deleteBtn" rid="{{$data->id}}"><i class="fa fa-trash-o" style="color: red;font-size:16px;"></i></a>
                     </td>
@@ -158,22 +158,22 @@
 @endsection
 @section('script')
 <script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
+$(function () {
+    $("#example1").DataTable({
+    "responsive": true, "lengthChange": false, "autoWidth": false,
+    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+    "paging": true,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true,
     });
-  </script>
+});
+</script>
 
 <script>
   $(document).ready(function () {
@@ -192,8 +192,8 @@
       //header for csrf-token is must in laravel
       $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
       //
-      var url = "{{URL::to('/admin/get-all-user')}}";
-      var upurl = "{{URL::to('/admin/get-all-user-update')}}";
+      var url = "{{URL::to('/admin/new-user')}}";
+      var upurl = "{{URL::to('/admin/new-user-update')}}";
       // console.log(url);
       $("#addBtn").click(function(){
       //   alert("#addBtn");
@@ -215,20 +215,7 @@
                     if (d.status == 303) {
                         $(".ermsg").html(d.message);
                     }else if(d.status == 300){
-
-                      // $(function() {
-                      //     var Toast = Swal.mixin({
-                      //       toast: true,
-                      //       position: 'top-end',
-                      //       showConfirmButton: false,
-                      //       timer: 3000
-                      //     });
-                      //     Toast.fire({
-                      //       icon: 'success',
-                      //       title: 'Data create successfully.'
-                      //     });
-                      //   });
-                        $(".ermsg").html(d.message);
+                      $(".ermsg").html(d.message);
                       window.setTimeout(function(){location.reload()},2000)
                     }
                 },
@@ -262,18 +249,6 @@
                           $(".ermsg").html(d.message);
                           pagetop();
                       }else if(d.status == 300){
-                        // $(function() {
-                        //   var Toast = Swal.mixin({
-                        //     toast: true,
-                        //     position: 'top-end',
-                        //     showConfirmButton: false,
-                        //     timer: 3000
-                        //   });
-                        //   Toast.fire({
-                        //     icon: 'success',
-                        //     title: 'Data updated successfully.'
-                        //   });
-                        // });
                         $(".ermsg").html(d.message);
                           window.setTimeout(function(){location.reload()},2000)
                       }

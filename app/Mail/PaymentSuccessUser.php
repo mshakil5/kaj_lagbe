@@ -17,11 +17,10 @@ class PaymentSuccessUser extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $payment, $transaction)
+    public function __construct($user, $payment)
     {
         $this->user = $user;
         $this->payment = $payment;
-        $this->transaction = $transaction;
     }
 
     /**
@@ -36,7 +35,6 @@ class PaymentSuccessUser extends Mailable
                     ->with([
                         'user' => $this->user,
                         'payment' => $this->payment,
-                        'transaction' => $this->transaction
                     ]);
     }
 }

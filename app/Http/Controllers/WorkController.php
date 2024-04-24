@@ -14,22 +14,28 @@ class WorkController extends Controller
         $data = Work::orderby('id','DESC')->get();
         return view('admin.work.index', compact('data'));
     }
+    
+    public function new()
+    {
+        $data = Work::orderby('id','DESC')->where('status','1')->get();
+        return view('admin.work.new', compact('data'));
+    }
 
     public function processing()
     {
-        $data = Work::orderby('id','DESC')->where('status','0')->get();
+        $data = Work::orderby('id','DESC')->where('status','2')->get();
         return view('admin.work.processing', compact('data'));
     }
 
     public function complete()
     {
-        $data = Work::orderby('id','DESC')->where('status','1')->get();
+        $data = Work::orderby('id','DESC')->where('status','3')->get();
         return view('admin.work.complete', compact('data'));
     }
 
     public function cancel()
     {
-        $data = Work::orderby('id','DESC')->where('status','2')->get();
+        $data = Work::orderby('id','DESC')->where('status','4')->get();
         return view('admin.work.cancel', compact('data'));
     }
 
@@ -42,8 +48,14 @@ class WorkController extends Controller
     public function userWorks()
     {
         $userId = auth()->id();
-        $works = Work::where('user_id', $userId)->orWhere('email', Auth::user()->email)->get();
+        $works = Work::where('user_id', $userId)->orWhere('email', Auth::user()->email)->orderBy('id', 'DESC')->get();
         return view('user.works', compact('works'));
+    }
+
+    public function showTransactions(Work $work)
+    {
+        $transactions = $work->transactions;
+        return view('user.transactions', compact('transactions', 'work'));
     }
 
     public function workDetailsByAdmin($id)
@@ -56,6 +68,12 @@ class WorkController extends Controller
     {
         $work = Work::with('workimage')->where('id', $id)->first();
         return view('user.work_details', compact('work'));
+    }
+
+    public function showDetails($id)
+    {
+        $work = Work::with('workimage')->where('id', $id)->first();
+        return view('user.show_work_details', compact('work'));
     }
 
     public function workUpdate(Request $request)
@@ -129,24 +147,32 @@ class WorkController extends Controller
 
     public function changeClientStatus(Request $request)
     {
-        $user = Work::find($request->id);
-        $user->status = $request->status;
-        if($user->save()){
-            if ($user->status == 0) {
-                $stsval = "Processing";
-            }elseif($user->status == 1){
-                $stsval = "Complete";
-            }else {
-                $stsval = "Cancel";
-            }
-            
-            $message ="Status Change Successfully.";
-            return response()->json(['status'=> 300,'message'=>$message,'stsval'=>$stsval,'id'=>$request->id]);
-        }else{
-            $message ="There was an error to change status!!.";
-            return response()->json(['status'=> 303,'message'=>$message]);
+        $work = Work::find($request->id);
+
+        if ($work->status == 3) {
+            $message = "Status cannot be changed as it is already completed.";
+            return response()->json(['status' => 303, 'message' => $message]);
         }
 
+        $work->status = $request->status;
+
+        if ($work->save()) {
+            if ($work->status == 1) {
+                $stsval = "New";
+            } elseif ($work->status == 2) {
+                $stsval = "In Progress";
+            } elseif ($work->status == 3) {
+                $stsval = "Completed";
+            } elseif ($work->status == 4) {
+                $stsval = "Cancelled";
+            }
+
+            $message = "Status Change Successfully.";
+            return response()->json(['status' => 300, 'message' => $message, 'stsval' => $stsval, 'id' => $request->id]);
+        } else {
+            $message = "There was an error to change status!!.";
+            return response()->json(['status' => 303, 'message' => $message]);
+        }
     }
 
 }

@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-1">
-                                <label class="mb-1" for="surname">Surname</label>
+                                <label class="mb-1" for="surname">Company Name</label>
                                 <input type="text" class="form-control" id="surname" name="surname" value="{{ $user->surname }}" required>
                             </div>
                         </div>
@@ -57,36 +57,36 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-1">
-                                <label class="mb-1" for="street_name">Street Name</label>
-                                <input type="text" class="form-control" id="street_name" name="street_name" value="{{ $user->street_name }}">
+                                <label class="mb-1" for="address_first_line">Address First Line</label>
+                                <input type="text" class="form-control" id="address_first_line" name="address_first_line" value="{{ $user->address_first_line }}" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-1">
-                                <label class="mb-1" for="house_number">House Number</label>
-                                <input type="text" class="form-control" id="house_number" name="house_number" value="{{ $user->house_number }}">
+                                <label class="mb-1" for="address_second_line">Address Second Line</label>
+                                <input type="text" class="form-control" id="address_second_line" name="address_second_line" value="{{ $user->address_second_line }}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-1">
-                                <label class="mb-1" for="postcode">Postcode</label>
-                                <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $user->postcode }}">
+                                <label class="mb-1" for="address_third_line">Address Third Line</label>
+                                <input type="text" class="form-control" id="address_third_line" name="address_third_line" value="{{ $user->address_third_line }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-1">
                                 <label class="mb-1" for="town">Town</label>
-                                <input type="text" class="form-control" id="town" name="town" value="{{ old('town', $user->additionalAddress->town ?? '') }}">
+                                <input type="text" class="form-control" id="town" name="town" value="{{ $user->town }}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-1">
-                                <label class="mb-1" for="country">Country</label>
-                                <input type="text" class="form-control" id="country" name="country" value="{{ $user->country }}">
+                                <label class="mb-1" for="postcode">Post Code</label>
+                                <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $user->postcode }}">
                             </div>
                         </div>
                     </div>
@@ -107,5 +107,22 @@
         border-color: #dc3545;
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@ideal-postcodes/address-finder-bundled@4"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        IdealPostcodes.AddressFinder.watch({
+            apiKey: "ak_lt4ocv0eHLLo4meBRGHWK4HU0SBxa",
+            outputFields: {
+            line_1: "#address_first_line",
+            line_2: "#address_second_line",
+            line_3: "#address_third_line",
+            post_town: "#town",
+            postcode: "#postcode"
+        }
+    });
+});
+</script>
 
 @endsection

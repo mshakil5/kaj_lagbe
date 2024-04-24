@@ -7,39 +7,50 @@
   <section class="content">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
-      <div class="row">
-        
+      <div class="row mt-3">
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Some text will be there</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
+          <a href="{{ route('admin.new') }}">
+              <div class="small-box bg-success">
+                  <div class="inner">
+                      <h5>New Job</h5>
+                      <p>Newly created Jobs</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                  </div>
+              </div>
+          </a>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>44</h3>
-
-              <p>Some text will be there</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
+            <a href="{{ route('admin.processing') }}">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h5>Job In Progress</h5>
+                        <p>Jobs are in progress</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
         </div>
-        <!-- ./col -->
+
+        <div class="col-lg-3 col-6">
+            <a href="{{ route('admin.complete') }}">
+                <div class="small-box bg-secondary">
+                    <div class="inner">
+                        <h5>Completed</h5>
+                        <p>Completed Jobs</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
       </div>
+
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
