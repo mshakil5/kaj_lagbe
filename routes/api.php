@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkController;
 use App\Http\Controllers\Api\CallBackController;
 use App\Http\Controllers\Api\FrontendController;
+use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\PassportAuthController;
 
 
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('work/invoice/{id}', [WorkController::class, 'showInvoiceApi']);
     Route::get('work/transactions/{id}', [WorkController::class, 'showTransactionsApi']);
     Route::post('call-back', [CallBackController::class, 'callBack']);
+
+    
+    Route::post('paypal-payment', [PaypalController::class, 'payment']);
 });
 
 
