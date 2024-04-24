@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('call-back', [CallBackController::class, 'callBack']);
 
     
+    Route::get('all-transaction', [FrontendController::class, 'getAllTransaction']);
+
+    
     Route::post('paypal-payment', [PaypalController::class, 'payment']);
 });
 

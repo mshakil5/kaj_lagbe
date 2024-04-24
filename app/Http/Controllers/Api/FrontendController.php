@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -144,6 +145,19 @@ class FrontendController extends Controller
         } else {
             return response()->json(['message' => 'Error deleting work.'], 500);
         }
+    }
+
+    public function getAllTransaction()
+    {
+        $data = Transaction::where('user_id', Auth::user()->id)->get();
+        if ($data){
+            $success['data'] = $data;
+            return response()->json(['success' => true, 'response' => $success], 200);
+        }else{
+            $success['Message'] = 'No data found.';
+            return response()->json(['success' => false, 'response' => $success], 202);
+        }
+        
     }
 
 }
