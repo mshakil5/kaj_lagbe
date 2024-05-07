@@ -110,7 +110,6 @@ class WorkController extends Controller
         {
             if(isset($workimageid[$key])){
 
-                dd($images[$key]);
                 $workImg = WorkImage::find($workimageid[$key]);
                 if ($request->hasFile('images')) {
                     $files = $request->file('images');

@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('call-back', [CallBackController::class, 'callBack']);
 
     
+    Route::post('account-delete-request', [CallBackController::class, 'accountDeleteRequest']);
+
+    
     Route::get('all-transaction', [FrontendController::class, 'getAllTransaction']);
 
     

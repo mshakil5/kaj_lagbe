@@ -74,6 +74,15 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a href="{{route('allUserDeleteReq')}}" class="nav-link {{ (request()->is('admin/user-delete-request*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Account Delete Request
+          </p>
+        </a>
+      </li>
+
      
 
 

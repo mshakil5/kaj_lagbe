@@ -140,6 +140,12 @@ class UserController extends Controller
         return view('admin.user.index', compact('data'));
     }
 
+    public function getUserDeleteRequest()
+    {
+        $data = User::whereHas('accDelRequest')->where('is_type', '0')->orderby('id','DESC')->get();
+        return view('admin.user.index', compact('data'));
+    }
+
     public function userStore(Request $request)
     {
         

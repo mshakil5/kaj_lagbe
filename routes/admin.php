@@ -81,6 +81,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/new-user/{id}', [UserController::class, 'userDelete']);
 
 
+    Route::get('/user-delete-request', [UserController::class, 'getUserDeleteRequest'])->name('allUserDeleteReq');
 
 });
   
