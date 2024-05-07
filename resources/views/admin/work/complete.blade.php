@@ -63,9 +63,16 @@
                         </a>
                     </td>
                     <td>
+                      @if ($data->invoice)
                         <a href="{{ route('work.invoice', $data->id) }}" class="btn btn-secondary">
                             Invoice
                         </a>
+                      @else
+                        <a href="{{ route('work.invoice', $data->id) }}" class="btn btn-warning">
+                          Add  Invoice
+                      </a>
+                      @endif
+                        
                     </td>
                    
                     <td>

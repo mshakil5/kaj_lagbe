@@ -29,7 +29,8 @@ class WorkController extends Controller
 
     public function complete()
     {
-        $data = Work::orderby('id','DESC')->where('status','3')->get();
+        $data = Work::with('invoice')->orderby('id','DESC')->where('status','3')->get();
+        // dd($data);
         return view('admin.work.complete', compact('data'));
     }
 
