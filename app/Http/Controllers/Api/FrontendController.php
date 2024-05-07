@@ -149,9 +149,11 @@ class FrontendController extends Controller
 
     public function getAllTransaction()
     {
-        $data = Transaction::where('user_id', Auth::user()->id)->get();
+        $data = Transaction::with('work')->where('user_id', Auth::user()->id)->get();
+        $jobid = Work::where('id', $data->work_id)->first()->orderid;
         if ($data){
             $success['data'] = $data;
+            $success['jobid'] = $jobid;
             return response()->json(['success' => true, 'response' => $success], 200);
         }else{
             $success['Message'] = 'No data found.';

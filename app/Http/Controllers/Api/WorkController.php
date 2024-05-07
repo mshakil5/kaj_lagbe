@@ -61,6 +61,7 @@ class WorkController extends Controller
         $transactions = $work->transactions;
         if ($transactions){
             $success['data'] = $transactions;
+            $success['jobId'] = $work->orderid;
             return response()->json(['success' => true, 'response' => $success], 200);
         }else{
             $success['Message'] = 'No data found.';
