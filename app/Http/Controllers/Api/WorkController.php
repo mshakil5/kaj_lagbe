@@ -42,9 +42,11 @@ class WorkController extends Controller
             return response()->json(['success' => false, 'response' => ['Message' => 'No data found.']], 202);
         }
         $invoice = $work->invoice;
+        $jobid = $work->orderid;
 
         if ($invoice) {
             $success['data'] = $invoice;
+            $success['jobid'] = $jobid;
             return response()->json(['success' => true, 'response' => $success], 200);
         }else{
             $success['Message'] = 'No data found.';
