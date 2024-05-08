@@ -46,7 +46,7 @@ Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
   
 // payment
-Route::post('pay', [PaypalController::class, 'pay'])->name('payment');
+Route::post('pay/{id}', [PaypalController::class, 'pay'])->name('payment');
 Route::get('success', [PaypalController::class, 'success']);
 Route::get('error', [PaypalController::class, 'error']);
 

@@ -14,6 +14,7 @@ class InvoiceController extends Controller
     {
         $work = Work::findOrFail($id);
         $invoice = $work->invoice;
+        
         return view('admin.work.invoice.index', compact('invoice', 'work'));
     }
 
@@ -82,9 +83,9 @@ class InvoiceController extends Controller
         return redirect()->route('work.invoice', ['id' => $work_id])->with('success', 'Invoice updated successfully.');
     }
 
-    public function destroy($work_id)
+    public function destroy($id)
     {
-        $invoice = Invoice::where('work_id', $work_id)->firstOrFail();
+        $invoice = Invoice::where('id', $id)->firstOrFail();
 
         if ($invoice->img) {
             $imagePath = public_path($invoice->img);
@@ -96,7 +97,7 @@ class InvoiceController extends Controller
 
         $invoice->delete();
 
-        return redirect()->route('admin.work')->with('success', 'Invoice deleted successfully.');
+        return back()->with('success', 'Invoice deleted successfully.');
     }
 
     public function showInvoice(Work $work)

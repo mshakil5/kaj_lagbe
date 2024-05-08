@@ -7,13 +7,12 @@
             <div class="row">
                 <div class="col">
                     <a href="{{ route('admin.new') }}" class="btn btn-secondary">Back</a>
-                    @if (isset($invoice) && $invoice->status == 0)
-                        <p class="btn mt-3 btn-secondary" disabled>Paid</p>
-                    @endif
+                    <a href="{{ route('invoice.create', ['work_id' => $work->id]) }}" class="btn btn-success">Create New</a>
+                    
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        {{-- <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -23,7 +22,10 @@
             @endif
 
             @isset($invoice)
-                <form action="{{ route('invoices.update', $invoice->work_id) }}" method="POST" enctype="multipart/form-data">
+
+            @foreach ($invoice as $invoice)
+
+                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="work_id" value="{{ $invoice->work_id }}">
@@ -60,10 +62,78 @@
                     @method('DELETE')
                     <button type="submit" class="btn mt-3 btn-danger">Delete Invoice</button>
                 </form>
+
+                @endforeach
             @else
-                <a href="{{ route('invoice.create', ['work_id' => $work->id]) }}" class="btn btn-success">Create New</a>
             @endisset
-        </div>
+            
+        </div> --}}
     </div>
 </div>
+
+<!-- Main content -->
+<section class="content" id="contentContainer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <!-- /.card -->
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Job Id : {{$work->orderid}}</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th style="text-align: center">Sl</th>
+                  <th style="text-align: center">Image</th>
+                  <th style="text-align: center">Date</th>
+                  <th style="text-align: center">Amount</th>
+                  <th style="text-align: center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($work->invoice as $key => $data)
+                  <tr>
+                    <td style="text-align: center">{{ $key + 1 }}</td>
+                    <td style="text-align: center">
+                        @if ($data->img)
+                            <p><a href="{{ asset($data->img) }}" target="_blank">View Invoice</a></p>
+                        @else
+                            <p>No file found</p>
+                        @endif    
+                    </td>
+                    <td style="text-align: center">{{$data->date}}</td>
+                    <td style="text-align: center">{{$data->amount}}</td>
+                    <td style="text-align: center">
+                      <form action="{{ route('invoices.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this invoice?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn mt-3 btn-danger">Delete Invoice</button>
+                    </form>
+
+
+                    </td>
+                  </tr>
+                  @endforeach
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+
 @endsection
