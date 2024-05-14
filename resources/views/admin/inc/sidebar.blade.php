@@ -87,14 +87,17 @@
 
 
 
-      <!-- <li class="nav-item">
-        <a href="{{route('admin.location')}}" class="nav-link {{ (request()->is('admin/location*')) ? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
-          <p>
-            Post Code
-          </p>
+      <li class="nav-item">
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="nav-link">
+          <i class="nav-icon fas fa-th"></i> {{ __('Logout') }}
         </a>
-      </li> -->
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+      </li> 
+
+      
 
 
 
