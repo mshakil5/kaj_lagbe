@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
+use Mail;
 use App\Models\Work;
 use App\Models\Location;
 use App\Models\WorkImage;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Mail\JobOrderMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -128,6 +131,26 @@ class FrontendController extends Controller
                 $workImg->save();
             }
         }
+
+        $adminmail = Contact::where('id', 1)->first()->email;
+        $contactmail = $request->email;
+        $ccEmails = $adminmail;
+        $msg = "Thank you for telling us about your work.";
+        $array['firstname'] = $request->name;
+        $array['email'] = $request->email;
+        $array['address1'] = $request->address_first_line;
+        $array['address2'] = $request->address_second_line;
+        $array['address3'] = $request->address_third_line;
+        $array['town'] = $request->town;
+        $array['postcode'] = $request->post_code;
+        $array['subject'] = "Order Booking Confirmation";
+        $array['message'] = $msg;
+        $array['contactmail'] = $contactmail;
+        
+        Mail::to($contactmail)
+        ->cc($ccEmails)
+        ->send(new JobOrderMail($array));
+
         return response()->json(['message' => 'Work updated successfully.', 'work' => $data], 200);
     }
 

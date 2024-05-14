@@ -30,6 +30,7 @@ class PaypalController extends Controller
         $email =  Auth::user()->email;
             
         $work_id = $request->work_id;
+        $invoice_id = $request->invoice_id;
         $amount = $request->amount;
 
         $paypalcommission = $amount * 2.9/100;
@@ -57,7 +58,7 @@ class PaypalController extends Controller
         $transaction->save();
 
 
-        $invoice = Invoice::where('work_id', $work_id)->first();
+        $invoice = Invoice::where('id', $invoice_id)->first();
         if ($invoice) {
             $invoice->status = 0;
             $invoice->save();

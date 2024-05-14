@@ -1,0 +1,10 @@
+@component('mail::message')
+
+**Name:** {{ $array['firstname'] }} <br>
+**Email:** {{ $array['email'] }}  
+**Address:** {{ $array['address1'] }}  {{ $array['address2'] }}  {{ $array['address3'] }},  {{ $array['town'] }}  {{ $array['postcode'] }}  
+**Message:** {{ $array['message'] }}
+
+Thanks,<br>
+{{ config('app.name') }}
+@endcomponent
