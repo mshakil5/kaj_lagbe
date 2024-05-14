@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('date')->nullable();
+            $table->string('jobid')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('work_id')->nullable();
             $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
+            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->decimal('amount', 10, 2)->default(0)->nullable();
             $table->decimal('discount', 10, 2)->default(0)->nullable();
             $table->decimal('additional_expense', 10, 2)->default(0)->nullable();

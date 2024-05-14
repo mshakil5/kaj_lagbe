@@ -1,7 +1,8 @@
 @component('mail::message')
 
 **Name:** {{ $array['firstname'] }} <br>
-**Email:** {{ $array['email'] }}  
+**Email:** {{ $array['email'] }}  <br>
+**Phone:** {{ $array['phone'] }}  <br>
 **Address:** {{ $array['address1'] }}  {{ $array['address2'] }}  {{ $array['address3'] }},  {{ $array['town'] }}  {{ $array['postcode'] }}  
 **Message:** {{ $array['message'] }}
 

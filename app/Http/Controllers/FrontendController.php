@@ -93,6 +93,7 @@ class FrontendController extends Controller
         
         $array['firstname'] = $request->name;
         $array['email'] = $request->email;
+        $array['phone'] = $request->phone;
         $array['address1'] = $request->address_first_line;
         $array['address2'] = $request->address_second_line;
         $array['address3'] = $request->address_third_line;

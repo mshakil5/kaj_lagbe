@@ -83,6 +83,26 @@ class FrontendController extends Controller
                 $workImg->save();
             }
         }
+
+        $adminmail = Contact::where('id', 1)->first()->email;
+        $contactmail = $request->email;
+        $ccEmails = $adminmail;
+        $msg = "Thank you for telling us about your work.";
+        $array['firstname'] = $request->name;
+        $array['email'] = $request->email;
+        $array['phone'] = $request->phone;
+        $array['address1'] = $request->address_first_line;
+        $array['address2'] = $request->address_second_line;
+        $array['address3'] = $request->address_third_line;
+        $array['town'] = $request->town;
+        $array['postcode'] = $request->post_code;
+        $array['subject'] = "Order Booking Confirmation";
+        $array['message'] = $msg;
+        $array['contactmail'] = $contactmail;
+        
+        Mail::to($contactmail)
+        ->cc($ccEmails)
+        ->send(new JobOrderMail($array));
         return response()->json(['message' => 'Work stored successfully.', 'work' => $data], 200);
     }
 
@@ -138,6 +158,7 @@ class FrontendController extends Controller
         $msg = "Thank you for telling us about your work.";
         $array['firstname'] = $request->name;
         $array['email'] = $request->email;
+        $array['phone'] = $request->phone;
         $array['address1'] = $request->address_first_line;
         $array['address2'] = $request->address_second_line;
         $array['address3'] = $request->address_third_line;
