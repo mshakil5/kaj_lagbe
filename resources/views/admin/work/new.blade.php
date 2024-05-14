@@ -123,8 +123,15 @@
       "responsive": true,
     });
 
+  });
+
+  $(document).ready(function () {
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } }); 
+    
+    
     $('.stsBtn').click(function() {
-      var url = "{{URL::to('/admin/change-client-status')}}";
+      alert('btn work');
+      // var url = "{{URL::to('/admin/change-client-status')}}";
       var id = $(this).data('id');
       var status = $(this).attr('value');
       $.ajax({
@@ -148,10 +155,8 @@
         }
       });
     });
-  });
 
-  $(document).ready(function () {
-    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });  
+
   });
 </script>
 
