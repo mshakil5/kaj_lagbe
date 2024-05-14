@@ -68,12 +68,13 @@
 
      @if($work->workimage)
         @foreach($work->workimage as $index => $image)
-            <div class="col-md-12">
-                <div class="row align-items-center">
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="row align-items-center mt-3">
                     <div class="col-md-6">
                         <a href="{{ asset('/' . $image->name) }}" data-lightbox="image-{{ $index }}">
-                             <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                                <img src="{{ asset('/' . $image->name) }}" alt="Image" class="img-fluid rounded" style="width: 200px; height: auto;">
+                             <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                                <img src="{{ asset('/' . $image->name) }}" alt="Image" class="img-fluid rounded" style="width: 100px; height: auto;">
                             </div>
                         </a>
                     </div>
@@ -85,6 +86,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+            
         @endforeach
     @endif
 </div>

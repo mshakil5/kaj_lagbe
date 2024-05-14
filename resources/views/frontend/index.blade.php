@@ -125,12 +125,12 @@
                                             <input type="file" class="form-control image-upload" name="images[]" accept="image/*" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-12">
+                                    <div class="col-lg-5 col-8">
                                         <div class="input-group mb-3">
                                             <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]" required></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 col-12 text-end">
+                                    <div class="col-lg-1 col-2 text-end">
                                         <button class="btn btn-success add-row" type="button">+</button>
                                     </div>
                                 </div>

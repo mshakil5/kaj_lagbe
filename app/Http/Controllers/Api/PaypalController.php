@@ -51,6 +51,7 @@ class PaypalController extends Controller
         $transaction->date = date('Y-m-d');
         $transaction->user_id = Auth::user()->id;
         $transaction->work_id = $work_id;
+        $transaction->invoice_id = $invoice_id;
         $transaction->amount = $amount;
         $transaction->net_amount = $amount;
         $tranid = now()->timestamp.Auth::user()->id;
