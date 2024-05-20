@@ -101,8 +101,11 @@ class FrontendController extends Controller
         $array['contactmail'] = $contactmail;
         
         Mail::to($contactmail)
-        ->cc($ccEmails)
         ->send(new JobOrderMail($array));
+
+        Mail::to($ccEmails)
+        ->send(new JobOrderMail($array));
+
         return response()->json(['message' => 'Work stored successfully.', 'work' => $data], 200);
     }
 

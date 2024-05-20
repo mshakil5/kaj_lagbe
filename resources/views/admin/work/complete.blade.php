@@ -31,7 +31,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Sl</th>
+                  <th>Job Id</th>
                   <th>Date</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -45,7 +45,7 @@
                 <tbody>
                   @foreach ($data as $key => $data)
                   <tr>
-                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $data->orderid }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
                     <td>{{$data->name}}</td>
                     <td>{{$data->email}}</td>
@@ -63,7 +63,7 @@
                         </a>
                     </td>
                     <td>
-                      @if ($data->invoice)
+                      @if ($data->invoice->count() > 0)
                         <a href="{{ route('work.invoice', $data->id) }}" class="btn btn-secondary">
                             Invoice
                         </a>

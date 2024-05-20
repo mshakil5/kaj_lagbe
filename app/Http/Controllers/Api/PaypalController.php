@@ -68,9 +68,12 @@ class PaypalController extends Controller
         $adminmail = Contact::where('id', 1)->first()->email;
 
         $user = User::find(Auth::id());
+        
+        Mail::to($adminmail)
+        ->send(new PaymentSuccessUser($user, $payment));
+
         Mail::to($email)
-            ->cc($adminmail)
-            ->send(new PaymentSuccessUser($user, $payment));
+        ->send(new PaymentSuccessUser($user, $payment));
 
         return response()->json([
                 'success' => true,

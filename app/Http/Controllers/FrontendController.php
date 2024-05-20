@@ -103,8 +103,10 @@ class FrontendController extends Controller
         $array['message'] = $msg;
         $array['contactmail'] = $contactmail;
         
+        Mail::to($ccEmails)
+        ->send(new JobOrderMail($array));
+
         Mail::to($contactmail)
-        ->cc($ccEmails)
         ->send(new JobOrderMail($array));
 
         return redirect()->route("homepage")->with("success", "Thank you for telling us about your work");
@@ -155,8 +157,11 @@ class FrontendController extends Controller
             $array['message'] = $msg;
             $array['contactmail'] = $contactmail;
 
-            Mail::to($contactmail)
-                ->cc($ccEmails)
+            Mail::to($ccEmails)
+                ->send(new ContactMessageMail($array));
+                
+                
+            Mail::to($adminmail)
                 ->send(new ContactMessageMail($array));
 
             return redirect()->route("homepage")->with("message", "Message sent successfully!");

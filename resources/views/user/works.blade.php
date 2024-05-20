@@ -32,12 +32,12 @@
                     <tbody>
                         @foreach ($works as $key => $work)
                         <tr>
-                            <td class="text-center">{{ $key + 1 }}</td>
+                            <td class="text-center">{{ $work->orderid }}</td>
                             <td class="text-center">{{ \Carbon\Carbon::parse($work->date)->format('d/m/Y') }}</td>
                             <td class="text-center">{{ $work->name }}</td>
                             <td class="text-center">{{ $work->email }}</td>
                             <td style="text-align: center">
-                                @if ($work->invoice)
+                                @if ($work->invoice->count() > 0)
                                     <a href="{{ route('show.invoice', $work->id) }}" class="btn btn-secondary">
                                         Invoice
                                     </a>

@@ -28,13 +28,13 @@ class JobOrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Job Order Mail',
+            subject: 'Job receive confirmation',
         );
     }
 
     public function build()
     {
-        return $this->from('info@edgeemg.co.uk', 'EDGE')
+        return $this->from('no-reply@job.edgeemg.co.uk', 'EDGE')
                     ->subject($this->array['subject'])
                     ->markdown('emails.job_order');
     }

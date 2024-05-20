@@ -12,6 +12,7 @@
 
     <title>EDGE</title>
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/edge_fav.jpg')}}">
     <!-- CSS FILES -->
     <link href="{{ asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('frontend/css/bootstrap-icons.css')}}" rel="stylesheet">

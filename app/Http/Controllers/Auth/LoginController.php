@@ -60,9 +60,9 @@ class LoginController extends Controller
             if (auth()->user()->is_type == '1') {
                 return redirect()->route('admin.dashboard');
             }else if (auth()->user()->is_type == '2') {
-                return redirect()->route('manager.home');
+                return redirect()->route('homepage');
             }else if (auth()->user()->is_type == '0') {
-                return redirect()->route('user.profile');
+                return redirect()->route('homepage');
             }else{
                 return redirect()->route('home');
             }
