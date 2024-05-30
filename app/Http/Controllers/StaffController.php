@@ -2,152 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\AdditionalAddress;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class StaffController extends Controller
 {
-    public function userProfile()
+    public function getStaff()
     {
-        $user = auth()->user();
-        return view('user.profile', compact('user'));
+        $data = User::where('is_type', '2')->orderby('id','DESC')->get();
+        return view('admin.staff.index', compact('data'));
     }
 
-    public function userProfileUpdate(Request $request)
-    {
-        $user = Auth::user();
-            $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'phone' => ['required', 'string', 'regex:/^\d{11}$/'],
-            'address_first_line' => 'required|string|max:255',
-            'address_second_line' => 'nullable|string|max:255',
-            'address_third_line' => 'nullable|string|max:255',
-            'town' => 'nullable|string|max:255',
-            'postcode' => 'nullable|string|max:255',
- 
-            ], [
-                'phone.regex' => 'The phone number must be exactly 11 digits.',
-                'email.unique' => 'The email has already been taken.',
-            ]);
-
-        $user->update($validatedData);
-        return redirect()->route('user.profile')->with('success', 'Profile updated successfully!');
-    }
-
-    public function password()
-    {
-        return view('user.password');
-    }
-
-    public function updatePassword(Request $request)
-    {
-        try {
-            $user = Auth::user();
-
-            $request->validate([
-                'current_password' => 'required',
-                'new_password' => 'required|string|min:8|different:current_password',
-                'confirm_password' => 'required|string|same:new_password',
-            ]);
-
-            if (!Hash::check($request->current_password, $user->password)) {
-                throw new Exception('The current password is incorrect.');
-            }
-
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-
-            return redirect()->back()->with('success', 'Password updated successfully.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
-    }
-
-    public function index()
-    {
-        $addresses = AdditionalAddress::where('user_id', auth()->user()->id)->get();
-        return view('user.additional_addresses.index', compact('addresses'));
-    }
-
-    public function create()
-    {
-        return view('user.additional_addresses.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'first_line' => 'required|string|max:255',
-            'second_line' => 'nullable|string|max:255',
-            'third_line' => 'nullable|string|max:255',
-            'town' => 'nullable|string|max:255',
-            'post_code' => 'nullable|string|max:255',
-        ]);
-
-        $address = new AdditionalAddress([
-            'first_line' => $request->get('first_line'),
-            'second_line' => $request->get('second_line'),
-            'third_line' => $request->get('third_line'),
-            'town' => $request->get('town'),
-            'post_code' => $request->get('post_code'),
-            'user_id' => auth()->user()->id,
-        ]);
-
-        $address->save();
-        return redirect()->route('additional-addresses.index')->with('success', 'Address created successfully.');
-    }
-
-    public function edit($id)
-    {
-        $address = AdditionalAddress::where('id', $id)->first();
-        return view('user.additional_addresses.edit', compact('address'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'first_line' => 'required|string|max:255',
-            'second_line' => 'nullable|string|max:255',
-            'third_line' => 'nullable|string|max:255',
-            'town' => 'nullable|string|max:255',
-            'post_code' => 'nullable|string|max:255',
-        ]);
-
-        $address = AdditionalAddress::where('id', $id)->first();
-        if (!$address) {
-            return redirect()->route('additional-addresses.index')->with('error', 'Address not found.');
-        }
-        $address->update($request->all());
-        return redirect()->route('additional-addresses.index')->with('success', 'Address updated successfully.');
-    }
-
-    public function destroy($id)
-    {
-        AdditionalAddress::where('id', $id)->delete();
-        return redirect()->route('additional-addresses.index')->with('success', 'Address deleted successfully.');
-    }
-
-    public function getUser()
-    {
-        $data = User::where('is_type', '0')->orderby('id','DESC')->get();
-        return view('admin.user.index', compact('data'));
-    }
-    
-    
-    public function getUserDeleteRequest()
-    {
-        $data = User::whereHas('accDelRequest')->where('is_type', '0')->orderby('id','DESC')->get();
-        return view('admin.user.index', compact('data'));
-    }
-
-    public function userStore(Request $request)
+    public function staffStore(Request $request)
     {
         
         if(empty($request->name)){
@@ -170,6 +37,11 @@ class UserController extends Controller
             return response()->json(['status'=> 303,'message'=>$message]);
             exit();
         }
+        if(strlen($request->password) < 6){
+            $message = "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Password must be at least 6 characters long..!</b></div>"; 
+            return response()->json(['status' => 303, 'message' => $message]);
+            exit();
+        }
         if(isset($request->password) && ($request->password != $request->confirm_password)){
             $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Password doesn't match.</b></div>";
             return response()->json(['status'=> 303,'message'=>$message]);
@@ -188,7 +60,7 @@ class UserController extends Controller
         $data->surname = $request->surname;
         $data->phone = $request->phone;
         $data->email = $request->email;
-        $data->is_type = "0";
+        $data->is_type = "2";
         if(isset($request->password)){
             $data->password = Hash::make($request->password);
         }
@@ -200,7 +72,7 @@ class UserController extends Controller
         }
     }
 
-    public function userEdit($id)
+    public function staffEdit($id)
     {
         $where = [
             'id'=>$id
@@ -209,7 +81,7 @@ class UserController extends Controller
         return response()->json($info);
     }
 
-    public function userUpdate(Request $request)
+    public function staffUpdate(Request $request)
     {
         if(empty($request->name)){
             $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Username \" field..!</b></div>";
@@ -256,13 +128,94 @@ class UserController extends Controller
         } 
     }
 
-    public function userDelete($id)
+    public function staffDelete($id)
     {
 
         if(User::destroy($id)){
             return response()->json(['success'=>true,'message'=>'User has been deleted successfully']);
         }else{
             return response()->json(['success'=>false,'message'=>'Delete Failed']);
+        }
+    }
+
+    public function editProfile(Request $request)
+    {
+         $staffId = auth()->id();
+         $staff = User::findOrFail($staffId);
+         return view('staff.profile', compact('staff'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+
+        if(empty($request->name)){
+            $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Name \" field..!</b></div>";
+            return response()->json(['status'=> 303,'message'=>$message]);
+            exit();
+        }
+        if(empty($request->email)){
+            $message ="<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill \"Email \" field..!</b></div>";
+            return response()->json(['status'=> 303,'message'=>$message]);
+            exit();
+        }
+        if(empty($request->phone) ||!preg_match('/^\d{11}$/', $request->phone)){
+            $message = "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Please fill a valid Phone field with exactly 11 digits.</b></div>";
+            return response()->json(['status'=> 303,'message'=>$message]);
+            exit();
+        }
+
+        if ($request->password !== $request->confirm_password) {
+            $message = "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Passwords don't match.</b></div>";
+            return response()->json(['status' => 303, 'message' => $message]);
+        }
+
+        if ($request->password !== $request->confirm_password) {
+            $message = "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Passwords don't match.</b></div>";
+            return response()->json(['status' => 303, 'message' => $message]);
+        }
+
+        $duplicateEmail = User::where('email', $request->email)->where('id', '!=', auth()->id())->first();
+        if ($duplicateEmail) {
+            $message = "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>This email is already in use.</b></div>";
+            return response()->json(['status' => 303, 'message' => $message]);
+        }
+
+        $user = User::find(auth()->id());
+        if (!$user) {
+            return response()->json(['status' => 303, 'message' => 'User not found.']);
+        }
+
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address_first_line = $request->address_first_line;
+        $user->address_second_line = $request->address_second_line;
+        $user->town = $request->town;
+        $user->postcode = $request->postcode;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('photo')) {
+            $oldImagePath = public_path('images/staff/'. $user->photo);
+
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
+            $image = $request->file('photo');
+            $imageName = time(). '.'. $image->getClientOriginalExtension();
+            $image->move(public_path('images/staff'), $imageName);
+            $user->photo = $imageName;
+        }
+        
+        if ($user->save()) {
+            $message = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Data Updated Successfully.</b></div>";
+            return response()->json(['status' => 300, 'message' => $message]);
+        } else {
+            return response()->json(['status' => 303, 'message' => 'Server Error!!']);
         }
     }
 

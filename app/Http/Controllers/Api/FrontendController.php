@@ -34,6 +34,55 @@ class FrontendController extends Controller
         
     }
 
+    public function workStore2(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'name' => ['required', 'string'],
+            'address_first_line' => ['required'],
+            'post_code' => ['required'],
+            'town' => ['nullable'],
+            'phone' => ['required'],
+            'images.*' => ['required', 'image'],
+        ]);
+
+        $data = new Work();
+        $data->user_id = auth()->id();
+        $data->orderid = mt_rand(100000, 999999);
+        $data->date = date('Y-m-d');
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address_first_line = $request->address_first_line;
+        $data->address_second_line = $request->address_second_line;
+        $data->address_third_line = $request->address_third_line;
+        $data->town = $request->town;
+        $data->post_code = $request->post_code;
+        $data->created_by = Auth::id();
+        $data->save();
+
+        if ($request->hasFile('images')) {
+            $files = $request->file('images');
+            
+            foreach ($files as $index => $image) {
+                $validatedData = $request->validate([
+                    'images.' . $index => ['required', 'image'],
+                ]);
+
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $storagePath = public_path('images/works');
+                $image->move($storagePath, $filename);
+
+                $workImg = new WorkImage();
+                $workImg->work_id = $data->id;
+                $workImg->name = 'images/works/' . $filename;
+                $workImg->save();
+            }
+        }
+        return response()->json(['message' => 'Work stored successfully.', 'work' => $data], 200);
+    }
+    
+    
     public function workStore(Request $request)
     {
         $request->validate([
@@ -65,7 +114,7 @@ class FrontendController extends Controller
         if ($request->hasFile('images')) {
             $files = $request->file('images');
             $descriptions = $request->input('descriptions');
-
+            
             foreach ($files as $index => $image) {
                 $validatedData = $request->validate([
                     'images.' . $index => ['required', 'image'],
@@ -83,7 +132,8 @@ class FrontendController extends Controller
                 $workImg->save();
             }
         }
-
+        
+        
         $adminmail = Contact::where('id', 1)->first()->email;
         $contactmail = $request->email;
         $ccEmails = $adminmail;
@@ -100,13 +150,15 @@ class FrontendController extends Controller
         $array['message'] = $msg;
         $array['contactmail'] = $contactmail;
         
+        
         Mail::to($contactmail)
         ->send(new JobOrderMail($array));
 
         Mail::to($ccEmails)
         ->send(new JobOrderMail($array));
-
+        
         return response()->json(['message' => 'Work stored successfully.', 'work' => $data], 200);
+        
     }
 
     public function workUpdate(Request $request, $id)
@@ -154,27 +206,6 @@ class FrontendController extends Controller
                 $workImg->save();
             }
         }
-
-        $adminmail = Contact::where('id', 1)->first()->email;
-        $contactmail = $request->email;
-        $ccEmails = $adminmail;
-        $msg = "Thank you for telling us about your work.";
-        $array['firstname'] = $request->name;
-        $array['email'] = $request->email;
-        $array['phone'] = $request->phone;
-        $array['address1'] = $request->address_first_line;
-        $array['address2'] = $request->address_second_line;
-        $array['address3'] = $request->address_third_line;
-        $array['town'] = $request->town;
-        $array['postcode'] = $request->post_code;
-        $array['subject'] = "Order Booking Confirmation";
-        $array['message'] = $msg;
-        $array['contactmail'] = $contactmail;
-        
-        Mail::to($contactmail)
-        ->cc($ccEmails)
-        ->send(new JobOrderMail($array));
-
         return response()->json(['message' => 'Work updated successfully.', 'work' => $data], 200);
     }
 
@@ -193,14 +224,14 @@ class FrontendController extends Controller
             return response()->json(['message' => 'Error deleting work.'], 500);
         }
     }
-
+    
     public function getAllTransaction()
     {
-        $data = Transaction::with('work')->where('user_id', Auth::user()->id)->get();
-        $jobid = Work::where('id', $data->work_id)->first()->orderid;
+        $data = Transaction::where('user_id', Auth::user()->id)->get();
+        $works = Work::with('transactions')->where('user_id', Auth::user()->id)->get();
         if ($data){
             $success['data'] = $data;
-            $success['jobid'] = $jobid;
+            $success['works'] = $works;
             return response()->json(['success' => true, 'response' => $success], 200);
         }else{
             $success['Message'] = 'No data found.';

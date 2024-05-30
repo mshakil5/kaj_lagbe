@@ -10,8 +10,10 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkController;
 use App\Http\Controllers\Api\CallBackController;
 use App\Http\Controllers\Api\FrontendController;
-use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\PassportAuthController;
+use App\Http\Controllers\Api\PaypalController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\Api\WorkTimeController;
 
 
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
@@ -33,15 +35,31 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('work/invoice/{id}', [WorkController::class, 'showInvoiceApi']);
     Route::get('work/transactions/{id}', [WorkController::class, 'showTransactionsApi']);
     Route::post('call-back', [CallBackController::class, 'callBack']);
-
-    
-    Route::post('account-delete-request', [CallBackController::class, 'accountDeleteRequest']);
-
-    
     Route::get('all-transaction', [FrontendController::class, 'getAllTransaction']);
-
-    
     Route::post('paypal-payment', [PaypalController::class, 'payment']);
+    Route::post('account-delete-request', [CallBackController::class, 'accountDeleteRequest']);
+});
+
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'staff'], function () {
+    Route::get('/edit-profile', [StaffController::class, 'editProfile']);
+    Route::post('/update-profile', [StaffController::class, 'updateProfile']);
+
+    Route::get('tasks/{id}', [WorkController::class, 'workDetailsByStaff']);
+
+    Route::get('/due-tasks', [WorkController::class, 'getAssignedTasks']);
+    Route::get('/completed-tasks', [WorkController::class, 'getCompletedTasks']);
+
+    Route::post('/start/task/{work_id}', [WorkTimeController::class, 'startWork']);
+
+    Route::post('/stop/task/{work_time_id}', [WorkTimeController::class, 'stopWork']);
+
+    Route::post('/change-work-status/{work_id}', [WorkController::class, 'changeWorkStatusStaff']);
+
+    Route::post('/start/breaktime', [WorkTimeController::class, 'startBreak']);
+    Route::post('/stop/breaktime', [WorkTimeController::class, 'stopBreak']);
+    
+    Route::get('/break-time', [WorkTimeController::class, 'breakTime']);
+
 });
 
 

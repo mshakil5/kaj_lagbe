@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('layouts.staff')
 
 @section('content')
 
@@ -12,7 +12,7 @@
       </div>
     </div>
 </section>
-  <!-- /.content -->
+<!-- /.content -->
 
 
 <!-- Main content -->
@@ -23,24 +23,21 @@
           <!-- /.card -->
 
           <div class="card card-secondary">
-            <div class="card-header">
-              <h3 class="card-title"><b>Work List</b></h3>
+            <div class="card-header bg-success text-white">
+              <h3 class="card-title"><b>Completed Tasks</b></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                
               <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Sl</th>
                     <th>Date</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th>Client Details</th>
                     <th>Address</th>
-                    <th>Assign</th>
                     <th>Status</th>
+                    <th>Duration</th>
                     <th>Details</th>
                   </tr>
                   </thead>
@@ -49,33 +46,23 @@
                     <tr>
                       <td>{{ $key + 1 }}</td>
                       <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
-                      <td>{{$data->name}}</td>
-                      <td>{{$data->email}}</td>
-                      <td>{{$data->phone}}</td>
-                      <td>
+                      <td style="text-align: left">
+                            {{$data->name}} </br> <br>
+                            {{$data->email}} </br> <br>
+                            {{$data->phone}}
+                        </td>
+                      <td style="text-align: left">
                           {{$data->address_first_line}} </br>
                           {{$data->address_second_line}}</br>
                           {{$data->address_third_line}}</br>
                           {{$data->town}}</br>
                           {{$data->post_code}}
                       </td>
-                      <td>
-                              <div class="dropdown">
-                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ $data->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Select Staff
-                                  </button>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $data->id }}">
-                                      @foreach ($staffs as $staff)
-                                          <a class="dropdown-item assign-staff" href="#" data-staff-id="{{ $staff->id }}" data-work-id="{{ $data->id }}">{{ $staff->name }} {{ $staff->surname }}</a>
-                                      @endforeach
-                                  </div>
-                              </div>
-                          </td>
+
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-secondary">
-                            <span id="stsval{{$data->id}}">
-                            @if ($data->status == 1) New
+                            <span id="stsval{{$data->id}}"> @if ($data->status == 1) New
                             @elseif($data->status == 2) In progress
                             @elseif($data->status == 3) Completed
                             @elseif($data->status == 4) Cancelled
@@ -86,20 +73,36 @@
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
                           <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="1" >New</a>
                             <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="2">In Progress</a>
                             <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="3">Completed</a>
-                            <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="4">Cancelled</a>
                           </div>
                         </div>
                       </td>
-                     
+
                       <td>
-                          <a href="{{ route('admin.work.details', $data->id) }}" class="btn btn-secondary">
+                        @php
+                            $totalDurationInSeconds = 0;
+
+                            foreach ($data->workTimes as $workTime) {
+                                if ($workTime->start_time && $workTime->end_time && !$workTime->is_break) {
+                                    $totalDurationInSeconds += $workTime->duration;
+                                }
+                            }
+
+                            $hours = floor($totalDurationInSeconds / 3600);
+                            $minutes = floor(($totalDurationInSeconds % 3600) / 60);
+                            $seconds = $totalDurationInSeconds % 60;
+                        @endphp
+
+                        <span>{{ $hours }}h {{ $minutes }}m {{ $seconds }}s</span>
+                      </td>
+                      
+                      <td>
+                          <a href="{{ route('staff.work.details', $data->id) }}" class="btn btn-secondary">
                               <i class="fas fa-eye"></i>
                           </a>
                       </td>
-  
+
                     </tr>
                     @endforeach
                   
@@ -124,16 +127,23 @@
 @section('script')
 
 <script>
-  $(document).ready(function () {
-          $('#example1').DataTable();
-      });
-
-
   $(function () {
-    
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
 
     $('.stsBtn').click(function() {
-      var url = "{{URL::to('/admin/change-work-status')}}";
+      var url = "{{URL::to('/staff/change-work-status')}}";
       var id = $(this).data('id');
       var status = $(this).attr('value');
       $.ajax({
@@ -145,11 +155,13 @@
           if (d.status == 303) {
             alert(d.message);
           } else if(d.status == 300) {
-            $("#stsval"+d.id).html(d.stsval);
-            alert('Status Changed Successfully');
-              setTimeout(function() {
-                window.location.reload();
-            }, 100);
+              swal({
+                  title: "Success!",
+                  text: "Status chnaged successfully",
+                  icon: "success",
+                  button: "OK",
+              });
+            window.setTimeout(function(){location.reload()},2000);
           }
         },
         error: function (d) {
@@ -163,37 +175,5 @@
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });  
   });
 </script>
-
-<script>
-    $(document).ready(function() {
-        $('.assign-staff').on('click', function(e) {
-            e.preventDefault();
-
-            var staffId = $(this).data('staff-id');
-            var workId = $(this).data('work-id');
-
-            $.ajax({
-                url: '/admin/assign-staff',
-                type: 'POST',
-                data: {
-                    staff_id: staffId,
-                    work_id: workId,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    alert('Assigned Successfully');
-                      setTimeout(function() {
-                        window.location.reload();
-                    }, 100);
-                    
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
-
 
 @endsection

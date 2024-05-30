@@ -19,6 +19,7 @@ class CallBackController extends Controller
         $callback = new CallBack();
         $callback->user_id = Auth::id();
         $callback->date = Date::now()->format('Y-m-d');
+
         $callback->save();
 
         if ($callback->exists) {
@@ -46,8 +47,7 @@ class CallBackController extends Controller
             ], 202);
         }
     }
-
-
+    
     public function accountDeleteRequest(Request $request)
     {
         $callback = new AccDelRequest();

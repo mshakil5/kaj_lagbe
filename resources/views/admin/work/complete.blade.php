@@ -39,6 +39,9 @@
                   <th>Address</th>
                   <th>Transaction</th>
                   <th>Invoice</th>
+                  <th>Staff</th>
+                  <th>Status</th>
+                  <th>Timer</th>
                   <th>Details</th>
                 </tr>
                 </thead>
@@ -63,6 +66,7 @@
                         </a>
                     </td>
                     <td>
+                        
                       @if ($data->invoice->count() > 0)
                         <a href="{{ route('work.invoice', $data->id) }}" class="btn btn-secondary">
                             Invoice
@@ -72,9 +76,55 @@
                           Add  Invoice
                       </a>
                       @endif
-                        
                     </td>
-                   
+                    <td>
+                        @if ($data->assigned_to)
+                            {{ $data->assignedTo->name }} {{ $data->assignedTo->surname }}
+                        @else
+                            Not Assigned
+                        @endif
+                    </td>
+
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-secondary">
+                          <span id="stsval{{$data->id}}"> @if ($data->status == 1) New
+                          @elseif($data->status == 2) In progress
+                          @elseif($data->status == 3) Completed
+                          @elseif($data->status == 4) Cancelled
+                          @endif
+                        </span>
+                      </button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="1" >New</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="2">In Progress</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="3">Completed</a>
+                          <a class="dropdown-item stsBtn" style="cursor: pointer;" data-id="{{$data->id}}" value="4">Cancelled</a>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      @php
+                          $totalDurationInSeconds = 0;
+
+                          foreach ($data->workTimes as $workTime) {
+                              if ($workTime->start_time && $workTime->end_time && !$workTime->is_break) {
+                                  $totalDurationInSeconds += $workTime->duration;
+                              }
+                          }
+
+                          $hours = floor($totalDurationInSeconds / 3600);
+                          $minutes = floor(($totalDurationInSeconds % 3600) / 60);
+                          $seconds = $totalDurationInSeconds % 60;
+                      @endphp
+
+                      <span>{{ $hours }}h {{ $minutes }}m {{ $seconds }}s</span>
+                  </td>
+       
                     <td>
                         <a href="{{ route('admin.work.details', $data->id) }}" class="btn btn-secondary">
                             <i class="fas fa-eye"></i>
@@ -120,7 +170,7 @@
     });
 
     $('.stsBtn').click(function() {
-      var url = "{{URL::to('/admin/change-client-status')}}";
+      var url = "{{URL::to('/admin/change-work-status')}}";
       var id = $(this).data('id');
       var status = $(this).attr('value');
       $.ajax({

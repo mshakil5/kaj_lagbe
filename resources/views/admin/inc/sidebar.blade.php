@@ -29,6 +29,15 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a href="{{route('allStaff')}}" class="nav-link {{ (request()->is('admin/staff*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            All Staff
+          </p>
+        </a>
+      </li>
+
       <li class="nav-item dropdown {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link dropdown-toggle {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
@@ -74,6 +83,8 @@
         </a>
       </li>
 
+     
+
       <li class="nav-item">
         <a href="{{route('allUserDeleteReq')}}" class="nav-link {{ (request()->is('admin/user-delete-request*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
@@ -82,12 +93,8 @@
           </p>
         </a>
       </li>
-
-     
-
-
-
-      <li class="nav-item">
+      
+    <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="nav-link">
           <i class="nav-icon fas fa-th"></i> {{ __('Logout') }}
         </a>
@@ -97,7 +104,15 @@
         </form>
       </li> 
 
-      
+
+      <!-- <li class="nav-item">
+        <a href="{{route('admin.location')}}" class="nav-link {{ (request()->is('admin/location*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Post Code
+          </p>
+        </a>
+      </li> -->
 
 
 

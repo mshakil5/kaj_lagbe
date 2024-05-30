@@ -28,7 +28,7 @@ class JobOrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Job receive confirmation',
+            subject: 'Job Confirmation Mail',
         );
     }
 

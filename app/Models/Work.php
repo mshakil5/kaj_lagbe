@@ -24,6 +24,7 @@ class Work extends Model
         'address_third_line',
         'town',
         'post_code',
+        'assigned_to',
         'status',
         'is_new',
         'updated_by',
@@ -48,6 +49,16 @@ class Work extends Model
     public function invoice()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    public function workTimes()
+    {
+        return $this->hasMany(WorkTime::class);
     }
 
 }

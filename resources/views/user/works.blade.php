@@ -107,20 +107,20 @@
     </div>
 </div> -->
 
-<a href="https://wa.me/?text=Hello%21%20Hello%20from%20Edge%20administration%2C%20how%20can%20I%20help%20you%3F" class="whatsapp-icon" target="_blank">
-    <img src="{{ asset('whatsapp_icon.png') }}" alt="WhatsApp Icon" width="60">
-</a>
+<!-- <a href="https://wa.me/?text=Hello%21%20Hello%20from%20Edge%20administration%2C%20how%20can%20I%20help%20you%3F" class="whatsapp-icon" target="_blank">
+    <img src="{{ asset('whatsapp_icon.png') }}" alt="WhatsApp Icon" width="50" height="50">
+</a> -->
 
 
 
-<style>
+<!-- <style>
     .whatsapp-icon {
         position: fixed;
         bottom: 50px;
         right: 50px;
         z-index: 1000; 
     }
-</style>
+</style> -->
 
 <style>
     .btn-redish-hover {

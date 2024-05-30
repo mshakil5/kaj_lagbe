@@ -5,7 +5,6 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <title>Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -49,7 +48,7 @@
     <ul class="navbar-nav ml-auto">
 
       
-      {{-- <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-none d-sm-inline-block">
         <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
@@ -59,7 +58,7 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>
-      </li> --}}
+      </li>
       
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -117,13 +116,12 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-{{-- <script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-{{-- <script src="{{ asset('assets/admin/js/jquery-ui.min.js')}}"></script> --}}
+<script src="{{ asset('assets/admin/js/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  // $.widget.bridge('uibutton', $.ui.button)
+  $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>

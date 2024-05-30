@@ -37,6 +37,7 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Address</th>
+                  <th>Staff</th>
                   <th>Status</th>
                   <th>Details</th>
                 </tr>
@@ -55,6 +56,13 @@
                         {{$data->address_third_line}}</br>
                         {{$data->town}}</br>
                         {{$data->post_code}}
+                    </td>
+                    <td>
+                        @if ($data->assigned_to)
+                            {{ $data->assignedTo->name }} {{ $data->assignedTo->surname }}
+                        @else
+                            Not Assigned
+                        @endif
                     </td>
                     <td>
                       <div class="btn-group">
@@ -123,7 +131,7 @@
     });
 
     $('.stsBtn').click(function() {
-      var url = "{{URL::to('/admin/change-client-status')}}";
+      var url = "{{URL::to('/admin/change-work-status')}}";
       var id = $(this).data('id');
       var status = $(this).attr('value');
       $.ajax({

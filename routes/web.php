@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\WorkTimeController;
   
 /*
 |--------------------------------------------------------------------------
@@ -93,8 +95,39 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
 });
   
 
-Route::group(['prefix' =>'manager/', 'middleware' => ['auth', 'is_manager']], function(){
+/*------------------------------------------
+--------------------------------------------
+All Admin Routes List
+--------------------------------------------
+--------------------------------------------*/
+Route::group(['prefix' =>'staff/', 'middleware' => ['auth', 'is_manager']], function(){
   
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    // Dashboard
+    Route::get('/home', [HomeController::class, 'staffHome'])->name('staff.home');
+
+    // Edit profile
+    Route::get('/edit-profile', [StaffController::class, 'editProfile'])->name('staff.profile.edit');
+    Route::post('/update-profile', [StaffController::class, 'updateProfile']);
+
+    // Due tasks
+    Route::get('/due-tasks', [WorkController::class, 'getAssignedTasks'])->name('assigned.tasks.staff');
+
+    // Completed tasks
+    Route::get('/completed-tasks', [WorkController::class, 'getCompletedTasks'])->name('completed.tasks.staff');
+
+    // Work details
+    Route::get('/work/{id}', [WorkController::class, 'workDetailsByStaff'])->name('staff.work.details');
+
+    // Work start, stop , Break start, stop
+    Route::post('/worktime/start', [WorkTimeController::class, 'startWork'])->name('worktime.start');
+    Route::post('/worktime/stop', [WorkTimeController::class, 'stopWork'])->name('worktime.stop');
+    Route::post('/breaktime/start', [WorkTimeController::class, 'startBreak'])->name('worktime.startBreak');
+    Route::post('/breaktime/stop', [WorkTimeController::class, 'stopBreak'])->name('worktime.stopBreak');
+
+    Route::get('/check-break', [WorkTimeController::class, 'checkBreak'])->name('checkBreak');
+
+    // Change status by staff
+    Route::get('/change-work-status', [WorkController::class, 'changeWorkStatusStaff']);
+
 });
  

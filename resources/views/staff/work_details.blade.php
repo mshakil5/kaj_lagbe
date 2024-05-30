@@ -1,11 +1,11 @@
-@extends('admin.layouts.admin')
+@extends('layouts.staff')
 
 @section('content')
 <div class="container">
     
     <div class="row">
         <div class="col-2">
-            <a href="{{ route('admin.new') }}">
+            <a href="{{ route('assigned.tasks.staff') }}">
                 <button type="button" class="btn btn-secondary my-3">Go back</button>
             </a>
         </div>

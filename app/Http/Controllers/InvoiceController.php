@@ -14,7 +14,6 @@ class InvoiceController extends Controller
     {
         $work = Work::findOrFail($id);
         $invoice = $work->invoice;
-        
         return view('admin.work.invoice.index', compact('invoice', 'work'));
     }
 

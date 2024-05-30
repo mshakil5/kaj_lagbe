@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Work;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
@@ -70,6 +71,76 @@ class WorkController extends Controller
             return response()->json(['success' => false, 'response' => $success], 202);
         }
         
+    }
+
+    public function getAssignedTasks()
+    {
+        $tasks = Work::with('workTimes')
+                     ->where('status', '2')
+                     ->where('assigned_to', Auth::id())
+                     ->orderBy('id', 'DESC')
+                     ->get();
+
+        if ($tasks->isEmpty()) {
+            return response()->json(['message' => 'No assigned tasks found.'], 404);
+        }
+
+        return response()->json(['tasks' => $tasks], 200);
+    }
+
+    public function getCompletedTasks()
+    {
+        $tasks = Work::with('workTimes')
+                     ->where('status', '3')
+                     ->where('assigned_to', Auth::id())
+                     ->orderBy('id', 'DESC')
+                     ->get();
+
+        if ($tasks->isEmpty()) {
+            return response()->json(['message' => 'No completed tasks found.'], 404);
+        }
+
+        return response()->json(['tasks' => $tasks], 200);
+    }
+
+    public function workDetailsByStaff($id, Request $request)
+    {
+        $work = Work::with('transactions','invoice','workimage')->where('id', $id)->first();
+        if ($work && $work->assigned_to == Auth::id()) {
+            $success['data'] = $work;
+            return response()->json(['success' => true, 'response' => $success], 200);
+        }else{
+             $success['Message'] = 'No data found.';
+            return response()->json(['success' => false, 'response' => $success], 202);
+        }
+    
+    }
+
+    public function changeWorkStatusStaff(Request $request, $work_id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required|integer|in:2,3',
+        ]);
+
+        $work = Work::find($work_id);
+
+        if (!$work) {
+            return response()->json(['error' => 'Work not found'], 404);
+        }
+
+        $work->status = $validatedData['status'];
+
+        if ($work->save()) {
+            $message = "Status changed successfully.";
+            return response()->json([
+                'status' => 200,
+                'message' => $message,
+                'work ID' => $work_id
+            ], 200);
+        } else {
+            $message = "There was an error changing status.";
+            return response()->json(['status' => 500, 'message' => $message], 500);
+        }
     }
 
 }

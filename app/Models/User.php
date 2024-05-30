@@ -87,7 +87,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdditionalAddress::class);
     }
-
+    
     public function accDelRequest()
     {
         return $this->hasMany(AccDelRequest::class);

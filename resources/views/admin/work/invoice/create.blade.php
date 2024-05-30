@@ -17,7 +17,7 @@
                     <tbody>
                         <tr>
                             <td>Date:</td>
-                            <td><input type="date" class="form-control" id="date" name="date" value="{{ date('Y-m-d') }}"></td>
+                            <td><input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}"></td>
                         </tr>
                         <tr>
                             <td>Amount:</td>

@@ -84,7 +84,8 @@ class FrontendController extends Controller
                 $workImg->save();
             }
         }
-
+        
+        
         $adminmail = Contact::where('id', 1)->first()->email;
         $contactmail = $request->email;
         $ccEmails = $adminmail;
@@ -103,12 +104,12 @@ class FrontendController extends Controller
         $array['message'] = $msg;
         $array['contactmail'] = $contactmail;
         
-        Mail::to($ccEmails)
-        ->send(new JobOrderMail($array));
-
         Mail::to($contactmail)
         ->send(new JobOrderMail($array));
 
+        Mail::to($ccEmails)
+        ->send(new JobOrderMail($array));
+        
         return redirect()->route("homepage")->with("success", "Thank you for telling us about your work");
     }
 

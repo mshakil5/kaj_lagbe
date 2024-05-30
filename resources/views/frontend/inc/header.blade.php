@@ -36,6 +36,10 @@
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="{{ route('user.profile') }}"><strong>{{ Auth::user()->name }}</strong></a>
                         </li>
+                    @elseif(auth()->user()->is_type == '2')
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{{ route('staff.home') }}"><strong>{{ Auth::user()->name }}</strong></a>
+                        </li>
                     @endif
                 @else
 

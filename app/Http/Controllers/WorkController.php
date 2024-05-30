@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Work;
+use App\Models\WorkTime;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,8 @@ class WorkController extends Controller
     public function new()
     {
         $data = Work::orderby('id','DESC')->where('status','1')->get();
-        return view('admin.work.new', compact('data'));
+        $staffs = User::orderby('id','DESC')->where('is_type','2')->get();
+        return view('admin.work.new', compact('data','staffs'));
     }
 
     public function processing()
@@ -30,7 +33,6 @@ class WorkController extends Controller
     public function complete()
     {
         $data = Work::with('invoice')->orderby('id','DESC')->where('status','3')->get();
-        // dd($data);
         return view('admin.work.complete', compact('data'));
     }
 
@@ -110,6 +112,7 @@ class WorkController extends Controller
         {
             if(isset($workimageid[$key])){
 
+                dd($images[$key]);
                 $workImg = WorkImage::find($workimageid[$key]);
                 if ($request->hasFile('images')) {
                     $files = $request->file('images');
@@ -145,14 +148,70 @@ class WorkController extends Controller
         return redirect()->route('user.works')->with('success', 'Work deleted successfully.');
     }
 
-    public function changeClientStatus(Request $request)
+    public function changeWorkStatus(Request $request)
     {
         $work = Work::find($request->id);
+        $work->status = $request->status;
 
-        if ($work->status == 3) {
-            $message = "Status cannot be changed as it is already completed.";
+        if ($work->save()) {
+            if ($work->status == 1) {
+                $stsval = "New";
+            } elseif ($work->status == 2) {
+                $stsval = "In Progress";
+            } elseif ($work->status == 3) {
+                $stsval = "Completed";
+            } elseif ($work->status == 4) {
+                $stsval = "Cancelled";
+            }
+
+            $message = "Status Change Successfully.";
+            return response()->json(['status' => 300, 'message' => $message, 'stsval' => $stsval, 'id' => $request->id]);
+        } else {
+            $message = "There was an error to change status!!.";
             return response()->json(['status' => 303, 'message' => $message]);
         }
+    }
+
+    public function assignStaff(Request $request)
+    {
+        $workId = $request->input('work_id');
+        $staffId = $request->input('staff_id');
+
+        $work = Work::find($workId);
+
+        if (!$work) {
+            return response()->json(['error' => 'Work item not found'], 404);
+        }
+
+        $work->assigned_to = $staffId;
+        $work->status = 2;
+        $work->is_new = 0;
+        $work->save();
+
+        return response()->json(['success' => 'Staff assigned successfully']);
+    }
+
+    public function getAssignedTasks()
+    {
+        $data = Work::with('workTimes')->orderby('id','DESC')->where('status','2')->where('assigned_to',auth()->id())->get();
+        return view('staff.assigned_tasks', compact('data'));
+    }
+
+    public function getCompletedTasks()
+    {
+        $data = Work::with('workTimes')->orderby('id','DESC')->where('status','3')->where('assigned_to',auth()->id())->get();
+        return view('staff.completed_tasks', compact('data'));
+    }
+
+    public function workDetailsByStaff($id)
+    {
+        $work = Work::where('id', $id)->first();
+        return view('staff.work_details', compact('work'));
+    }
+
+    public function changeWorkStatusStaff(Request $request)
+    {
+        $work = Work::find($request->id);
 
         $work->status = $request->status;
 

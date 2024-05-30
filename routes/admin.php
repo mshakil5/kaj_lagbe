@@ -8,6 +8,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\StaffController;
 
 
 /*------------------------------------------
@@ -38,6 +39,8 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/get-complete', [WorkController::class, 'complete'])->name('admin.complete');
     Route::get('/get-cancel', [WorkController::class, 'cancel'])->name('admin.cancel');
 
+    Route::post('/assign-staff', [WorkController::class, 'assignStaff'])->name('assign.staff');
+
     Route::get('/get-all-work/{id}', [WorkController::class, 'workGallery'])->name('admin.workGallery');
     Route::get('/work/{id}', [WorkController::class, 'workDetailsByAdmin'])->name('admin.work.details');
 
@@ -57,7 +60,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/transactions-update', [TransactionController::class, 'update'])->name('transactions.update');
     Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
 
-    Route::get('/change-client-status', [WorkController::class, 'changeClientStatus']);
+    Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
 
     // location
     Route::get('/location', [LocationController::class, 'index'])->name('admin.location');
@@ -80,8 +83,16 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/new-user-update', [UserController::class, 'userUpdate']);
     Route::get('/new-user/{id}', [UserController::class, 'userDelete']);
 
+    //Staff crud by Admin
+    Route::get('/staff', [StaffController::class, 'getStaff'])->name('allStaff');
+    Route::post('/staff', [StaffController::class, 'staffStore']);
+    Route::get('/staff/{id}/edit', [StaffController::class, 'staffEdit']);
+    Route::post('/staff-update', [StaffController::class, 'staffUpdate']);
+    Route::get('/staff/{id}', [StaffController::class, 'staffDelete']);
 
     Route::get('/user-delete-request', [UserController::class, 'getUserDeleteRequest'])->name('allUserDeleteReq');
+
+
 
 });
   

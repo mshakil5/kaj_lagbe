@@ -17,7 +17,6 @@ class PassportAuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|regex:/^\d{11}$/',
             'address_first_line' => 'required|string|max:255',

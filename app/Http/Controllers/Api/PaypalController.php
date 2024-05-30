@@ -51,7 +51,8 @@ class PaypalController extends Controller
         $transaction->date = date('Y-m-d');
         $transaction->user_id = Auth::user()->id;
         $transaction->work_id = $work_id;
-        $transaction->invoice_id = $invoice_id;
+        // $transaction->invoice_id = $invoice_id;
+        $transaction->jobid = $invoice_id;
         $transaction->amount = $amount;
         $transaction->net_amount = $amount;
         $tranid = now()->timestamp.Auth::user()->id;
@@ -59,21 +60,22 @@ class PaypalController extends Controller
         $transaction->save();
 
 
-        $invoice = Invoice::where('id', $invoice_id)->first();
-        if ($invoice) {
-            $invoice->status = 0;
-            $invoice->save();
-        }
+        // $invoice = Invoice::where('id', $invoice_id)->first();
+        // if ($invoice) {
+        //     $invoice->status = 0;
+        //     $invoice->save();
+        // }
 
         $adminmail = Contact::where('id', 1)->first()->email;
 
         $user = User::find(Auth::id());
         
-        Mail::to($adminmail)
-        ->send(new PaymentSuccessUser($user, $payment));
 
-        Mail::to($email)
-        ->send(new PaymentSuccessUser($user, $payment));
+                Mail::to($adminmail)
+                    ->send(new PaymentSuccessUser($user, $payment));
+
+                Mail::to($email)
+                    ->send(new PaymentSuccessUser($user, $payment));
 
         return response()->json([
                 'success' => true,
