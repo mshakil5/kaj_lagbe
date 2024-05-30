@@ -57,7 +57,6 @@ class HomeController extends Controller
                              ->whereDate('updated_at', $today)
                              ->orderby('id','DESC')
                              ->get();
-
         $completedTasks = Work::where('assigned_to', $userId)
                               ->where('status', 3)
                               ->whereDate('updated_at', $today)

@@ -20,34 +20,40 @@
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0">Today's Assigned Tasks</h5>
+                        <a href="{{route('assigned.tasks.staff')}}">
+                            <h5 class="card-title mb-0">Today's Assigned Tasks</h5>
+                        </a>
                     </div>
                     <div class="card-body">
                         @if($assignedTasks->isEmpty())
                             <p class="card-text">No tasks assigned for today.</p>
                         @else
+                        <a href="{{route('assigned.tasks.staff')}}" style="text-decoration: none; color:black">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" id="assignedTasksTable">
+                                <table class="table table-bordered" id="assignedTasksTable">
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
+                                            <th>Client Details</th>
+                                            <th>Address</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($assignedTasks as $task)
                                             <tr>
                                                 <td>{{ $task->orderid }}</td>
-                                                <td>{{ $task->name }}</td>
-                                                <td>{{ $task->email }}</td>
-                                                <td>{{ $task->phone }}</td>
+                                                <td>{{ $task->name }} <br> {{ $task->phone }} <br>
+                                                    {{ $task->email }}
+                                                </td>
+                                                <td>
+                                                    {{$task->address_first_line}} {{$task->address_second_line}} {{$task->address_third_line}} {{$task->town}} {{$task->post_code}} 
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                        </a>
                         @endif
                     </div>
                 </div>
@@ -62,7 +68,7 @@
                             <p class="card-text">No tasks completed today.</p>
                         @else
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" id="completedTasksTable">
+                                <table class="table table-bordered" id="completedTasksTable">
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
@@ -153,8 +159,13 @@
 <!-- Data table -->
  <script>
     $(document).ready(function() {
-        $('#assignedTasksTable').DataTable();
-        $('#completedTasksTable').DataTable();
+        $('#assignedTasksTable').DataTable( {
+            responsive: true
+        });
+
+        $('#completedTasksTable').DataTable( {
+            responsive: true
+        });
     });
 </script>
 
