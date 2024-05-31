@@ -117,6 +117,8 @@ Route::group(['prefix' =>'staff/', 'middleware' => ['auth', 'is_manager']], func
 
     // Work details
     Route::get('/work/{id}', [WorkController::class, 'workDetailsByStaff'])->name('staff.work.details');
+    Route::get('/work-gallery/{id}', [WorkController::class, 'workDetailsUploadByStaff'])->name('staff.work.images');
+    Route::post('/work-gallery-upload', [WorkController::class, 'workImageUploadByStaff'])->name('staff.workimages.upload');
 
     // Work start, stop , Break start, stop
     Route::post('/worktime/start', [WorkTimeController::class, 'startWork'])->name('worktime.start');

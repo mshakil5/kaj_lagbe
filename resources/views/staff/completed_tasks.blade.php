@@ -101,6 +101,10 @@
                           <a href="{{ route('staff.work.details', $data->id) }}" class="btn btn-secondary">
                               <i class="fas fa-eye"></i>
                           </a>
+
+                          <a href="{{ route('staff.work.images', $data->id) }}" class="btn btn-secondary">
+                            <i class="fas fa-camera"></i>
+                          </a>
                       </td>
 
                     </tr>

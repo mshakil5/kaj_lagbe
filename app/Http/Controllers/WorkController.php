@@ -112,7 +112,6 @@ class WorkController extends Controller
         {
             if(isset($workimageid[$key])){
 
-                dd($images[$key]);
                 $workImg = WorkImage::find($workimageid[$key]);
                 if ($request->hasFile('images')) {
                     $files = $request->file('images');
@@ -209,6 +208,12 @@ class WorkController extends Controller
         return view('staff.work_details', compact('work'));
     }
 
+    public function workDetailsUploadByStaff($id)
+    {
+        $work = Work::where('id', $id)->first();
+        return view('staff.work_image', compact('work'));
+    }
+
     public function changeWorkStatusStaff(Request $request)
     {
         $work = Work::find($request->id);
@@ -232,6 +237,29 @@ class WorkController extends Controller
             $message = "There was an error to change status!!.";
             return response()->json(['status' => 303, 'message' => $message]);
         }
+    }
+
+
+    public function workImageUploadByStaff(Request $request)
+    {
+        $image = $request->image;
+        $work_id = $request->work_id;
+        dd($request->all());
+        $request->validate([
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,mov,avi,wmv|max:20480', // 20MB Max
+        ]);
+
+        // $workImg = WorkImage::find($workimageid[$key]);
+        // if ($request->hasFile('images')) {
+        //     $files = $request->file('images');
+        //     $rand = mt_rand(100000, 999999);
+        //     $imageName = time() . $rand . '.' . $files[$key]->extension();
+        //     $files[$key]->move(public_path('images'), $imageName);
+        //     $workImg->name = $imageName;
+        // }
+        // $workImg->description = $descriptions[$key] ?? null;
+        // $workImg->save();
+        return back()->with("message", "Updated Successfully");
     }
 
 }
