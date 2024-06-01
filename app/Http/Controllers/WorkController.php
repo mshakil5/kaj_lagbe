@@ -255,7 +255,6 @@ class WorkController extends Controller
     {
         $image = $request->image;
         $work_id = $request->work_id;
-        dd($request->all());
         $request->validate([
             'image' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,mov,avi,wmv|max:20480', // 20MB Max
         ]);
