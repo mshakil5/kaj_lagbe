@@ -61,6 +61,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
 
     Route::get('/change-work-status', [WorkController::class, 'changeWorkStatus']);
+    Route::get('/view-image/{id}', [WorkController::class, 'viewImage'])->name('view.image');
 
     // location
     Route::get('/location', [LocationController::class, 'index'])->name('admin.location');

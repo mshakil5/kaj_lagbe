@@ -42,6 +42,7 @@
                   <th>Staff</th>
                   <th>Status</th>
                   <th>Timer</th>
+                  <th>Image</th>
                   <th>Details</th>
                 </tr>
                 </thead>
@@ -123,6 +124,12 @@
                       @endphp
 
                       <span>{{ $hours }}h {{ $minutes }}m {{ $seconds }}s</span>
+                  </td>
+
+                  <td>
+                    <a href="{{ route('view.image', $data->id) }}" class="btn btn-secondary">
+                      <i class="fas fa-image"></i>
+                    </a>
                   </td>
        
                     <td>

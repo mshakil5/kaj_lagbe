@@ -83,7 +83,7 @@
                                 <p>{{ $work->post_code }}</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group mb-1">
                                 <label class="mb-1" for="invoice_id">Invoice ID</label>
                                 @if ($work->invoice)
@@ -92,7 +92,7 @@
                                     <p>No invoice generated</p>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                         
                     </div>
                     <div class="row" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">
