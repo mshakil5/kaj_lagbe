@@ -130,6 +130,10 @@ Route::group(['prefix' =>'staff/', 'middleware' => ['auth', 'is_manager']], func
 
     // Change status by staff
     Route::get('/change-work-status', [WorkController::class, 'changeWorkStatusStaff']);
+    // Upload image of completed tasks
+    Route::get('/upload/{id}', [WorkController::class, 'uploadPage'])->name('upload.page');
+    Route::post('/upload-file', [WorkController::class, 'uploadFile'])->name('upload-file');
+    Route::delete('/upload/{id}', [WorkController::class, 'deleteFile'])->name('upload.delete');
 
 });
  

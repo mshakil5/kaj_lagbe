@@ -7,7 +7,9 @@ use App\Models\Work;
 use App\Models\WorkTime;
 use App\Models\WorkImage;
 use Illuminate\Http\Request;
+use App\Models\Upload;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class WorkController extends Controller
 {
@@ -260,6 +262,83 @@ class WorkController extends Controller
         // $workImg->description = $descriptions[$key] ?? null;
         // $workImg->save();
         return back()->with("message", "Updated Successfully");
+    }
+
+    public function uploadPage($id) 
+    {
+        $uploads = Upload::where('work_id', $id)
+                     ->orderBy('id', 'desc')
+                     ->get();
+        return view('staff.upload_image', compact('id', 'uploads'));
+    }
+
+    public function uploadFile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:10240',
+            'video' => 'nullable|mimes:mp4,mov|max:102400',
+            'work_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json(['status' => 422, 'errors' => $errors], 422);
+        }
+
+        $workId = $request->get('work_id');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time(). '.'. $image->getClientOriginalExtension();
+            $imagePath = 'images/completed_tasks/images/'. $imageName;
+            $image->move(public_path('images/completed_tasks/images'), $imageName);
+        }
+
+        if ($request->hasFile('video')) {
+            $video = $request->file('video');
+            $videoName = time(). '.'. $video->getClientOriginalExtension();
+            $videoPath = 'images/completed_tasks/videos/'. $videoName;
+            $video->move(public_path('images/completed_tasks/videos'), $videoName);
+        }
+
+        $upload = new Upload;
+        $upload->work_id = $workId;
+        $upload->staff_id = auth()->user()->id;
+        $upload->image = $imagePath;
+        $upload->video = $videoPath;
+        $upload->created_by = auth()->user()->id;
+        $upload->save();
+
+        return response()->json(['status' => 200, 'message' => 'Uploaded Successfully.']);
+    }
+
+    public function deleteFile($id)
+    {
+        $upload = Upload::find($id);
+
+        if (!$upload) {
+            return response()->json(['error' => 'Upload not found'], 404);
+        }
+
+        if ($upload->image && file_exists(public_path($upload->image))) {
+            unlink(public_path($upload->image));
+        }
+
+        if ($upload->video && file_exists(public_path($upload->video))) {
+            unlink(public_path($upload->video));
+        }
+
+        $upload->delete();
+
+        return response()->json(['success' => 'Upload deleted successfully'], 200);
+    }
+
+    public function viewImage($id) 
+    {
+        $uploads = Upload::where('work_id', $id)
+                     ->orderBy('id', 'desc')
+                     ->get();
+        return view('admin.work.completed_image', compact('uploads'));
     }
 
 }

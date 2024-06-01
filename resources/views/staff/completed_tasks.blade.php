@@ -102,9 +102,12 @@
                               <i class="fas fa-eye"></i>
                           </a>
 
-                          <a href="{{ route('staff.work.images', $data->id) }}" class="btn btn-secondary">
-                            <i class="fas fa-camera"></i>
+                          <a href="{{ route('upload.page', $data->id) }}" class="btn btn-secondary">
+                            <i class="fas fa-upload"></i>
                           </a>
+                          {{-- <a href="{{ route('staff.work.images', $data->id) }}" class="btn btn-secondary">
+                            <i class="fas fa-camera"></i>
+                          </a> --}}
                       </td>
 
                     </tr>
