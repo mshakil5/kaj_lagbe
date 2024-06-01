@@ -315,7 +315,9 @@ class WorkController extends Controller
         $upload->work_id = $workId;
         $upload->staff_id = auth()->user()->id;
         $upload->image = $imagePath;
-        $upload->video = $videoPath;
+        if ($request->hasFile('video')) {
+            $upload->video = $videoPath;
+        }
         $upload->created_by = auth()->user()->id;
         if ($upload->save()) {
             return response()->json(['status' => 200, 'message' => 'Uploaded Successfully.']);
