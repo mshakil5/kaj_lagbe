@@ -69,6 +69,15 @@ class WorkController extends Controller
         return view('admin.work.work_details', compact('work'));
     }
 
+    public function workDetailsByUser($id)
+    {
+
+        $uploads = Upload::where('work_id', $id)
+                     ->orderBy('id', 'desc')
+                     ->get();
+        return view('user.work_images', compact('uploads'));
+    }
+
     public function workDetails($id)
     {
         $work = Work::with('workimage')->where('id', $id)->first();

@@ -68,6 +68,7 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
     Route::get('/works/{id}', [WorkController::class, 'showDetails'])->name('show.details');
 
     Route::put('/works', [WorkController::class, 'workUpdate'])->name('work.update');
+    Route::get('/work-images/{id}', [WorkController::class, 'workDetailsByUser'])->name('user.work.images');
 
     Route::delete('/work/{id}', [WorkController::class, 'destroy'])->name('work.destroy');
 

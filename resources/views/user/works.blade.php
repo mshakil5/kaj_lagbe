@@ -74,6 +74,13 @@
                                 <a href="{{ route('show.details', $work->id) }}" class="btn btn-secondary">
                                     <i class="bi bi-eye"></i>
                                 </a>
+
+                                @if ($work->status == 3)
+                                <a href="{{ route('user.work.images', $work->id) }}" class="btn btn-secondary">
+                                    <i class="bi bi-image"></i>
+                                </a>
+                                @endif
+
                             </td>
 
                             <td class="text-center">
