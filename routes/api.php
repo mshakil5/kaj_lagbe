@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('work/invoice/{id}', [WorkController::class, 'showInvoiceApi']);
     Route::get('work/transactions/{id}', [WorkController::class, 'showTransactionsApi']);
     Route::post('call-back', [CallBackController::class, 'callBack']);
+    Route::get('completed-work/{id}', [WorkController::class, 'completedWorkDetails']);
     Route::get('all-transaction', [FrontendController::class, 'getAllTransaction']);
     Route::post('paypal-payment', [PaypalController::class, 'payment']);
     Route::post('account-delete-request', [CallBackController::class, 'accountDeleteRequest']);

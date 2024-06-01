@@ -6,6 +6,7 @@ use App\Models\Work;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Upload;
 
 class WorkController extends Controller
 {
@@ -141,6 +142,40 @@ class WorkController extends Controller
             $message = "There was an error changing status.";
             return response()->json(['status' => 500, 'message' => $message], 500);
         }
+    }
+
+    public function completedWorkDetails($id)
+    {
+        $work = Work::findOrFail($id);
+
+        if ($work->user_id != Auth::id()) {
+            return response()->json([
+                'success' => false,
+                'response' => [
+                    'message' => 'Forbidden: You do not have access to this work.'
+                ]
+            ], 403);
+        }
+
+        $uploads = Upload::where('work_id', $id)->get(['image', 'video']);
+
+        if ($uploads->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'response' => [
+                    'message' => 'No uploads found for the given work ID.',
+                    'data' => []
+                ]
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'response' => [
+                'message' => 'Uploads retrieved successfully.',
+                'data' => $uploads
+            ]
+        ], 200);
     }
 
 }
