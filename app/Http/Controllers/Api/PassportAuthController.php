@@ -99,4 +99,22 @@ class PassportAuthController extends Controller
         return response()->json(['message' => 'Password changed successfully.'], 200);
     }
 
+    public function checkUser($id)
+    {
+        $chkuser = User::where('id', $id)->first();
+        
+        if ($chkuser) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'User Available',
+                'userdetails' => $chkuser,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No user found',
+            ], 404);
+        }
+    }
+
 }

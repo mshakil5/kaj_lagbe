@@ -66,3 +66,6 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'staff'], function () {
 
 Route::post('register', [PassportAuthController::class, 'register']);
 Route::post('login', [PassportAuthController::class, 'login']);
+Route::get('check-available-user/{id}', [PassportAuthController::class, 'checkUser']);
+
+
