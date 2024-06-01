@@ -310,7 +310,6 @@ class WorkController extends Controller
             $video->move(public_path('images/completed_tasks/videos'), $videoName);
         }
 
-        dd($request->all());
         $upload = new Upload;
         $upload->work_id = $workId;
         $upload->staff_id = auth()->user()->id;
