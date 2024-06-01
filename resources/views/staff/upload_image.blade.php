@@ -81,6 +81,7 @@
         $('#uploadButton').on('click', function(e) {
             e.preventDefault();
 
+            alert('btn work');
             let formData = new FormData($('#uploadForm')[0]);
             formData.append('work_id', $('#work_id').val());
 
