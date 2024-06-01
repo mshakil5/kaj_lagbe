@@ -1,7 +1,10 @@
 @extends('layouts.staff')
 
 @section('content')
-
+    <!-- Image loader -->
+    <div id='loading' style='display:none ;'>
+        <img src="{{ asset('loader.gif') }}" id="loading-image" alt="Loading..." />
+    </div>
 <div class="rightBar">
     <div class="ermsg"></div>
 
@@ -80,8 +83,9 @@
     $(document).ready(function () {
         $('#uploadButton').on('click', function(e) {
             e.preventDefault();
+            $("#loading").show();    
 
-            alert('btn work');
+
             let formData = new FormData($('#uploadForm')[0]);
             formData.append('work_id', $('#work_id').val());
 
@@ -93,6 +97,8 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
+                $("#loading").hide();    
+
                     swal({
                         icon: 'success',
                         title: 'Success!',
@@ -107,6 +113,8 @@
                     $('#video').val('');
                 },
                 error: function (xhr, status, error) {
+                $("#loading").hide();  
+                    console.log(xhr, status, error);
                     var errorMessage = xhr.responseJSON.errors.image[0] || xhr.responseJSON.errors.video[0];
                     swal({
                         icon: 'error',

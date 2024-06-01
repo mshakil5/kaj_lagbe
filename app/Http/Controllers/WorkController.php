@@ -316,9 +316,13 @@ class WorkController extends Controller
         $upload->image = $imagePath;
         $upload->video = $videoPath;
         $upload->created_by = auth()->user()->id;
-        $upload->save();
+        if ($upload->save()) {
+            return response()->json(['status' => 200, 'message' => 'Uploaded Successfully.']);
+        } else {
+            return response()->json(['status' => 422, 'errors' => "Server error!!"], 422);
+        }
+        
 
-        return response()->json(['status' => 200, 'message' => 'Uploaded Successfully.']);
     }
 
     public function deleteFile($id)
