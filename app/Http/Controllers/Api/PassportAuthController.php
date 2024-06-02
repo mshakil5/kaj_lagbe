@@ -112,9 +112,9 @@ class PassportAuthController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'status' => 404,
-                'message' => 'No user found',
-            ], 404);
+                'status' => 200,
+                'message' => 'Inactive user or User name not found.',
+            ], 200);
         }
     }
 
