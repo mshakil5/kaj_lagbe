@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('additional_addresses', function (Blueprint $table) {
+        Schema::create('call_backs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('first_line')->nullable();
-            $table->string('second_line')->nullable();
-            $table->string('third_line')->nullable();
-            $table->string('town')->nullable();
-            $table->string('post_code')->nullable();
-            $table->boolean('status')->default(0);
+            $table->string('date')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('additional_addresses');
+        Schema::dropIfExists('call_backs');
     }
 };

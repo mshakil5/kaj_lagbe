@@ -19,10 +19,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('is_type')->default(0);
-            /* Users: 0=>User, 1=>Admin, 2=>Manager */
+            /* Users: 0=>User, 1=>Admin, 2=>Staff */
             $table->string('phone')->nullable();
-            $table->string('house_number')->nullable();
-            $table->string('street_name')->nullable();
+            $table->string('address_first_line')->nullable();
+            $table->string('address_second_line')->nullable();
+            $table->string('address_third_line')->nullable();
             $table->string('town')->nullable();
             $table->string('postcode')->nullable();
             $table->string('country')->nullable();
