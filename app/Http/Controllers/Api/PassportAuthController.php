@@ -58,7 +58,8 @@ class PassportAuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $token = Auth::user()->createToken('AppName')->accessToken;
-            return response()->json(['message' => 'Login successful.', 'token' => $token], 200);
+            $userId = Auth::user()->id;
+            return response()->json(['message' => 'Login successful.', 'token' => $token, 'userId' => $userId], 200);
         }
 
         return response()->json(['message' => 'Invalid credentials.', 'error' => 'Unauthenticated'], 401);
