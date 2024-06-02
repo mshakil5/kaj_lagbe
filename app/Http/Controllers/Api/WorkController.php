@@ -147,7 +147,7 @@ class WorkController extends Controller
     public function completedWorkDetails($id)
     {
         $work = Work::findOrFail($id);
-        dd($id);
+        
         if ($work->user_id != Auth::id()) {
             return response()->json([
                 'success' => false,
