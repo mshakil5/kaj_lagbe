@@ -108,29 +108,39 @@
                         </div>
                     </div>
 
-                    @if($work->workimage)
-                        @foreach($work->workimage as $index => $image)
-                            <div class="row" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-1">
+                @if($work->workimage)
+                    @foreach($work->workimage as $index => $image)
+                        <div class="row" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">
+                            <div class="col-md-6">
+                                <div class="form-group mb-1">
+                                    @if(in_array(pathinfo($image->name, PATHINFO_EXTENSION), ['jpeg', 'jpg', 'png', 'gif', 'svg']))
                                         <label class="mb-1" for="image{{ $index }}">Image</label>
                                         <div class="image-container text-center">
                                             <a href="{{ asset('/' . $image->name) }}" data-lightbox="image-{{ $index }}">
                                                 <img src="{{ asset('/' . $image->name) }}" alt="Image" class="img-fluid mb-2 rounded" style="max-height: 120px;">
                                             </a>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group mb-1">
-                                        <label class="mb-1" for="description{{ $index }}">Description</label>
-                                        <p>{{ $image->description }}</p>
-                                    </div>
+                                    @elseif(in_array(pathinfo($image->name, PATHINFO_EXTENSION), ['mp4', 'avi', 'mov', 'wmv']))
+                                        <label class="mb-1" for="video{{ $index }}">Video</label>
+                                        <div class="video-container text-center">
+                                            <video controls class="img-fluid mb-2 rounded" style="max-height: 120px;">
+                                                <source src="{{ asset('/' . $image->name) }}" type="video/{{ pathinfo($image->name, PATHINFO_EXTENSION) }}">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                        @endforeach
-                    @endif
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-1">
+                                    <label class="mb-1" for="description{{ $index }}">Description</label>
+                                    <p>{{ $image->description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
                 @else
                     <p>No work details found.</p>
                 @endisset
@@ -138,9 +148,5 @@
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 @endsection

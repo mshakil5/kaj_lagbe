@@ -40,7 +40,7 @@ class FrontendController extends Controller
             'post_code' => ['required'],
             'town' => ['nullable'],
             'phone' => ['required', 'regex:/^\d{11}$/'],
-            'images.*' => ['required', 'image'],
+            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
             'descriptions.*' => ['required', 'string'],
         ], [
             'phone.regex' => 'The phone number must be exactly 11 digits.',
@@ -68,7 +68,7 @@ class FrontendController extends Controller
 
             foreach ($files as $index => $image) {
                 $validatedData = $request->validate([
-                    'images.' . $index => ['required', 'image'],
+                    'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
                     'descriptions.' . $index => ['required', 'string'],
                 ]);
 

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/OverlayScrollbars.min.css')}}">
     <!-- Ekko Lightbox -->
     <link rel="stylesheet" href="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/lightbox/lightbox.min.css')}}">
 
     <style>
         .navbar.navbar-light {
@@ -213,6 +214,7 @@
     <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/lightbox/lightbox.min.js')}}"></script>
 
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('assets/admin/js/jquery-ui.min.js')}}"></script>

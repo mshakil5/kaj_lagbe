@@ -9,6 +9,8 @@
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/admin/lightbox/lightbox.min.css')}}">
+
 </head>
 
 <body>
@@ -66,6 +68,7 @@
 <script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('frontend/js/counter.js')}}"></script>
 <script src="{{ asset('frontend/js/custom.js')}}"></script>
+<script src="{{ asset('assets/admin/lightbox/lightbox.min.js')}}"></script>
 
 <script>
     document.querySelector('#navbarDropdown').addEventListener('click', function() {

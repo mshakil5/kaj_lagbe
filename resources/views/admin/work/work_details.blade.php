@@ -23,8 +23,7 @@
         </div>
     </div>
 
-    <div class="row">
-        
+    <div class="row"> 
         <div class="col-md-6">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $work->email }}" disabled>
@@ -35,8 +34,7 @@
         </div>
     </div>
 
-    <div class="row">
-        
+    <div class="row">    
         <div class="col-md-6">
             <label for="address_second_line">Address Second Line:</label>
             <input type="text" class="form-control" id="address_second_line" name="address_second_line" value="{{ $work->address_second_line }}" disabled>
@@ -48,7 +46,6 @@
     </div>
 
     <div class="row">
-        
         <div class="col-md-6">
             <label for="town">Town:</label>
             <input type="text" class="form-control" id="town" name="town" value="{{ $work->town }}" disabled>
@@ -69,35 +66,38 @@
         </div>
     </div>
 
-
      @if($work->workimage)
         @foreach($work->workimage as $index => $image)
             <div class="row">
-            <div class="col-md-12 mt-3">
-                <div class="row align-items-center mt-3">
-                    <div class="col-md-6">
-                        <a href="{{ asset('/' . $image->name) }}" data-lightbox="image-{{ $index }}">
-                             <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
-                                <img src="{{ asset('/' . $image->name) }}" alt="Image" class="img-fluid rounded" style="width: 100px; height: 100px;">
+                <div class="col-md-12 mt-3">
+                    <div class="row align-items-center mt-3">
+                        <div class="col-md-6">
+                            @if(in_array(pathinfo($image->name, PATHINFO_EXTENSION), ['jpeg', 'jpg', 'png', 'gif', 'svg']))
+                                <a href="{{ asset('/' . $image->name) }}" data-lightbox="image-{{ $index }}">
+                                    <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+                                        <img src="{{ asset('/' . $image->name) }}" alt="Image" class="img-fluid rounded" style="max-height: 100%; max-width: 100%;">
+                                    </div>
+                                </a>
+                            @elseif(in_array(pathinfo($image->name, PATHINFO_EXTENSION), ['mp4', 'avi', 'mov', 'wmv']))
+                                <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+                                    <video controls class="img-fluid rounded" style="max-height: 100%; max-width: 100%;">
+                                        <source src="{{ asset('/' . $image->name) }}" type="video/{{ pathinfo($image->name, PATHINFO_EXTENSION) }}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description{{ $index }}">Description:</label>
+                                <textarea class="form-control" id="description{{ $index }}" name="descriptions[{{ $index }}]" disabled>{{ $image->description }}</textarea>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="description{{ $index }}">Description:</label>
-                            <textarea class="form-control" id="description{{ $index }}" name="descriptions[{{ $index }}]" disabled>{{ $image->description }}</textarea>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-            
         @endforeach
-    @endif
+     @endif
 </div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 @endsection

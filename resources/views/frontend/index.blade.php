@@ -122,7 +122,7 @@
                                 <div class="row image-row" style="margin-top: 10px;">
                                     <div class="col-lg-6 col-12">
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*" required>
+                                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*,video/*" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-8">
@@ -287,7 +287,7 @@
                 <div class="row image-row" style="margin-top: 10px;">
                     <div class="col-lg-6 col-12">
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*" required>
+                            <input type="file" class="form-control image-upload" name="images[]" accept="image/*,video/*" required>
                         </div>
                     </div>
                     <div class="col-lg-5 col-12">
