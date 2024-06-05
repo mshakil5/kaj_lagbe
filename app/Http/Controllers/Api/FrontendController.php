@@ -92,7 +92,7 @@ class FrontendController extends Controller
             'post_code' => ['required'],
             'town' => ['nullable'],
             'phone' => ['required'],
-            'images.*' => ['required','mimes:jpeg,png,jpg,gif,mp4,mov'],
+            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
             'descriptions.*' => ['required', 'string'],
         ]);
 
@@ -116,10 +116,10 @@ class FrontendController extends Controller
             $descriptions = $request->input('descriptions');
             
             foreach ($files as $index => $image) {
-                // $validatedData = $request->validate([
-                //     'images.' . $index => ['required', 'image'],
-                //     'descriptions.' . $index => ['required', 'string'],
-                // ]);
+                $validatedData = $request->validate([
+                    'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
+                    'descriptions.' . $index => ['required', 'string'],
+                ]);
 
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $storagePath = public_path('images/works');
@@ -170,7 +170,7 @@ class FrontendController extends Controller
             'post_code' => ['required'],
             'town' => ['nullable'],
             'phone' => ['required'],
-            'images.*' => ['required', 'image'],
+            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
             'descriptions.*' => ['required', 'string'],
         ]);
 
@@ -191,7 +191,7 @@ class FrontendController extends Controller
 
             foreach ($files as $index => $image) {
                 $validatedData = $request->validate([
-                    'images.' . $index => ['required', 'image'],
+                    'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
                     'descriptions.' . $index => ['required', 'string'],
                 ]);
 
