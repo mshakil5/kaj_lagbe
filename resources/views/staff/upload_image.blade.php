@@ -23,9 +23,9 @@
 }
 </style>
     <!-- Image loader -->
-    <div id='loading' style='display:none ;'>
-        <img src="{{ asset('loader.gif') }}" id="loading-image" alt="Loading..." />
-    </div>
+<div id='loading' style='display:none ;'>
+    <img src="{{ asset('loader.gif') }}" id="loading-image" alt="Loading..." />
+</div>
 <div class="rightBar">
     <div class="ermsg"></div>
 

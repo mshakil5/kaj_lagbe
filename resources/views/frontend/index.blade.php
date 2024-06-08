@@ -142,6 +142,12 @@
                         @else
                             <button type="submit" class="form-control submitBtn" id="submitBtn">Submit</button>
                         @endguest
+
+                        <!-- Loader -->
+                        <div id='loading' style='display:none ;'>
+                            <img src="{{ asset('loader.gif') }}" id="loading-image" alt="Loading..." />
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -255,6 +261,24 @@
     .remove-row {
         font-size: 25px;
     }
+
+    #loading {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        background-color: #fff;
+        z-index: 99;
+    }
+
+    #loading-image {
+        z-index: 100;
+    }
 </style>
 
 @endsection
@@ -279,6 +303,19 @@
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Loader start-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('.custom-form');
+        const loadingDiv = document.getElementById('loading');
+
+        form.addEventListener('submit', function() {
+            loadingDiv.style.display = 'flex';
+        });
+    });
+</script>
+<!-- Loader end-->
 
 <script>
     $(document).ready(function(){
