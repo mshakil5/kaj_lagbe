@@ -26,10 +26,19 @@
 <div id='loading' style='display:none ;'>
     <img src="{{ asset('loader.gif') }}" id="loading-image" alt="Loading..." />
 </div>
+
+<div class="row">
+    <div class="col-2">
+        <a href="{{ route('completed.tasks.staff') }}">
+            <button type="button" class="btn btn-secondary my-3"><i class="fas fa-arrow-left"></i> Go back</button>
+        </a>
+    </div>
+</div>
+
 <div class="rightBar">
     <div class="ermsg"></div>
 
-    <h4 class="font-weight-bold bg-success p-2 mb-4">Upload Image/Video</h4>
+    <h4 class="d-flex justify-content-center font-weight-bold bg-success p-2 mb-4 col-lg-6">Upload Image/Video</h4>
 
     <div class="user-form">
         <div class="left">

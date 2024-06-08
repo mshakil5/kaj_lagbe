@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('admin.complete') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+                            <a href="{{ route('admin.complete') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Go back</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="uploadedFilesTable">

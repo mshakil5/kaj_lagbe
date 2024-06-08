@@ -32,7 +32,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Sl</th>
+                    <th>Job ID</th>
                     <th>Date</th>
                     <th>Client Details</th>
                     <th>Address</th>
@@ -45,7 +45,7 @@
                     @foreach ($data as $key => $data)
 
                     <tr>
-                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $data->orderid }}</td>
                       <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
                       <td style="text-align: left">
                           {{$data->name}} </br> <br>

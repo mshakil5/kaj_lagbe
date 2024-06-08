@@ -1,12 +1,12 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container pt-3">
     <div class="card">
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <a href="{{ route('admin.work') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('admin.complete') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Go back</a>
                 </div>
             </div>
         </div>

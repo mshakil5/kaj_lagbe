@@ -6,13 +6,17 @@
     <div class="row">
         <div class="col-2">
             <a href="{{ route('assigned.tasks.staff') }}">
-                <button type="button" class="btn btn-secondary my-3">Go back</button>
+                <button type="button" class="btn btn-secondary my-3"><i class="fas fa-arrow-left"></i> Go back</button>
             </a>
         </div>
             <h1 class="mt-2">Work Details</h1>
     </div>
 
     <div class="row">
+        <div class="col-md-6">
+            <label for="name">Job ID:</label>
+            <input type="text" class="form-control" id="date" name="date" value="{{ $work->orderid }}" disabled>
+        </div>
         <div class="col-md-6">
             <label for="name">Date:</label>
             <input type="text" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::parse($work->date)->format('d/m/y') }}" disabled>
@@ -21,9 +25,6 @@
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $work->name }}" disabled>
         </div>
-    </div>
-
-    <div class="row">
         
         <div class="col-md-6">
             <label for="email">Email:</label>
@@ -33,9 +34,6 @@
             <label for="address_first_line">Address First Line:</label>
             <input type="text" class="form-control" id="address_first_line" name="address_first_line" value="{{ $work->address_first_line }}" disabled>
         </div>
-    </div>
-
-    <div class="row">
         
         <div class="col-md-6">
             <label for="address_second_line">Address Second Line:</label>
@@ -45,9 +43,6 @@
             <label for="address_third_line">Address Third Line:</label>
             <input type="text" class="form-control" id="address_third_line" name="address_third_line" value="{{ $work->address_third_line }}" disabled>
         </div>
-    </div>
-
-    <div class="row">
         
         <div class="col-md-6">
             <label for="town">Town:</label>
@@ -57,15 +52,10 @@
             <label for="post_code">Post Code:</label>
             <input type="text" class="form-control" id="post_code" name="post_code" value="{{ $work->post_code }}" disabled>
         </div>
-    </div>
-    <div class="row">
+
         <div class="col-md-6">
             <label for="phone">Phone:</label>
             <input type="text" class="form-control" id="phone" name="phone" value="{{ $work->phone }}" disabled>
-        </div>
-        <div class="col-md-6">
-            <label for="phone">Staff:</label>
-            <input type="text" class="form-control" id="staff" name="staff" value="@if ($work->assignedTo) {{ $work->assignedTo->name }} {{ $work->assignedTo->surname }} @endif" disabled>
         </div>
     </div>
 

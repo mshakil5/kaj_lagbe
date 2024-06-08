@@ -6,11 +6,11 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2">
-                <a href="{{ route('admin.new') }}">
-                    <button type="button" class="btn btn-secondary my-3">Go back</button>
+            <div class="col-6">
+                <a href="{{ route('admin.complete') }}">
+                    <button type="button" class="btn btn-secondary my-3"> <i class="fas fa-arrow-left"></i> Go back</button>
                 </a>
-                <button type="button" class="btn btn-secondary my-3" id="newBtn">Add new</button>
+                <button type="button" class="btn btn-success my-3" id="newBtn">Create new transaction</button>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             <!-- general form elements disabled -->
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Add new transaction</h3>
+                <h3 class="card-title">Create new transaction</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -93,14 +93,14 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">All Data</h3>
+              <h3 class="card-title">Job Id : {{$work->orderid}}</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th style="text-align: center">Sl</th>
+                  <th style="text-align: center">Job Id</th>
                   <th style="text-align: center">Title</th>
                   <th style="text-align: center">Date</th>
                   <th style="text-align: center">Amount</th>
@@ -110,7 +110,7 @@
                 <tbody>
                   @foreach ($data as $key => $data)
                   <tr>
-                    <td style="text-align: center">{{ $key + 1 }}</td>
+                    <td style="text-align: center">{{$data->orderid}}</td>
                     <td style="text-align: center">{{$data->work->name}}</td>
                     <td style="text-align: center">{{$data->date}}</td>
                     <td style="text-align: center">{{$data->amount}}</td>

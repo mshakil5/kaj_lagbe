@@ -1,14 +1,13 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
                 <div class="col">
                     <a href="{{ route('admin.new') }}" class="btn btn-secondary">Back</a>
-                    <a href="{{ route('invoice.create', ['work_id' => $work->id]) }}" class="btn btn-success">Create New</a>
-                    
+                    <a href="{{ route('invoice.create', ['work_id' => $work->id]) }}" class="btn btn-success">Create New</a>         
                 </div>
             </div>
         </div>
@@ -69,7 +68,20 @@
             
         </div> --}}
     </div>
-</div>
+</div> -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <a href="{{ route('admin.complete') }}">
+                    <button type="button" class="btn btn-secondary my-3"> <i class="fas fa-arrow-left"></i> Go back</button>
+                </a>
+                <a href="{{ route('invoice.create', ['work_id' => $work->id]) }}" class="btn btn-success">Create new invoice</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Main content -->
 <section class="content" id="contentContainer">
@@ -87,7 +99,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th style="text-align: center">Sl</th>
+                  <th style="text-align: center">Job ID</th>
                   <th style="text-align: center">Image</th>
                   <th style="text-align: center">Date</th>
                   <th style="text-align: center">Amount</th>
@@ -97,7 +109,7 @@
                 <tbody>
                   @foreach ($work->invoice as $key => $data)
                   <tr>
-                    <td style="text-align: center">{{ $key + 1 }}</td>
+                    <td style="text-align: center">{{$work->orderid}}</td>
                     <td style="text-align: center">
                         @if ($data->img)
                             <p><a href="{{ asset($data->img) }}" target="_blank">View Invoice</a></p>
@@ -136,4 +148,24 @@
 
 
 
+@endsection
+
+@section('script')
+<script>
+$(function () {
+    $("#example1").DataTable({
+    "responsive": true, "lengthChange": false, "autoWidth": false,
+    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+    "paging": true,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true,
+    });
+});
+</script>
 @endsection

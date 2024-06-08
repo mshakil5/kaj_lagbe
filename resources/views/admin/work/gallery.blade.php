@@ -7,7 +7,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2">
-        <a href="{{route('admin.work')}}" class="btn btn-secondary">Back</a>
+        <a href="{{route('admin.work')}}" class="btn btn-secondary">Go back</a>
       </div>
     </div>
   </div>

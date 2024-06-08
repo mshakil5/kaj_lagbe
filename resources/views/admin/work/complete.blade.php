@@ -31,11 +31,9 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Job Id</th>
+                  <th>Job ID</th>
                   <th>Date</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
+                  <th>Client Details</th>
                   <th>Address</th>
                   <th>Transaction</th>
                   <th>Invoice</th>
@@ -51,14 +49,16 @@
                   <tr>
                     <td>{{ $data->orderid }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
-                    <td>{{$data->name}}</td>
-                    <td>{{$data->email}}</td>
-                    <td>{{$data->phone}}</td>
+                    <td style="text-align: left">
+                          {{$data->name}} </br> <br>
+                          {{$data->email}} </br> <br>
+                          {{$data->phone}}
+                    </td>
                     <td style="text-align: left">
                         {{$data->address_first_line}} </br>
-                        {{$data->address_second_line}}</br>
-                        {{$data->address_third_line}}</br>
-                        {{$data->town}}</br>
+                        {{$data->address_second_line}} </br>
+                        {{$data->address_third_line}} </br>
+                        {{$data->town}} </br>
                         {{$data->post_code}}
                     </td>
                     <td>

@@ -7,7 +7,7 @@
   <section class="content">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
-      <div class="row mt-3">
+      <div class="row pt-3">
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <a href="{{ route('admin.new') }}">

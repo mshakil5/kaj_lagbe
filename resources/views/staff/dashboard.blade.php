@@ -33,7 +33,7 @@
                                 <table class="table table-bordered" id="assignedTasksTable">
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
+                                            <th>Job ID</th>
                                             <th>Client Details</th>
                                             <th>Address</th>
                                         </tr>
@@ -71,7 +71,7 @@
                                 <table class="table table-bordered" id="completedTasksTable">
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
+                                            <th>Job ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
