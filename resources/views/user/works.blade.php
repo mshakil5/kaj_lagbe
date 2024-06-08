@@ -18,7 +18,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="text-center">Sl</th>
+                            <th class="text-center">Job ID</th>
                             <th class="text-center">Date</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Email</th>
