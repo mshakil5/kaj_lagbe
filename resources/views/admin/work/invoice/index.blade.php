@@ -117,7 +117,7 @@
                             <p>No file found</p>
                         @endif    
                     </td>
-                    <td style="text-align: center">{{$data->date}}</td>
+                    <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
                     <td style="text-align: center">{{$data->amount}}</td>
                     <td style="text-align: center">
                       <form action="{{ route('invoices.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this invoice?');">

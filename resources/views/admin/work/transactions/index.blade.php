@@ -112,7 +112,7 @@
                   <tr>
                     <td style="text-align: center">{{$data->orderid}}</td>
                     <td style="text-align: center">{{$data->work->name}}</td>
-                    <td style="text-align: center">{{$data->date}}</td>
+                    <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
                     <td style="text-align: center">{{$data->amount}}</td>
                     <td style="text-align: center">
                       <a id="EditBtn" rid="{{$data->id}}" class="btn btn-link">

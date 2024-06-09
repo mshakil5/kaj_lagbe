@@ -47,7 +47,7 @@
                   @foreach ($data as $key => $data)
                   <tr>
                     <td style="text-align: center">{{ $key + 1 }}</td>
-                    <td style="text-align: center">{{$data->date}}</td>
+                    <td style="text-align: center">{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
                     <td style="text-align: center">{{$data->name}}</td>
                     <td style="text-align: center">{{$data->email}}</td>
                     <td style="text-align: center">{{$data->phone}}</td>
