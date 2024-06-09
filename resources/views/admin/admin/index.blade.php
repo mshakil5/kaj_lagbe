@@ -17,7 +17,7 @@
 
 
     <!-- Main content -->
-    <section class="content" id="addThisFormContainer">
+    <section class="content mt-3" id="addThisFormContainer">
       <div class="container-fluid">
         <div class="row justify-content-md-center">
           <!-- right column -->
