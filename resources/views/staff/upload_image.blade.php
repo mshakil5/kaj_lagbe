@@ -203,7 +203,9 @@
 
 <script>
     $(function () {
-      $("#uploadedFilesTable").DataTable();
+      $("#uploadedFilesTable").DataTable({
+        order: [],
+      });
     });
 </script>
 

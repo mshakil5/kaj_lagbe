@@ -160,10 +160,12 @@
  <script>
     $(document).ready(function() {
         $('#assignedTasksTable').DataTable( {
+            order: [],
             responsive: true
         });
 
         $('#completedTasksTable').DataTable( {
+            order: [],
             responsive: true
         });
     });
