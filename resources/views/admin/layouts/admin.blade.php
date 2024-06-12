@@ -74,17 +74,15 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
+    <a href="{{ route('admin.dashboard') }}" class="brand-link" style="cursor: pointer; padding-left: 30px;">
+        <span class="brand-text font-weight-bold">
+            {{ Auth::user()->name }}
+        </span>
+    </a>
+
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          {{-- <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image"> --}}
-        </div>
-        <div class="info">
-          <a href="{{ route('admin.dashboard') }}" class="d-block">{{Auth::user()->name}}</a>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       @include('admin.inc.sidebar')
@@ -102,7 +100,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="https://www.mentosoftware.co.uk/">Mento Software</a>.</strong>
+    <strong>Copyright &copy; 2024 <a href="https://www.mentosoftware.co.uk/">Mento Software</a>.</strong>
     All rights reserved.
   </footer>
 

@@ -71,7 +71,7 @@
 
     @if($work->workimage)
         @foreach($work->workimage as $index => $image)
-            <div class="row pb-2">
+            <div class="row pb-5">
                 <div class="col-md-12 mt-3">
                     <div class="row align-items-center mt-3">
                         <div class="col-md-6">
