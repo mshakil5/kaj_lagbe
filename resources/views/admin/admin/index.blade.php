@@ -134,7 +134,9 @@
                     
                     <td>
                       <a id="EditBtn" rid="{{$data->id}}"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
+                      @if (Auth::user()->id != $data->id)
                       <a id="deleteBtn" rid="{{$data->id}}"><i class="fa fa-trash-o" style="color: red;font-size:16px;"></i></a>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

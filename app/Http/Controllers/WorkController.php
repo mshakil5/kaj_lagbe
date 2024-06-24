@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Upload;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WorkAssignedMail;
 
 class WorkController extends Controller
 {
@@ -197,6 +199,28 @@ class WorkController extends Controller
         $work->status = 2;
         $work->is_new = 0;
         $work->save();
+
+        $staff = User::find($staffId);
+        $contactmail = $staff->email;
+
+        $msg = "You have been assigned a new work.";
+
+        $emailData = [
+            'staffname' => $staff->name,
+            'firstname' => $work->name,
+            'email' => $work->email,
+            'phone' => $work->phone,
+            'address1' => $work->address_first_line,
+            'address2' => $work->address_second_line,
+            'address3' => $work->address_third_line,
+            'town' => $work->town,
+            'postcode' => $work->post_code,
+            'subject' => "Work Assign",
+            'message' => $msg,
+            'contactmail' => $contactmail,
+        ];
+
+        Mail::to($contactmail)->send(new WorkAssignedMail($emailData));
 
         return response()->json(['success' => 'Staff assigned successfully']);
     }
