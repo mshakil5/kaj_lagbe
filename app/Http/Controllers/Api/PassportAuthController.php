@@ -48,7 +48,7 @@ class PassportAuthController extends Controller
         ]);
 
         $token = $user->createToken('AppName')->accessToken;
-        $userId = Auth::user()->id;
+        $userId = $user;
 
         return response()->json(['message' => 'Registration successful.', 'token' => $token, 'userId' => $userId], 200);
     }
