@@ -33,6 +33,7 @@ class FrontendController extends Controller
 
     public function workStore(Request $request)
     {
+        
         $request->validate([
             'email' => ['required', 'email'],
             'name' => ['required', 'string'],
