@@ -38,7 +38,7 @@
         </a>
       </li>
 
-      <li class="nav-item dropdown {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'menu-open' : '' }}">
+      <li class="nav-item dropdown {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/job*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link dropdown-toggle {{ (request()->is('admin/get-new*') || request()->is('admin/get-processing*') || request()->is('admin/get-complete*') || request()->is('admin/get-cancel*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -47,6 +47,13 @@
               </p>
           </a>
           <ul class="nav nav-treeview">
+            
+              <li class="nav-item">
+                <a href="{{ route('admin.job') }}" class="nav-link {{ (request()->is('admin/job*')) ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create</p>
+                </a>
+              </li>
               <li class="nav-item">
                   <a href="{{ route('admin.new') }}" class="nav-link {{ (request()->is('admin/get-new*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>

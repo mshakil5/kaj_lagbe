@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StaffController;
 
@@ -93,6 +94,13 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('/user-delete-request', [UserController::class, 'getUserDeleteRequest'])->name('allUserDeleteReq');
 
+    
+    //job post by Admin
+    Route::get('/job', [JobController::class, 'getjob'])->name('admin.job');
+    Route::post('/job', [JobController::class, 'jobStore']);
+    Route::get('/job/{id}/edit', [JobController::class, 'jobEdit']);
+    Route::post('/job-update', [JobController::class, 'jobUpdate']);
+    Route::get('/job/{id}', [JobController::class, 'jobDelete']);
 
 
 });
