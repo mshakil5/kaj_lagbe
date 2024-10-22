@@ -29,7 +29,7 @@ class WorkAssignedMail extends Mailable
 
     public function build()
     {
-        return $this->from('solomon@.co.uk', 'Solomon Maintainance')
+        return $this->from('solomon@example.co.uk', 'Solomon Maintainance')
                     ->subject($this->emailData['subject'])
                     ->markdown('emails.workAssigned')
                     ->with('emailData', $this->emailData);

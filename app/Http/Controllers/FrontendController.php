@@ -38,6 +38,7 @@ class FrontendController extends Controller
         $request->validate([
             'email' => ['required', 'email'],
             'name' => ['required', 'string'],
+            'category_id' => ['required'],
             'address_first_line' => ['required'],
             'post_code' => ['required'],
             'town' => ['nullable'],
@@ -54,6 +55,7 @@ class FrontendController extends Controller
         $data->orderid = mt_rand(100000, 999999);
         $data->date = date('Y-m-d');
         $data->name = $request->name;
+        $data->category_id = $request->category_id;
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address_first_line = $request->address_first_line;
@@ -63,6 +65,8 @@ class FrontendController extends Controller
         $data->post_code = $request->post_code;
         $data->created_by = Auth::id();
         $data->save();
+
+        $categoryName = $data->category->name;
 
         if ($request->hasFile('images')) {
             $files = $request->file('images');
@@ -105,6 +109,7 @@ class FrontendController extends Controller
         $array['subject'] = "Order Booking Confirmation";
         $array['message'] = $msg;
         $array['contactmail'] = $contactmail;
+        $array['category_name'] = $categoryName;
         
         Mail::to($contactmail)
         ->send(new JobOrderMail($array));
@@ -112,7 +117,7 @@ class FrontendController extends Controller
         Mail::to($ccEmails)
         ->send(new JobOrderMail($array));
         
-        return redirect()->route("homepage")->with("success", "Thank you for telling us about your work");
+        return redirect()->back()->with("success", "Thank you for telling us about your work");
     }
 
     public function checkPostCode(Request $request)
@@ -171,6 +176,12 @@ class FrontendController extends Controller
         } else {
             return redirect()->route("homepage")->with("error", "Server Error!");
         }
+    }
+
+    public function showCategoryDetails($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        return view('frontend.post_job', compact('category'));
     }
 
 }

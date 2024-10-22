@@ -39,6 +39,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
 Route::post('/contact-message', [FrontendController::class, 'contactMessage'])->name('contactMessage');
 
+Route::get('/category/{slug}', [FrontendController::class, 'showCategoryDetails'])->name('category.show');
 
 
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');

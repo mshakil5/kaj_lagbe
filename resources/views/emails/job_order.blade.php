@@ -1,5 +1,6 @@
 @component('mail::message')
 
+**Category:** {{ $array['category_name'] }} <br>
 **Name:** {{ $array['firstname'] }} <br>
 **Email:** {{ $array['email'] }}  <br>
 **Phone:** {{ $array['phone'] }}  <br>

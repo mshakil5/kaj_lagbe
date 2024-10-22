@@ -21,14 +21,14 @@
     </h2>
     <div class="categories-list">
         @foreach ($categories as $category)
-            <div class="category card">
+            <a href="{{ route('category.show', $category->slug) }}" class="category card">
                 @if ($category->image)
                     <img src="{{ asset('images/category/' . $category->image) }}" alt="{{ $category->name }}" class="category-image">
                 @else
                     <i class="fas fa-{{ $category->slug }}"></i>
                 @endif
                 <p>{{ $category->name }}</p>
-            </div>
+            </a> 
         @endforeach
     </div>
 </div>
@@ -85,5 +85,9 @@
         </a>
     </div>
 </div>
+
+@endsection
+
+@section('script')
 
 @endsection

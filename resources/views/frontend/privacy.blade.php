@@ -70,7 +70,7 @@
                     <li><strong>Contact Us</strong></li>
                   </ol>
                     
-                  <p style="margin-left: 40px"> If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us at solomon@.co.uk <br>
+                  <p style="margin-left: 40px"> If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us at solomon@example.co.uk <br>
                     By using our website, you consent to the practices described in this Privacy Policy.</p>
 
                   

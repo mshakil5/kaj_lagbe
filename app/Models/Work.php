@@ -61,4 +61,9 @@ class Work extends Model
         return $this->hasMany(WorkTime::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

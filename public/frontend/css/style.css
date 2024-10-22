@@ -103,6 +103,7 @@ body {
     align-items: center;
     width: 150px;
     text-align: center;
+    text-decoration: none;
 }
 
 .category {
