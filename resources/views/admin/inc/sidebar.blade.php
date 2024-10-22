@@ -94,6 +94,15 @@
         </a>
       </li>
       
+      <li class="nav-item">
+        <a href="{{route('admin.companyDetail')}}" class="nav-link {{ (request()->is('admin/company-details*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Company Details
+          </p>
+        </a>
+      </li>
+      
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="nav-link">
           <i class="nav-icon fas fa-th"></i> 

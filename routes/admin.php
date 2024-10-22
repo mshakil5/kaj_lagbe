@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\Admin\CompanyDetailsController;
 
 
 /*------------------------------------------
@@ -94,6 +95,9 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/user-delete-request', [UserController::class, 'getUserDeleteRequest'])->name('allUserDeleteReq');
 
 
+    // company information
+    Route::get('/company-details', [CompanyDetailsController::class, 'index'])->name('admin.companyDetail');
+    Route::post('/company-details', [CompanyDetailsController::class, 'update'])->name('admin.companyDetails');
 
 });
   

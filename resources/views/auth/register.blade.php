@@ -6,6 +6,41 @@
     .register-form-container {
         margin-top: 50px;
         margin-bottom: 50px;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-form-container h2 {
+        color: rgb(0, 88, 162);
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .register-form-container input {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-form-container button {
+        background-color: #d71920;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer; 
+        font-weight: 600;
+    }
+
+    .register-form-container button:hover {
+        background-color: #b7151e;
     }
 </style>
 
@@ -40,7 +75,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus placeholder="{{ __('Company Name') }}">
+                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" placeholder="{{ __('Company Name') }}">
                 @error('surname')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -73,7 +108,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="address_second_line" type="text" class="form-control @error('address_second_line') is-invalid @enderror" name="address_second_line" value="{{ old('address_second_line') }}"  autocomplete="address_second_line" placeholder="{{ __('Address Second Line') }}">
+                <input id="address_second_line" type="text" class="form-control @error('address_second_line') is-invalid @enderror" name="address_second_line" value="{{ old('address_second_line') }}" autocomplete="address_second_line" placeholder="{{ __('Address Second Line') }}">
                 @error('address_second_line')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -84,7 +119,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="address_third_line" type="text" class="form-control @error('address_third_line') is-invalid @enderror" name="address_third_line" value="{{ old('address_third_line') }}"  autocomplete="address_third_line" placeholder="{{ __('Address Third Line') }}">
+                <input id="address_third_line" type="text" class="form-control @error('address_third_line') is-invalid @enderror" name="address_third_line" value="{{ old('address_third_line') }}" autocomplete="address_third_line" placeholder="{{ __('Address Third Line') }}">
                 @error('address_third_line')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -95,7 +130,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="town" type="text" class="form-control @error('town') is-invalid @enderror" name="town" value="{{ old('town') }}"  autocomplete="town" placeholder="{{ __('Town') }}">
+                <input id="town" type="text" class="form-control @error('town') is-invalid @enderror" name="town" value="{{ old('town') }}" autocomplete="town" placeholder="{{ __('Town') }}">
                 @error('town')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -106,7 +141,7 @@
 
         <div class="row">
             <div class="col-12">
-                <input id="postcode" type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" value="{{ old('postcode') }}"  autocomplete="postcode" placeholder="{{ __('Post Code') }}">
+                <input id="postcode" type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" value="{{ old('postcode') }}" autocomplete="postcode" placeholder="{{ __('Post Code') }}">
                 @error('postcode')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
