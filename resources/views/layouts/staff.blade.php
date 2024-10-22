@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/logo.jpg')}}">
+    <title>Solomon Maintainance</title>
+    <link rel="icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="{{ asset('assets/staff/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/staff/css/app.css')}}">

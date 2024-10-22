@@ -10,7 +10,7 @@
               <div class="custom-text-box">
                   <h5 class="mb-3">Privacy Policy </h5>
                   <p>Effective Date: 22/02/2024 </p>
-                  <p class="mb-0">At EDGEEMG Ltd, we are committed to protecting and respecting your privacy. This Privacy Policy outlines how we collect, use, disclose, and protect the information you provide to us when you visit our website or interact with our online services. Please take a moment to read this Privacy Policy to understand our practices.
+                  <p class="mb-0">At Solomon Maintainance Ltd, we are committed to protecting and respecting your privacy. This Privacy Policy outlines how we collect, use, disclose, and protect the information you provide to us when you visit our website or interact with our online services. Please take a moment to read this Privacy Policy to understand our practices.
                   </p>
 
                   <ol>
@@ -70,7 +70,7 @@
                     <li><strong>Contact Us</strong></li>
                   </ol>
                     
-                  <p style="margin-left: 40px"> If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us at info@edgeemg.co.uk <br>
+                  <p style="margin-left: 40px"> If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us at solomon@.co.uk <br>
                     By using our website, you consent to the practices described in this Privacy Policy.</p>
 
                   

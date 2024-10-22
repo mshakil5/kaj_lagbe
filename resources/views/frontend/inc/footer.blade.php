@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12 mb-4">
-                <img src="{{ asset('frontend/images/logo.jpg')}}" class="logo img-fluid" alt="">
+                <img src="{{ asset('frontend/images/image-1200x500.jpg')}}" class="logo img-fluid" alt="">
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mb-4">
@@ -25,9 +25,9 @@
 
                 <p class="text-white d-flex mt-3">
                     <i class="bi-geo-alt me-2"></i>
-                    100 Fairholt Rd. 
-                    London, 
-                    N165HN
+                    1285 Maple Avenue
+                    Toronto, ON
+                    M4C 1H2, Canada
                 </p>
 
                 <p class="text-white d-flex mb-2">
@@ -41,8 +41,8 @@
                 <p class="text-white d-flex">
                     <i class="bi-envelope me-2"></i>
 
-                    <a href="mailto:sam@edgeemg.co.uk" class="site-footer-link">
-                        sam@edgeemg.co.uk
+                    <a href="mailto:solomon@.co.uk" class="site-footer-link">
+                        solomon@.co.uk
                     </a>
                 </p>
 
@@ -58,7 +58,7 @@
             <div class="row">
 
                 <div class="col-lg-12 col-md-7 col-12">
-                    <p class="copyright-text mb-0">Copyright © 2024 <a href="#">EDGE</a>  Design &amp; Developed: <a href="https://mentosoftware.co.uk" target="_blank"></a>
+                    <p class="copyright-text mb-0">Copyright © 2024 <a href="#">Solomon Maintainance</a>  Design &amp; Developed: <a href="https://mentosoftware.co.uk" target="_blank"></a>
                         <a href="https://mentosoftware.co.uk" target="_blank">Mento Software</a>
                     </p>
                 </div>

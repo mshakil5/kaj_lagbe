@@ -7,7 +7,7 @@
             <div class="row">
 
                 <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <img src="{{ asset('image.jpg')}}"
+                    <img src="{{ asset('frontend/images/image-1040x864.jpg')}}"
                         class="custom-text-box-image img-fluid" alt="">
                 </div>
 
@@ -176,24 +176,24 @@
 
                             <p class="d-flex mt-3">
                                 <i class="bi-geo-alt me-2"></i>
-                                100 Fairholt Rd. 
-                                London, 
-                                N165HN
+                                1285 Maple Avenue
+                                Toronto, ON
+                                M4C 1H2, Canada
                             </p>
 
                             <p class="d-flex mb-2">
                                 <i class="bi-telephone me-2"></i>
 
                                 <a href="tel: 0203-994-7611">
-                                    02-039947611
+                                    02-1233145
                                 </a>
                             </p>
 
                             <p class="d-flex">
                                 <i class="bi-envelope me-2"></i>
 
-                                <a href="mailto:sam@edgeemg.co.uk">
-                                    sam@edgeemg.co.uk
+                                <a href="mailto:solomon@.co.uk">
+                                    solomon@.co.uk
                                 </a>
                             </p>
 

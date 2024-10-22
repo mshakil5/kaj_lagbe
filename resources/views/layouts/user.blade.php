@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>EDGE</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/logo.jpg')}}">
+    <title>Solomon Maintainance</title>
+    <link rel="icon" type="image/x-icon" href="">
     
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/bootstrap-icons.css') }}" rel="stylesheet">

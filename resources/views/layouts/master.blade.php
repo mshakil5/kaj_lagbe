@@ -10,9 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>EDGE</title>
+    <title>Solomon Maintainance</title>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/logo.jpg')}}">
+    <link rel="icon" type="image/x-icon" href="">
     
     <!-- CSS FILES -->
     <link href="{{ asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet">
