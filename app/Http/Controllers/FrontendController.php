@@ -12,13 +12,15 @@ use App\Models\WorkImage;
 use Illuminate\Http\Request;
 use App\Mail\ContactMessageMail;
 use App\Mail\JobOrderMail;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $categories = Category::where('status', 1)->get();
+        return view('frontend.index', compact('categories'));
     }
 
     public function privacy()

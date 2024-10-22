@@ -76,31 +76,56 @@ body {
 }
 
 .categories {
-    background-color: #fff;
-    padding: 20px 0;
     text-align: center;
+    padding: 20px;
 }
 
 .categories h2 {
-    font-size: 24px;
     margin-bottom: 20px;
+    color: #005ea5;
+    font-weight: 600;
 }
 
-.categories .category {
-    display: inline-block;
-    width: 120px;
-    margin: 0 10px;
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category.card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
     text-align: center;
 }
 
-.categories .category i {
-    font-size: 36px;
-    color: #d71920;
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    max-width: 150px;
 }
 
-.categories .category p {
-    margin: 10px 0 0;
+.category img.category-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.category p {
     font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #005ea5;
 }
 
 .info-section {

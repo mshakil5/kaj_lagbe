@@ -19,49 +19,20 @@
     <h2>
         Browse our most popular categories
     </h2>
-    <div class="category">
-        <i class="fas fa-wrench">
-        </i>
-        <p>
-            Plumber
-        </p>
-    </div>
-    <div class="category">
-        <i class="fas fa-bolt">
-        </i>
-        <p>
-            Electrician
-        </p>
-    </div>
-    <div class="category">
-        <i class="fas fa-home">
-        </i>
-        <p>
-            Roofer
-        </p>
-    </div>
-    <div class="category">
-        <i class="fas fa-hammer">
-        </i>
-        <p>
-            Builder
-        </p>
-    </div>
-    <div class="category">
-        <i class="fas fa-leaf">
-        </i>
-        <p>
-            Gardener
-        </p>
-    </div>
-    <div class="category">
-        <i class="fas fa-paint-roller">
-        </i>
-        <p>
-            Painter
-        </p>
+    <div class="categories-list">
+        @foreach ($categories as $category)
+            <div class="category card">
+                @if ($category->image)
+                    <img src="{{ asset('images/category/' . $category->image) }}" alt="{{ $category->name }}" class="category-image">
+                @else
+                    <i class="fas fa-{{ $category->slug }}"></i>
+                @endif
+                <p>{{ $category->name }}</p>
+            </div>
+        @endforeach
     </div>
 </div>
+
 <div class="info-section">
     <div class="info-box">
         <i class="fas fa-check-circle">

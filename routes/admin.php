@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Admin\CompanyDetailsController;
+use App\Http\Controllers\Admin\CategoryController;
 
 
 /*------------------------------------------
@@ -98,6 +99,14 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     // company information
     Route::get('/company-details', [CompanyDetailsController::class, 'index'])->name('admin.companyDetail');
     Route::post('/company-details', [CompanyDetailsController::class, 'update'])->name('admin.companyDetails');
+
+    // Category crud
+    Route::get('/category', [CategoryController::class, 'getCategory'])->name('allcategory');
+    Route::post('/category', [CategoryController::class, 'categoryStore']);
+    Route::get('/category/{id}/edit', [CategoryController::class, 'categoryEdit']);
+    Route::post('/category-update', [CategoryController::class, 'categoryUpdate']);
+    Route::get('/category/{id}', [CategoryController::class, 'categoryDelete']);
+    Route::post('/category-status', [CategoryController::class, 'toggleStatus']);
 
 });
   
