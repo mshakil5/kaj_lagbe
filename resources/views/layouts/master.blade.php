@@ -24,7 +24,6 @@
 
 <body id="section_1">
 
-
     @include('frontend.inc.header')
 
     @yield('content')
@@ -37,55 +36,7 @@
     <script src="{{ asset('frontend/js/counter.js')}}"></script>
     <script src="{{ asset('frontend/js/custom.js')}}"></script>
 
-    
     @yield('script')
-
-    <script>
-        
-    $(document).ready(function () {
-
-        //header for csrf-token is must in laravel
-      $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-      //
-
-        //check post code start 
-      //var url = "{{URL::to('/check-post-code')}}";
-      //  $("#post_code").change(function(){
-        //    var length =  $(this).val().length;
-//
-        //    var postcode = $("#post_code").val();
-        //    
-        //    if (length > 2) {
-        //        $.ajax({
-        //            url: url,
-        //            method: "POST",
-        //            data: {postcode},
-//
-        //            success: function (d) {
-        //                if (d.status == 303) {
-        //                    $(".perrmsg").html(d.message);
-        //                    $('#submitBtn').attr('disabled', true);
-        //                }else if(d.status == 300){
-        //                    $(".perrmsg").html(d.message);
-        //                    $('#submitBtn').attr('disabled', false);
-        //                }
-        //            },
-        //            error: function (d) {
-        //                console.log(d);
-        //            }
-        //        }); 
-        //    }else{
-        //        $(".perrmsg").html("");
-        //    }
-
-            
-      //  });
-        
-        //check post code end 
-
-    });
-
-    </script>
 
 </body>
 
