@@ -15,6 +15,7 @@ use App\Mail\JobOrderMail;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompanyDetails;
+use App\Models\Review;
 
 class FrontendController extends Controller
 {
@@ -191,6 +192,24 @@ class FrontendController extends Controller
     {
         $aboutUs = CompanyDetails::select('about_us')->first()->about_us;
         return view('frontend.about_us', compact('aboutUs'));
+    }
+
+    public function review()
+    {
+        return view('frontend.review');
+    }
+
+    public function reviewStore(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'stars' => 'required|integer|min:1|max:5',
+            'review' => 'required'
+        ]);
+
+        Review::create($validated);
+
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 
 }

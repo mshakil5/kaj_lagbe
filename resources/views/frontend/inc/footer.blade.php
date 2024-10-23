@@ -1,10 +1,5 @@
 <div class="footer">
     <p>
-        <a href="#">
-            View local tradespeople in your area
-        </a>
-    </p>
-    <p>
         <a href="{{ route('aboutUs') }}">
             About us
         </a>

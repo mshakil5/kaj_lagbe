@@ -54,13 +54,9 @@
 </div>
 <div class="info-section">
     <div class="info-box">
-        <img alt="Leave a Review Image" height="200" src="https://placehold.co/300x200" width="300" />
-        <p>
-            Have you completed a project recently? Let your tradesperson know how they did.
-        </p>
-        <a href="#">
-            Leave a Review
-        </a>
+        <img alt="Leave a Review" src="{{ asset('frontend/images/review.jpg') }}" width="300" height="200" />
+        <p>Have you completed a project recently? Let your tradesperson know how they did.</p>
+        <a href="{{ route('review') }}">Leave a Review</a>
     </div>
     <div class="info-box">
         <img alt="Tradesperson Sign Up Image" height="200" src="https://placehold.co/300x200" width="300" />

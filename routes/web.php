@@ -45,6 +45,9 @@ Route::get('/category/{slug}', [FrontendController::class, 'showCategoryDetails'
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
 
+Route::get('/review', [FrontendController::class, 'review'])->name('review');
+Route::post('/review', [FrontendController::class, 'reviewStore'])->name('review.store');
+
 
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
   
