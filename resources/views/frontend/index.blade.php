@@ -54,26 +54,26 @@
 </div>
 <div class="info-section">
     <div class="info-box">
-        <img alt="Leave a Review" src="{{ asset('frontend/images/review.jpg') }}" width="300" height="200" />
+        <img alt="Leave a Review" src="{{ asset('frontend/images/review.jpg') }}"/>
         <p>Have you completed a project recently? Let your tradesperson know how they did.</p>
-        <a href="{{ route('review') }}">Leave a Review</a>
+        <a href="{{ route('review') }}">Leave A Review</a>
     </div>
     <div class="info-box">
-        <img alt="Tradesperson Sign Up Image" height="200" src="{{ asset('frontend/images/join-with-us.jpg') }}" width="300" />
+        <img alt="Tradesperson Sign Up Image" height="200" src="{{ asset('frontend/images/join-with-us.jpg') }}"/>
         <p>
             Over 1 million homeowners visit our site looking for approved and quality tradespeople like you.
         </p>
         <a href="{{ Auth::check() ? (auth()->user()->is_type == '1' ? route('admin.dashboard') : (auth()->user()->is_type == '0' ? route('user.profile') : route('staff.home'))) : route('register') }}">
-            {{ Auth::check() ? 'Dashboard' : 'Join today' }}
+            {{ Auth::check() ? 'Dashboard' : 'Join Today' }}
         </a>
     </div>
     <div class="info-box">
-        <img alt="Request a Quote Image" height="200" src="{{ asset('frontend/images/Request-for-Quotation.jpg') }}" width="300" />
+        <img alt="Request a Quote Image" height="200" src="{{ asset('frontend/images/Request-for-Quotation.jpg') }}"/>
         <p>
             Tell us what you're looking for and we'll pass your request on to three approved tradespeople.
         </p>
         <a href="{{ route('quote.form') }}">
-            Request a quote
+            Request A Quote
         </a>
     </div>
 </div>
