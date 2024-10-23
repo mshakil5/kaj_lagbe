@@ -91,9 +91,7 @@ class FrontendController extends Controller
             'address_first_line' => ['required'],
             'post_code' => ['required'],
             'town' => ['nullable'],
-            'phone' => ['required'],
-            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
-            'descriptions.*' => ['required', 'string'],
+            'phone' => ['required']
         ]);
 
         $data = new Work();
@@ -116,10 +114,10 @@ class FrontendController extends Controller
             $descriptions = $request->input('descriptions');
             
             foreach ($files as $index => $image) {
-                $validatedData = $request->validate([
-                    'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
-                    'descriptions.' . $index => ['required', 'string'],
-                ]);
+                // $validatedData = $request->validate([
+                //     'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
+                //     'descriptions.' . $index => ['required', 'string'],
+                // ]);
 
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $storagePath = public_path('images/works');
@@ -170,8 +168,8 @@ class FrontendController extends Controller
             'post_code' => ['required'],
             'town' => ['nullable'],
             'phone' => ['required'],
-            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
-            'descriptions.*' => ['required', 'string'],
+            // 'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
+            // 'descriptions.*' => ['required', 'string'],
         ]);
 
         $data = Work::findOrFail($id);
@@ -190,10 +188,10 @@ class FrontendController extends Controller
             $descriptions = $request->input('descriptions');
 
             foreach ($files as $index => $image) {
-                $validatedData = $request->validate([
-                    'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
-                    'descriptions.' . $index => ['required', 'string'],
-                ]);
+                // $validatedData = $request->validate([
+                //     'images.' . $index => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
+                //     'descriptions.' . $index => ['required', 'string'],
+                // ]);
 
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $storagePath = public_path('images/works');
