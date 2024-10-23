@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('frontend.inc.hero')
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12 col-sm-12">

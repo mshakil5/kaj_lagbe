@@ -1,35 +1,31 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="hero">
-    <h1>
-        Find a guaranteed tradesperson
-    </h1>
-    <p>
-        Recommendations you can rely on
-    </p>
-    <div class="search-bar">
-        <input placeholder="Trade (e.g. Electrician)" type="text" />
-        <button>
-            Search
-        </button>
-    </div>
-</div>
-<div class="categories">
+@include('frontend.inc.hero')
+
+<div class="categories mt-5">
     <h2>
         Browse our most popular categories
     </h2>
-    <div class="categories-list">
-        @foreach ($categories as $category)
-            <a href="{{ route('category.show', $category->slug) }}" class="category card">
-                @if ($category->image)
-                    <img src="{{ asset('images/category/' . $category->image) }}" alt="{{ $category->name }}" class="category-image">
-                @else
-                    <i class="fas fa-{{ $category->slug }}"></i>
-                @endif
-                <p>{{ $category->name }}</p>
-            </a> 
-        @endforeach
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="categories col-8">
+                <div class="categories-list slick-carousel">
+                    @foreach ($categories as $category)
+                        <div class="slick-slide-item">
+                            <a href="{{ route('category.show', $category->slug) }}" class="category card">
+                                @if ($category->image)
+                                    <img src="{{ asset('images/category/' . $category->image) }}" alt="{{ $category->name }}" class="category-image">
+                                @else
+                                    <i class="fas fa-{{ $category->slug }}"></i>
+                                @endif
+                                <p>{{ $category->name }}</p>
+                            </a> 
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

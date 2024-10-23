@@ -32,9 +32,6 @@
                 <a class="nav-item nav-link" href="{{ route('login') }}">
                     Login
                 </a>
-                <a class="nav-item nav-link" href="{{ route('register') }}">
-                    Register
-                </a>
                 @endif
         </nav>
     </div>

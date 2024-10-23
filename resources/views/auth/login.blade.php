@@ -44,7 +44,7 @@
     }
 </style>
 
-<div class="col-lg-5 col-12 mx-auto login-form-container">
+<div class="col-lg-4 col-12 mx-auto login-form-container">
     <form class="custom-form contact-form" method="POST" action="{{ route('login') }}" role="form">
         @csrf
         <h2>Login</h2>
@@ -55,7 +55,7 @@
             </div>
         @endif
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-12">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                 @error('email')
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <button type="submit">Log In</button>
+        <button type="submit" class="mt-1">Log In</button>
     </form>
 </div>
 

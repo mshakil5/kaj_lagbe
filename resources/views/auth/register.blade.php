@@ -44,7 +44,7 @@
     }
 </style>
 
-<div class="col-lg-5 col-12 mx-auto register-form-container">
+<div class="col-lg-6 col-12 mx-auto register-form-container">
     <form class="custom-form contact-form" method="POST" action="{{ route('register') }}" role="form">
         @csrf
         <h2>{{ __('Register with us') }}</h2>
@@ -74,7 +74,8 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" placeholder="{{ __('Company Name') }}">
                 @error('surname')
                     <span class="invalid-feedback" role="alert">
@@ -82,10 +83,8 @@
                     </span>
                 @enderror
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 @error('phone')
                     <span class="invalid-feedback d-block mb-2" role="alert">
                         <strong>{{ $message }}</strong>
@@ -93,10 +92,12 @@
                 @enderror
                 <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="{{ __('Mobile') }}">
             </div>
+
         </div>
 
         <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="address_first_line" type="text" class="form-control @error('address_first_line') is-invalid @enderror" name="address_first_line" value="{{ old('address_first_line') }}" required autocomplete="address_first_line" placeholder="{{ __('Address First Line') }}">
                 @error('address_first_line')
                     <span class="invalid-feedback" role="alert">
@@ -104,10 +105,8 @@
                     </span>
                 @enderror
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <input id="address_second_line" type="text" class="form-control @error('address_second_line') is-invalid @enderror" name="address_second_line" value="{{ old('address_second_line') }}" autocomplete="address_second_line" placeholder="{{ __('Address Second Line') }}">
                 @error('address_second_line')
                     <span class="invalid-feedback" role="alert">
@@ -115,10 +114,12 @@
                     </span>
                 @enderror
             </div>
+
         </div>
 
         <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="address_third_line" type="text" class="form-control @error('address_third_line') is-invalid @enderror" name="address_third_line" value="{{ old('address_third_line') }}" autocomplete="address_third_line" placeholder="{{ __('Address Third Line') }}">
                 @error('address_third_line')
                     <span class="invalid-feedback" role="alert">
@@ -126,10 +127,9 @@
                     </span>
                 @enderror
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="town" type="text" class="form-control @error('town') is-invalid @enderror" name="town" value="{{ old('town') }}" autocomplete="town" placeholder="{{ __('Town') }}">
                 @error('town')
                     <span class="invalid-feedback" role="alert">
@@ -137,10 +137,12 @@
                     </span>
                 @enderror
             </div>
+
         </div>
 
         <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="postcode" type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" value="{{ old('postcode') }}" autocomplete="postcode" placeholder="{{ __('Post Code') }}">
                 @error('postcode')
                     <span class="invalid-feedback" role="alert">
@@ -148,10 +150,8 @@
                     </span>
                 @enderror
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ __('Email Address') }}">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -159,10 +159,12 @@
                     </span>
                 @enderror
             </div>
+
         </div>
 
         <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="{{ __('Password') }}">
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -170,10 +172,8 @@
                     </span>
                 @enderror
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirm Password') }}">
             </div>
         </div>

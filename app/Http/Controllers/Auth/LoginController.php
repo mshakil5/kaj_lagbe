@@ -64,7 +64,7 @@ class LoginController extends Controller
             }else if (auth()->user()->is_type == '0') {
                 return redirect()->route('homepage');
             }else{
-                return redirect()->route('home');
+                return redirect()->route('homepage');
             }
         }else{
             return redirect()->route('login')->with('error', 'Wrong credentials. Please try again.');

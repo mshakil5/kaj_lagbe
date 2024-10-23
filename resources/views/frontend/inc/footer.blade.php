@@ -5,7 +5,7 @@
         </a>
     </p>
     <p>
-        <a href="#">
+        <a href="{{ route('aboutUs') }}">
             About us
         </a>
         |

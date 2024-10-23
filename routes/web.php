@@ -35,7 +35,7 @@ Route::get('/clear', function() {
   
 Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
 Route::post('/contact-message', [FrontendController::class, 'contactMessage'])->name('contactMessage');
 

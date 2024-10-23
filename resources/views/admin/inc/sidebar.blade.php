@@ -95,6 +95,15 @@
       </li>
       
       <li class="nav-item">
+        <a href="{{route('allcategory')}}" class="nav-link {{ (request()->is('admin/category*')) ? 'active' : '' }}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Work Categories
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a href="{{route('admin.companyDetail')}}" class="nav-link {{ (request()->is('admin/company-details*')) ? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>

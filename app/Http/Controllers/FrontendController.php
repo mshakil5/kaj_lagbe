@@ -14,13 +14,15 @@ use App\Mail\ContactMessageMail;
 use App\Mail\JobOrderMail;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CompanyDetails;
 
 class FrontendController extends Controller
 {
     public function index()
     {
         $categories = Category::where('status', 1)->get();
-        return view('frontend.index', compact('categories'));
+        $companyDetails = CompanyDetails::first();
+        return view('frontend.index', compact('categories', 'companyDetails'));
     }
 
     public function privacy()
@@ -181,7 +183,14 @@ class FrontendController extends Controller
     public function showCategoryDetails($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        return view('frontend.post_job', compact('category'));
+        $companyDetails = CompanyDetails::first();
+        return view('frontend.post_job', compact('category', 'companyDetails'));
+    }
+
+    public function aboutUs()
+    {
+        $aboutUs = CompanyDetails::select('about_us')->first()->about_us;
+        return view('frontend.about_us', compact('aboutUs'));
     }
 
 }

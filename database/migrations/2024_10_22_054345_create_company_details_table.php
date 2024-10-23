@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('email1',191)->nullable();
             $table->string('email2',191)->nullable();
             $table->string('website',191)->nullable();
-            $table->string('footer_content',191)->nullable();
+            $table->longText('footer_content',191)->nullable();
             $table->string('footer_link',191)->nullable();
             $table->string('opening_time')->nullable();
             $table->string('header_content',191)->nullable();

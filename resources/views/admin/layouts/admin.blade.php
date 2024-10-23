@@ -150,6 +150,7 @@
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <script src="{{ asset('assets/admin/lightbox/lightbox.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/sweetalert.min.js')}}"></script>
+<script src="{{ asset('assets/admin/summernote/summernote.min.js')}}"></script>
 
 <script>
   // page schroll top

@@ -199,8 +199,8 @@
 
                 <div class="col-sm-12">
                     <div class="form-group">
-                    <label>Footer Content</label>
-                    <textarea name="footer_content" id="footer_content" class="form-control @error('footer_content') is-invalid @enderror" cols="30" rows="3">{{$data->footer_content}}</textarea>
+                    <label>Hero Content</label>
+                    <textarea name="footer_content" id="footer_content" class="form-control @error('footer_content') is-invalid @enderror summernote" cols="30" rows="3">{{$data->footer_content}}</textarea>
                     </div>
                 </div>
 
