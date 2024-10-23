@@ -16,6 +16,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompanyDetails;
 use App\Models\Review;
+use App\Models\Quote;
 
 class FrontendController extends Controller
 {
@@ -210,6 +211,25 @@ class FrontendController extends Controller
         Review::create($validated);
 
         return redirect()->back()->with('success', 'Review submitted successfully!');
+    }
+
+    public function showRequestQuoteForm()
+    {
+        return view('frontend.quote_request');
+    }
+
+    public function requestQuote(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'details' => 'required|string',
+        ]);
+        
+        Quote::create($validatedData);
+
+        return redirect()->back()->with('success', 'Your quote request has been submitted successfully!');
     }
 
 }

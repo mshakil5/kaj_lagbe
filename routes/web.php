@@ -48,6 +48,8 @@ Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
 Route::get('/review', [FrontendController::class, 'review'])->name('review');
 Route::post('/review', [FrontendController::class, 'reviewStore'])->name('review.store');
 
+Route::get('/request-quote', [FrontendController::class, 'showRequestQuoteForm'])->name('quote.form');
+Route::post('/request-quote', [FrontendController::class, 'requestQuote'])->name('quote.request');
 
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
   

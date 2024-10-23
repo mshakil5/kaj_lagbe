@@ -59,20 +59,20 @@
         <a href="{{ route('review') }}">Leave a Review</a>
     </div>
     <div class="info-box">
-        <img alt="Tradesperson Sign Up Image" height="200" src="https://placehold.co/300x200" width="300" />
+        <img alt="Tradesperson Sign Up Image" height="200" src="{{ asset('frontend/images/join-with-us.jpg') }}" width="300" />
         <p>
             Over 1 million homeowners visit our site looking for approved and quality tradespeople like you.
         </p>
-        <a href="#">
-            Join today
+        <a href="{{ Auth::check() ? (auth()->user()->is_type == '1' ? route('admin.dashboard') : (auth()->user()->is_type == '0' ? route('user.profile') : route('staff.home'))) : route('register') }}">
+            {{ Auth::check() ? 'Dashboard' : 'Join today' }}
         </a>
     </div>
     <div class="info-box">
-        <img alt="Request a Quote Image" height="200" src="https://placehold.co/300x200" width="300" />
+        <img alt="Request a Quote Image" height="200" src="{{ asset('frontend/images/Request-for-Quotation.jpg') }}" width="300" />
         <p>
             Tell us what you're looking for and we'll pass your request on to three approved tradespeople.
         </p>
-        <a href="#">
+        <a href="{{ route('quote.form') }}">
             Request a quote
         </a>
     </div>
