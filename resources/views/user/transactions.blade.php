@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="row justify-content-center" id="basic-table">
-    <div class="col-md-10">
-        <a href="{{ route('user.works') }}" class="btn btn-secondary mb-3">Go Back</a>
+<div class="row mt-3">
+    <div class="col-10 mx-auto">
+        <a href="{{ route('user.works') }}" class="btn btn-primary mb-3">Go Back</a>
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Transaction Details</h4>               
+            <div class="card-header bg-primary">
+                <h2 class="card-title text-white">Transaction Details</h2>               
             </div>
             <div class="table-responsive">
                 <table class="table">

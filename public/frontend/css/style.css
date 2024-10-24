@@ -256,6 +256,11 @@ body {
     color: #005ea5;
 }
 
+.dropdown-menu .dropdown-item:hover {
+    background-color: transparent;
+    color: inherit;
+}
+
 @media (max-width: 768px) {
     .info-section .info-box {
         width: 80%; 

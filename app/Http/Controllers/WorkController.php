@@ -80,15 +80,15 @@ class WorkController extends Controller
         return view('user.work_images', compact('uploads'));
     }
 
-    public function workDetails($id)
+    public function editWork($id)
     {
         $work = Work::with('workimage')->where('id', $id)->first();
-        return view('user.work_details', compact('work'));
+        return view('user.work_edit', compact('work'));
     }
 
     public function showDetails($id)
     {
-        $work = Work::with('workimage')->where('id', $id)->first();
+        $work = Work::with('workimage','category')->where('id', $id)->first();
         return view('user.show_work_details', compact('work'));
     }
 
@@ -96,7 +96,8 @@ class WorkController extends Controller
     {
         $imgdesc = $request->descriptions;
         $images = $request->images;
-        
+        $workimageid = $request->workimageid;
+
         $request->validate([
             'email' => ['required', 'email'],
             'name' => ['required', 'string'],
@@ -104,12 +105,12 @@ class WorkController extends Controller
             'post_code' => ['required'],
             'town' => ['required'],
             'phone' => ['required'],
-            'images.*' => ['image'],
+            'images.*' => ['image', 'nullable'],
             'descriptions.*' => ['nullable', 'string'],
         ]);
 
-        $work = Work::where('id', $request->workid)->first();
-        
+        $work = Work::findOrFail($request->workid);
+
         $work->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -121,34 +122,47 @@ class WorkController extends Controller
             'address_third_line' => $request->address_third_line,
         ]);
 
-        foreach ($imgdesc as $key => $item)
-        {
-            if(isset($workimageid[$key])){
+        $existingImages = $work->workimage()->get();
 
-                $workImg = WorkImage::find($workimageid[$key]);
-                if ($request->hasFile('images')) {
-                    $files = $request->file('images');
-                    $rand = mt_rand(100000, 999999);
-                    $imageName = time() . $rand . '.' . $files[$key]->extension();
-                    $files[$key]->move(public_path('images'), $imageName);
-                    $workImg->name = $imageName;
+        foreach ($existingImages as $existingImage) {
+            if (!in_array($existingImage->id, $workimageid)) {
+                if (file_exists(public_path('images/works/' . $existingImage->name))) {
+                    unlink(public_path('images/works/' . $existingImage->name));
                 }
-                $workImg->description = $descriptions[$key] ?? null;
-                $workImg->save();
+                $existingImage->delete();
+            }
+        }
 
-            }else{
+        foreach ($imgdesc as $key => $item) {
+            $workImg = WorkImage::find($workimageid[$key]);
 
-                $workImg = new WorkImage();
-                if ($request->hasFile('images')) {
-                    $files = $request->file('images');
+            if ($workImg) {
+                if ($request->hasFile('images.' . $key)) {
+                    if (file_exists(public_path('images/works/' . $workImg->name))) {
+                        unlink(public_path('images/works/' . $workImg->name));
+                    }
+
+                    $file = $request->file('images.' . $key);
                     $rand = mt_rand(100000, 999999);
-                    $imageName = time() . $rand . '.' . $files[$key]->extension();
-                    $files[$key]->move(public_path('images'), $imageName);
-                    $workImg->name = $imageName;
+                    $imageName = time() . $rand . '.' . $file->extension();
+                    $file->move(public_path('images/works'), $imageName);
+                    $workImg->name = 'images/works/' . $imageName;
                 }
-                $workImg->work_id = $work->id;
-                $workImg->description = $descriptions[$key] ?? null;
+                $workImg->description = $item;
                 $workImg->save();
+            } else {
+                if ($request->hasFile('images.' . $key)) {
+                    $file = $request->file('images.' . $key);
+                    $rand = mt_rand(100000, 999999);
+                    $imageName = time() . $rand . '.' . $file->extension();
+                    $file->move(public_path('images/works'), $imageName);
+
+                    WorkImage::create([
+                        'work_id' => $work->id,
+                        'name' => 'images/works/' . $imageName,
+                        'description' => $item,
+                    ]);
+                }
             }
         }
         return redirect()->route("user.works")->with("message", "Updated Successfully");
@@ -156,8 +170,23 @@ class WorkController extends Controller
 
     public function destroy($id)
     {
-        Work::where('id', $id)->delete();
-        return redirect()->route('user.works')->with('success', 'Work deleted successfully.');
+        $work = Work::with('workimage')->find($id);
+
+        if ($work) {
+            foreach ($work->workimage as $image) {
+                $imagePath = public_path($image->name);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+                $image->delete();
+            }
+
+            $work->delete();
+
+            return redirect()->route('user.works')->with('success', 'Work deleted successfully.');
+        }
+
+        return redirect()->route('user.works')->with('error', 'Work not found.');
     }
 
     public function changeWorkStatus(Request $request)

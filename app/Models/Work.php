@@ -12,24 +12,7 @@ class Work extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'orderid',
-        'date',
-        'name',
-        'email',
-        'phone',
-        'address_first_line',
-        'address_second_line',
-        'address_third_line',
-        'town',
-        'post_code',
-        'assigned_to',
-        'status',
-        'is_new',
-        'updated_by',
-        'created_by',
-    ];
+    protected $guarded = [];
 
     public function workimage()
     {

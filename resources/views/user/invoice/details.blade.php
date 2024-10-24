@@ -1,16 +1,18 @@
 @extends('layouts.user')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-10">
-        <a href="{{ route('user.works') }}" class="btn btn-secondary mb-3">Go Back</a>
+<div class="row mt-3">
+    <div class="col-10 mx-auto">
+        <a href="{{ route('user.works') }}" class="btn btn-primary mb-3">Go Back</a>
         
         @if ($invoice)
 
         @foreach ($invoice as $invoice)
             <div class="card mt-2">
+                <div class="card-header bg-primary">
+                    <h2 class="card-title text-white">Invoice Details</h2>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Invoice Details</h4>
                     
                         <table class="table">
                             <tr>
@@ -25,7 +27,7 @@
                                 <th>Invoice:</th>
                                 <td class="text-center">
                                     @if(isset($invoice->img))
-                                        <a class="btn btn-secondary" href="{{ asset($invoice->img) }}" target="_blank">View Invoice</a>
+                                        <a class="btn btn-primary" href="{{ asset($invoice->img) }}" target="_blank">View Invoice</a>
                                     @else
                                         <span>No invoice available</span>
                                     @endif
@@ -39,13 +41,13 @@
                                 <th>Send:</th>
                                 <td class="text-center">
                                     @if ($invoice->status == 0)
-                                        <button class="btn btn-secondary" disabled>Paid</button>
+                                        <button class="btn btn-primary" disabled>Paid</button>
                                     @elseif ($invoice->status != 0)
                                         <form action="{{ route('payment', $invoice->id) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="amount" value="{{ $invoice->amount }}">
                                             <input type="hidden" name="work_id" value="{{ $invoice->work_id }}">
-                                            <button type="submit" class="btn btn-secondary">Pay</button>
+                                            <button type="submit" class="btn btn-primary">Pay</button>
                                         </form>
                                     @endif
                                 </td>

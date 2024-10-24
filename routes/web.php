@@ -1,7 +1,7 @@
 <?php
-  
+
 use Illuminate\Support\Facades\Route;
-  
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
@@ -10,7 +10,7 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\WorkTimeController;
-  
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,16 +23,16 @@ use App\Http\Controllers\WorkTimeController;
 */
 
 // cache clear
-Route::get('/clear', function() {
+Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');
     return "Cleared!";
- });
+});
 //  cache clear
-  
-  
+
+
 Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
 Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
@@ -52,7 +52,7 @@ Route::get('/request-quote', [FrontendController::class, 'showRequestQuoteForm']
 Route::post('/request-quote', [FrontendController::class, 'requestQuote'])->name('quote.request');
 
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
-  
+
 // payment
 Route::post('pay/{id}', [PaypalController::class, 'pay'])->name('payment');
 Route::get('success', [PaypalController::class, 'success']);
@@ -64,16 +64,16 @@ Route::get('error', [PaypalController::class, 'error']);
 All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function(){
-  
+Route::group(['prefix' => 'user/', 'middleware' => ['auth', 'is_user']], function () {
+
     Route::get('/home', [HomeController::class, 'userDashboard'])->name('user.home');
     Route::get('/works', [WorkController::class, 'userWorks'])->name('user.works');
 
-    Route::get('/work/{id}', [WorkController::class, 'workDetails'])->name('work.details');
+    Route::get('/edit-work/{id}', [WorkController::class, 'editWork'])->name('work.edit');
 
-    Route::get('/works/{id}', [WorkController::class, 'showDetails'])->name('show.details');
+    Route::get('/work/{id}', [WorkController::class, 'showDetails'])->name('show.details');
 
-    Route::put('/works', [WorkController::class, 'workUpdate'])->name('work.update');
+    Route::put('/work-update', [WorkController::class, 'workUpdate'])->name('work.update');
     Route::get('/work-images/{id}', [WorkController::class, 'workDetailsByUser'])->name('user.work.images');
 
     Route::delete('/work/{id}', [WorkController::class, 'destroy'])->name('work.destroy');
@@ -96,19 +96,16 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
     Route::get('/additional-addresses/{id}/edit', [UserController::class, 'edit'])->name('additional-addresses.edit');
     Route::put('/additional-addresses/{id}', [UserController::class, 'update'])->name('additional-addresses.update');
     Route::delete('/additional-addresses/{id}', [UserController::class, 'destroy'])->name('additional-addresses.destroy');
-
-
-    
 });
-  
+
 
 /*------------------------------------------
 --------------------------------------------
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::group(['prefix' =>'staff/', 'middleware' => ['auth', 'is_manager']], function(){
-  
+Route::group(['prefix' => 'staff/', 'middleware' => ['auth', 'is_manager']], function () {
+
     // Dashboard
     Route::get('/home', [HomeController::class, 'staffHome'])->name('staff.home');
 
@@ -141,6 +138,4 @@ Route::group(['prefix' =>'staff/', 'middleware' => ['auth', 'is_manager']], func
     Route::get('/upload/{id}', [WorkController::class, 'uploadPage'])->name('upload.page');
     Route::post('/upload-file', [WorkController::class, 'uploadFile'])->name('upload-file');
     Route::delete('/upload/{id}', [WorkController::class, 'deleteFile'])->name('upload.delete');
-
 });
- 
