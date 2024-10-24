@@ -9,13 +9,15 @@ use App\Models\Contact;
 use Mail;
 use App\Models\WorkImage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class JobController extends Controller
 {
     public function getjob()
     {
         $data = Work::where('created_by', Auth::user()->id)->orderby('id','DESC')->get();
-        return view('admin.work.create', compact('data'));
+        $categories = Category::where('status', 1)->get();
+        return view('admin.work.create', compact('data', 'categories'));
     }
 
     public function jobStore(Request $request)
@@ -26,6 +28,7 @@ class JobController extends Controller
             'name' => ['required', 'string'],
             'address_first_line' => ['required'],
             'post_code' => ['required'],
+            'category_id' => ['required'],
             'town' => ['nullable'],
             'phone' => ['required', 'regex:/^\d{11}$/'],
             'images.*' => ['required', 'mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,wmv', 'max:102400'],
@@ -42,6 +45,7 @@ class JobController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
+        $data->category_id = $request->category_id;
         $data->address_first_line = $request->address_first_line;
         $data->address_second_line = $request->address_second_line;
         $data->address_third_line = $request->address_third_line;

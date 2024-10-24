@@ -12,6 +12,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Admin\CompanyDetailsController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FeedbackController;
 
 
 /*------------------------------------------
@@ -112,6 +113,10 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/category-update', [CategoryController::class, 'categoryUpdate']);
     Route::get('/category/{id}', [CategoryController::class, 'categoryDelete']);
     Route::post('/category-status', [CategoryController::class, 'toggleStatus']);
+
+    //Feedbacks
+    Route::get('/reviews', [FeedbackController::class, 'getReviews'])->name('allReviews');
+    Route::get('/quotes', [FeedbackController::class, 'getQuotes'])->name('allQuotes');
 
 });
   

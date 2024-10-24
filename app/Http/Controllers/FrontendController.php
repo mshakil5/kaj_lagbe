@@ -122,7 +122,7 @@ class FrontendController extends Controller
         Mail::to($ccEmails)
         ->send(new JobOrderMail($array));
         
-        return redirect()->back()->with("success", "Thank you for telling us about your work");
+        return redirect()->route('homepage')->with("success", "Thank you for telling us about your work");
     }
 
     public function checkPostCode(Request $request)
@@ -141,6 +141,11 @@ class FrontendController extends Controller
         }
         
 
+    }
+
+    public function showContactForm()
+    {
+        return view('frontend.contact');
     }
 
     public function contactMessage(Request $request)
@@ -177,9 +182,9 @@ class FrontendController extends Controller
             Mail::to($adminmail)
                 ->send(new ContactMessageMail($array));
 
-            return redirect()->route("homepage")->with("message", "Message sent successfully!");
+            return redirect()->back()->with("message", "Message sent successfully!");
         } else {
-            return redirect()->route("homepage")->with("error", "Server Error!");
+            return redirect()->back()->with("error", "Server Error!");
         }
     }
 

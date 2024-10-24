@@ -33,6 +33,7 @@
                 <tr>
                   <th>Job ID</th>
                   <th>Date</th>
+                  <th>Category</th>
                   <th>Client Details</th>
                   <th>Address</th>
                   <!-- <th>Status</th> -->
@@ -44,6 +45,7 @@
                   <tr>
                     <td>{{ $data->orderid }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->date)->format('d/m/Y') }}</td>
+                    <td>{{ $data->category->name }}</td>
                     <td style="text-align: left">
                           {{$data->name}} </br> <br>
                           {{$data->email}} </br> <br>

@@ -25,7 +25,7 @@
             <!-- general form elements disabled -->
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Add new user</h3>
+                <h3 class="card-title" id="cardTitle">Add new staff</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -306,10 +306,12 @@ $(function () {
           $("#addBtn").html('Update');
           $("#addThisFormContainer").show(300);
           $("#newBtn").hide(100);
+          $("#cardTitle").html('Update this staff');
       }
       function clearform(){
           $('#createThisForm')[0].reset();
           $("#addBtn").val('Create');
+          $("#cardTitle").html('Add new staff');
       }
   });
 </script>

@@ -25,7 +25,7 @@
             <!-- general form elements disabled -->
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Add new admin</h3>
+                <h3 class="card-title" id="cardTitle">Add new admin</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -331,12 +331,14 @@
           $("#codeid").val(data.id);
           $("#addBtn").val('Update');
           $("#addBtn").html('Update');
+          $("#cardTitle").html('Update this admin');
           $("#addThisFormContainer").show(300);
           $("#newBtn").hide(100);
       }
       function clearform(){
           $('#createThisForm')[0].reset();
           $("#addBtn").val('Create');
+          $("#cardTitle").html('Add new admin');
       }
   });
 </script>

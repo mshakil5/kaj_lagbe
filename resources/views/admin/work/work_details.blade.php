@@ -24,6 +24,10 @@
         </div>
 
         <div class="col-md-6">
+            <label for="name">Category:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $work->category->name }}" disabled>
+        </div>
+        <div class="col-md-6">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $work->name }}" disabled>
         </div>

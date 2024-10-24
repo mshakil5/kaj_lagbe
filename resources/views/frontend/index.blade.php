@@ -16,8 +16,6 @@
                             <a href="{{ route('category.show', $category->slug) }}" class="category card">
                                 @if ($category->image)
                                     <img src="{{ asset('images/category/' . $category->image) }}" alt="{{ $category->name }}" class="category-image">
-                                @else
-                                    <i class="fas fa-{{ $category->slug }}"></i>
                                 @endif
                                 <p>{{ $category->name }}</p>
                             </a> 
@@ -52,6 +50,7 @@
         </p>
     </div>
 </div>
+
 <div class="info-section">
     <div class="info-box">
         <img alt="Leave a Review" src="{{ asset('frontend/images/review.jpg') }}"/>

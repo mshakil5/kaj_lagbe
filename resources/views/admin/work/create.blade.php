@@ -11,11 +11,11 @@
 
 
     <!-- Main content -->
-    <section class="content mt-3" id="addThisFormContainer">
+    <section class="content pt-3" id="addThisFormContainer">
       <div class="container-fluid">
         <div class="row justify-content-md-center">
           <!-- right column -->
-          <div class="col-md-8">
+          <div class="col-md-10">
             <!-- general form elements disabled -->
             <div class="card card-secondary">
               <div class="card-header">
@@ -64,12 +64,23 @@
 
                   <div class="row">
                     <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="phone"> Phone</label>
-                        <input type="number" name="phone" id="phone" class="form-control" required>
-                      </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="number" name="phone" id="phone" class="form-control" required>
+                        </div>
                     </div>
-                  </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="category_id">Category</label>
+                            <select name="category_id" id="category_id" class="form-control">
+                                <option value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
                   <div class="row">
                     <div class="col-lg-4 col-12">
@@ -95,22 +106,20 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12 col-12">
-                    <div id="imageContainer">
-                        <div class="row image-row" style="margin-top: 10px;">
-                            <div class="col-lg-6 col-12">
-                                <div class="input-group mb-3">
-                                    <input type="file" class="form-control image-upload" name="images[]" accept="image/*,video/*" required>
-                                </div>
+                <div id="imageContainer">
+                    <div class="row image-row" style="margin-top: 10px;">
+                        <div class="col-lg-6 col-12">
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control image-upload" name="images[]" accept="image/*,video/*" required>
                             </div>
-                            <div class="col-lg-5 col-8">
-                                <div class="input-group mb-3">
-                                    <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]" required></textarea>
-                                </div>
+                        </div>
+                        <div class="col-lg-5 col-8">
+                            <div class="input-group mb-3">
+                                <textarea class="form-control description resizable" placeholder="Description" rows="3" name="descriptions[]" required></textarea>
                             </div>
-                            <div class="col-lg-1 col-2 text-end">
-                                <button class="btn btn-success add-row" type="button">+</button>
-                            </div>
+                        </div>
+                        <div class="col-lg-1 col-2 text-end">
+                            <button class="btn btn-success add-row" type="button">+</button>
                         </div>
                     </div>
                 </div>

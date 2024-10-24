@@ -14,7 +14,7 @@
 
     .login-form-container h2 {
         color: rgb(0, 88, 162);
-        font-size: 24px;
+        font-size: 34px;
         margin-bottom: 20px;
         text-align: center;
     }
@@ -82,6 +82,8 @@
         <div class="row mt-3">
             <div class="col-12 text-center">
                 <a href="{{ route('password.request.form') }}" class="btn btn-link">Forgot Password?</a>
+                <br>
+                <a href="{{ route('register') }}" class="btn btn-link">Register?</a>
             </div>
         </div>
 

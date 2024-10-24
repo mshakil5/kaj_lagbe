@@ -4,7 +4,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solomon Maintainance</title>
-    <link rel="icon" type="image/x-icon" href="">
+
+    @php
+        $companyDetails = \App\Models\CompanyDetails::first();
+    @endphp
+
+    <link rel="icon" href="{{ asset('images/company/' . $companyDetails->fav_icon) }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="{{ asset('assets/staff/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/staff/css/app.css')}}">
@@ -40,7 +45,7 @@
             <nav class="navbar navbar-expand-lg navbar-light ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ route('homepage') }}">
-                        <img src="{{ asset('frontend/images/logo.jpg')}}" class="img-fluid d-block" alt=""
+                        <img src="{{ asset('frontend/images/image-1200x500.jpg')}}" class="img-fluid d-block" alt=""
                             style="width: 200px;">
                     </a>
 
@@ -144,7 +149,7 @@
                 <div class="col-lg-4">
                     <div class="footer-block">
                         <a class="navbar-brand" href="#">
-                            <img src="{{ asset('frontend/images/logo.jpg')}}" class="img-fluid d-block" alt=""
+                            <img src="{{ asset('frontend/images/image-1200x500.jpg')}}" class="img-fluid d-block" alt=""
                                 style="width: 150px; height: 70px;">
                         </a>
                         <div class="copyright">
@@ -166,7 +171,7 @@
                                 <li><a href="">About</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 d-none">
                             <h5 class="social-title">Connect with us</h5>
                             <div class="social">
                                 <a href="" title="Facebook">

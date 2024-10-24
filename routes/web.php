@@ -40,6 +40,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('homepage');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
+Route::get('/contact', [FrontendController::class, 'showContactForm'])->name('contact.show');
 Route::post('/contact-message', [FrontendController::class, 'contactMessage'])->name('contactMessage');
 
 Route::get('/category/{slug}', [FrontendController::class, 'showCategoryDetails'])->name('category.show');

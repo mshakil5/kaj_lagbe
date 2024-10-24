@@ -16,7 +16,7 @@
 
     <title>Solomon Maintainance</title>
 
-    <link rel="icon" type="image/x-icon" href="">
+    <link rel="icon" href="{{ asset('images/company/' . $companyDetails->fav_icon) }}">
     
     <!-- CSS FILES -->
     <!-- <link href="{{ asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet"> -->
