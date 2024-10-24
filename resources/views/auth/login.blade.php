@@ -78,6 +78,13 @@
         </div>
 
         <button type="submit" class="mt-1">Log In</button>
+
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <a href="{{ route('password.request.form') }}" class="btn btn-link">Forgot Password?</a>
+            </div>
+        </div>
+
     </form>
 </div>
 

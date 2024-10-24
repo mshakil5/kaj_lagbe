@@ -71,4 +71,10 @@ class LoginController extends Controller
         }
           
     }
+
+    public function showPasswordRequestForm()
+    {
+        return view('auth.passwords.email');
+    }
+    
 }

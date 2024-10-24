@@ -10,6 +10,8 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\WorkTimeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,7 @@ Route::get('/clear', function () {
 
 Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 Route::post('/work', [FrontendController::class, 'workStore'])->name('work.store');
 Route::post('/contact-message', [FrontendController::class, 'contactMessage'])->name('contactMessage');
@@ -50,6 +53,9 @@ Route::post('/review', [FrontendController::class, 'reviewStore'])->name('review
 
 Route::get('/request-quote', [FrontendController::class, 'showRequestQuoteForm'])->name('quote.form');
 Route::post('/request-quote', [FrontendController::class, 'requestQuote'])->name('quote.request');
+
+Route::get('password/request', [LoginController::class, 'showPasswordRequestForm'])->name('password.request.form');
+Route::post('password/request', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.request');
 
 Route::post('/check-post-code', [FrontendController::class, 'checkPostCode']);
 
